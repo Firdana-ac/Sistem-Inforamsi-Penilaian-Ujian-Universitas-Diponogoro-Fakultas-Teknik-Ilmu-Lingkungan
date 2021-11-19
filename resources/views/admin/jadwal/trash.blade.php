@@ -29,7 +29,7 @@
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $data->hari->nama_hari }}</td>
                     <td>
-                        <h5 class="card-title">{{ $data->mapel->nama_mapel }}</h5>
+                        <h5 class="card-title">{{ $data->team->nama_team }}</h5>
                         <p class="card-text"><small class="text-muted">{{ $data->dosen->nama_dosen }}</small></p>
                     </td>
                     <td>{{ $data->kelas->nama_kelas }}</td>

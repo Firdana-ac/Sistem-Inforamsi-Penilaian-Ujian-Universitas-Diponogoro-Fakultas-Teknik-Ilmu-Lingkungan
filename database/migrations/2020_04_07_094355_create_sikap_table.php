@@ -18,7 +18,7 @@ class CreateSikapTable extends Migration
             $table->integer('mhs_id');
             $table->integer('kelas_id');
             $table->integer('dosen_id');
-            $table->integer('mapel_id');
+            $table->integer('team_id');
             $table->string('sikap_1', 5)->nullable();
             $table->string('sikap_2', 5)->nullable();
             $table->string('sikap_3', 5)->nullable();

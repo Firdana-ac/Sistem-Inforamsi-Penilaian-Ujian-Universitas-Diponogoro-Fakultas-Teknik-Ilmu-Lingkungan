@@ -80,11 +80,11 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($mapel as $val => $data)
+                        @foreach ($team as $val => $data)
                             <tr>
                                 <?php $data = $data[0]; ?>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $data->mapel->nama_mapel }}</td>
+                                <td>{{ $data->team->nama_team }}</td>
                                 <td class="ctr">{{ ($data->ulangan($val)) ? $data->ulangan($val)['ulha_1'] : " - " }}</td>
                                 <td class="ctr">{{ ($data->ulangan($val)) ? $data->ulangan($val)['ulha_2'] : " - " }}</td>
                                 <td class="ctr">{{ ($data->ulangan($val)) ? $data->ulangan($val)['uts'] : " - " }}</td>

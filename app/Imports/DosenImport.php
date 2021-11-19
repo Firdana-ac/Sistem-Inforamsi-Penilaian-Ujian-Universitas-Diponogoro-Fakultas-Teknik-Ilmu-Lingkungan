@@ -3,7 +3,7 @@
 namespace App\Imports;
 
 use App\Dosen;
-use App\Mapel;
+use App\Team;
 use Maatwebsite\Excel\Concerns\ToModel;
 
 class DosenImport implements ToModel
@@ -28,7 +28,7 @@ class DosenImport implements ToModel
         } else {
             $id_card = $kode;
         }
-        $mapel = Mapel::where('nama_mapel', $row[3])->first();
+        $team = Team::where('nama_team', $row[3])->first();
         if ($row[2] == 'L') {
             $foto = 'uploads/dosen/35251431012020_male.jpg';
         } else {
@@ -41,7 +41,7 @@ class DosenImport implements ToModel
             'nip' => $row[1],
             'jk' => $row[2],
             'foto' => $foto,
-            'mapel_id' => $mapel->id,
+            'team_id' => $team->id,
         ]);
     }
 }

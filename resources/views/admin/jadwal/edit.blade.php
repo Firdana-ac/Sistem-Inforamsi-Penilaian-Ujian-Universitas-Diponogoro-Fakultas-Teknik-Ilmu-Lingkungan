@@ -46,11 +46,11 @@
                 </select>
               </div>
               <div class="form-group">
-                <label for="dosen_id">Kode Mapel</label>
+                <label for="dosen_id">Kode Team</label>
                 <select id="dosen_id" name="dosen_id" class="form-control @error('dosen_id') is-invalid @enderror select2bs4">
                   <option value="" @if ($jadwal->dosen_id)
                     selected
-                  @endif>-- Pilih Kode Mapel --</option>
+                  @endif>-- Pilih Kode Team --</option>
                   @foreach ($dosen as $data)
                     <option value="{{ $data->id }}"
                       @if ($jadwal->dosen_id == $data->id)

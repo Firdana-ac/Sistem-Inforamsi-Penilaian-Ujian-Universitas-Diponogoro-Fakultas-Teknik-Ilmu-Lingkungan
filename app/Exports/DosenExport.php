@@ -12,7 +12,7 @@ class DosenExport implements FromCollection
      */
     public function collection()
     {
-        $dosen = Dosen::join('mapel', 'mapel.id', '=', 'dosen.mapel_id')->select('dosen.nama_dosen', 'dosen.nip', 'dosen.jk', 'mapel.nama_mapel')->get();
+        $dosen = Dosen::join('team', 'team.id', '=', 'dosen.team_id')->select('dosen.nama_dosen', 'dosen.nip', 'dosen.jk', 'team.nama_team')->get();
         return $dosen;
     }
 }

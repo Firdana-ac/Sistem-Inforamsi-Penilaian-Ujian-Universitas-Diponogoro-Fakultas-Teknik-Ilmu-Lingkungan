@@ -18,7 +18,7 @@ class CreateRapotTable extends Migration
             $table->integer('mhs_id');
             $table->integer('kelas_id');
             $table->integer('dosen_id');
-            $table->integer('mapel_id');
+            $table->integer('team_id');
             $table->string('p_nilai', 5);
             $table->string('p_predikat', 5);
             $table->text('p_deskripsi');

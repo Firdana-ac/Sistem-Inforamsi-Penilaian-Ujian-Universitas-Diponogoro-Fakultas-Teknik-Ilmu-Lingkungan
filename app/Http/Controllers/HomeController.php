@@ -7,7 +7,7 @@ use App\Dosen;
 use App\Kehadiran;
 use App\Kelas;
 use App\Mhs;
-use App\Mapel;
+use App\Team;
 use App\User;
 use App\Paket;
 use App\Pengumuman;
@@ -59,7 +59,7 @@ class HomeController extends Controller
         $rpl = Kelas::where('paket_id', '7')->count();
         $tpm = Kelas::where('paket_id', '5')->count();
         $las = Kelas::where('paket_id', '8')->count();
-        $mapel = Mapel::count();
+        $team = Team::count();
         $user = User::count();
         $paket = Paket::all();
         return view('admin.index', compact(
@@ -79,7 +79,7 @@ class HomeController extends Controller
             'rpl',
             'tpm',
             'las',
-            'mapel',
+            'team',
             'user',
             'paket'
         ));

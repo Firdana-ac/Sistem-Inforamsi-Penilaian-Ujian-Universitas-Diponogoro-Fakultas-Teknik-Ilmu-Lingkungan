@@ -9,11 +9,11 @@ class Dosen extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = ['id_card', 'nip', 'nama_dosen', 'mapel_id', 'kode', 'jk', 'telp', 'tmp_lahir', 'tgl_lahir', 'foto'];
+    protected $fillable = ['id_card', 'nip', 'nama_dosen', 'team_id', 'kode', 'jk', 'telp', 'tmp_lahir', 'tgl_lahir', 'foto'];
 
-    public function mapel()
+    public function team()
     {
-        return $this->belongsTo('App\Mapel')->withDefault();
+        return $this->belongsTo('App\Team')->withDefault();
     }
 
     protected $table = 'dosen';

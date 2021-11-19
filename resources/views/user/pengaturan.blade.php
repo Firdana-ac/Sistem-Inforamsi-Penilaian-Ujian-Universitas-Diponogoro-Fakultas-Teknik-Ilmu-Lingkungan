@@ -86,8 +86,8 @@
                     <hr>
 
                     @if (Auth::user()->role == 'Dosen')
-                        <strong><i class="fas fa-book mr-1"></i> Dosen Mapel</strong>
-                        <p class="text-muted">{{ Auth::user()->dosen(Auth::user()->id_card)->mapel->nama_mapel }}</p>
+                        <strong><i class="fas fa-book mr-1"></i> Dosen Team</strong>
+                        <p class="text-muted">{{ Auth::user()->dosen(Auth::user()->id_card)->team->nama_team }}</p>
                         <hr>
                         <strong><i class="far fa-file-alt mr-1"></i> Kode Jadwal</strong>
                         <p class="text-muted">{{ Auth::user()->dosen(Auth::user()->id_card)->kode }}</p>

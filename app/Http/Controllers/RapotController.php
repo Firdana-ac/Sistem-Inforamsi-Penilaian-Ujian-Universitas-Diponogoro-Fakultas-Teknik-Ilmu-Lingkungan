@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Dosen;
 use App\Kelas;
-use App\Mapel;
+use App\Team;
 use App\Nilai;
 use App\Rapot;
 use App\Sikap;
@@ -60,7 +60,7 @@ class RapotController extends Controller
                     'mhs_id' => $request->mhs_id,
                     'kelas_id' => $request->kelas_id,
                     'dosen_id' => $request->dosen_id,
-                    'mapel_id' => $dosen->mapel_id,
+                    'team_id' => $dosen->team_id,
                     'k_nilai' => $request->nilai,
                     'k_predikat' => $request->predikat,
                     'k_deskripsi' => $request->deskripsi,
@@ -129,9 +129,9 @@ class RapotController extends Controller
         $id = Crypt::decrypt($id);
         $mhs = Mhs::findorfail($id);
         $kelas = Kelas::findorfail($mhs->kelas_id);
-        $jadwal = Jadwal::orderBy('mapel_id')->where('kelas_id', $kelas->id)->get();
-        $mapel = $jadwal->groupBy('mapel_id');
-        return view('admin.rapot.show', compact('mapel', 'mhs', 'kelas'));
+        $jadwal = Jadwal::orderBy('team_id')->where('kelas_id', $kelas->id)->get();
+        $team = $jadwal->groupBy('team_id');
+        return view('admin.rapot.show', compact('team', 'mhs', 'kelas'));
     }
 
     public function predikat(Request $request)
@@ -165,17 +165,17 @@ class RapotController extends Controller
     {
         $mhs = Mhs::where('no_induk', Auth::user()->no_induk)->first();
         $kelas = Kelas::findorfail($mhs->kelas_id);
-        $pai = Mapel::where('nama_mapel', 'Pendidikan Agama dan Budi Pekerti')->first();
-        $ppkn = Mapel::where('nama_mapel', 'Pendidikan Pancasila dan Kewarganegaraan')->first();
+        $pai = Team::where('nama_team', 'Pendidikan Agama dan Budi Pekerti')->first();
+        $ppkn = Team::where('nama_team', 'Pendidikan Pancasila dan Kewarganegaraan')->first();
         if ($pai != null && $ppkn != null) {
-            $Spai = Sikap::where('mhs_id', $mhs->id)->where('mapel_id', $pai->id)->first();
-            $Sppkn = Sikap::where('mhs_id', $mhs->id)->where('mapel_id', $ppkn->id)->first();
+            $Spai = Sikap::where('mhs_id', $mhs->id)->where('team_id', $pai->id)->first();
+            $Sppkn = Sikap::where('mhs_id', $mhs->id)->where('team_id', $ppkn->id)->first();
         } else {
             $Spai = "";
             $Sppkn = "";
         }
-        $jadwal = Jadwal::where('kelas_id', $kelas->id)->orderBy('mapel_id')->get();
-        $mapel = $jadwal->groupBy('mapel_id');
-        return view('mhs.rapot', compact('mhs', 'kelas', 'mapel', 'Spai', 'Sppkn'));
+        $jadwal = Jadwal::where('kelas_id', $kelas->id)->orderBy('team_id')->get();
+        $team = $jadwal->groupBy('team_id');
+        return view('mhs.rapot', compact('mhs', 'kelas', 'team', 'Spai', 'Sppkn'));
     }
 }

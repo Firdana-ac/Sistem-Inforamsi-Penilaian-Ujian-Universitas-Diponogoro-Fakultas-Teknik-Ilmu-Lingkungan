@@ -37,7 +37,7 @@
                           <ul>
                               <li>rows 1 = nama hari</li>
                               <li>rows 2 = nama kelas</li>
-                              <li>rows 3 = nama mapel</li>
+                              <li>rows 3 = nama team</li>
                               <li>rows 4 = nama dosen</li>
                               <li>rows 5 = jam mulai</li>
                               <li>rows 6 = jam selesai</li>
@@ -138,9 +138,9 @@
                   </select>
                 </div>
                 <div class="form-group">
-                  <label for="dosen_id">Kode Mapel</label>
+                  <label for="dosen_id">Kode Team</label>
                   <select id="dosen_id" name="dosen_id" class="form-control @error('dosen_id') is-invalid @enderror select2bs4">
-                      <option value="">-- Pilih Kode Mapel --</option>
+                      <option value="">-- Pilih Kode Team --</option>
                       @foreach ($dosen as $data)
                           <option value="{{ $data->id }}">{{ $data->kode }}</option>
                       @endforeach

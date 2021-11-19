@@ -43,7 +43,7 @@
                         <tr>
                           <td>{{ $data->jam_mulai.' - '.$data->jam_selesai }}</td>
                           <td>
-                              <h5 class="card-title">{{ $data->mapel->nama_mapel }}</h5>
+                              <h5 class="card-title">{{ $data->team->nama_team }}</h5>
                               <p class="card-text"><small class="text-muted">{{ $data->dosen->nama_dosen }}</small></p>
                           </td>
                           <td>{{ $data->kelas->nama_kelas }}</td>
@@ -207,7 +207,7 @@
                     $.each(data, function (index, val) {
                         html += "<tr>";
                           html += "<td>" + val.jam_mulai + ' - ' + val.jam_selesai + "</td>";
-                          html += "<td><h5 class='card-title'>" + val.mapel + "</h5><p class='card-text'><small class='text-muted'>" + val.dosen + "</small></p></td>";
+                          html += "<td><h5 class='card-title'>" + val.team + "</h5><p class='card-text'><small class='text-muted'>" + val.dosen + "</small></p></td>";
                           html += "<td>" + val.kelas + "</td>";
                           html += "<td>" + val.ruang + "</td>";
                           if (val.ket != null) {

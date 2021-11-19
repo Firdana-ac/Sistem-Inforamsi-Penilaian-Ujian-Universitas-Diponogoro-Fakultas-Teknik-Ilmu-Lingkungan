@@ -78,17 +78,17 @@
             <thead>
                 <tr>
                     <th>No.</th>
-                    <th>Nama Mapel</th>
+                    <th>Nama Team</th>
                     <th>Lihat Dosen</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($mapel as $data)
+                @foreach ($team as $data)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
-                        <td>{{ $data->nama_mapel }}</td>
+                        <td>{{ $data->nama_team }}</td>
                         <td>
-                            <a href="{{ route('dosen.mapel', Crypt::encrypt($data->id)) }}" class="btn btn-info btn-sm"><i class="nav-icon fas fa-search-plus"></i> &nbsp; Ditails</a>
+                            <a href="{{ route('dosen.team', Crypt::encrypt($data->id)) }}" class="btn btn-info btn-sm"><i class="nav-icon fas fa-search-plus"></i> &nbsp; Ditails</a>
                         </td>
                     </tr>
                 @endforeach
@@ -144,11 +144,11 @@
                         <input type="text" id="nip" name="nip" onkeypress="return inputAngka(event)" class="form-control @error('nip') is-invalid @enderror">
                     </div>
                     <div class="form-group">
-                        <label for="mapel_id">Mapel</label>
-                        <select id="mapel_id" name="mapel_id" class="select2bs4 form-control @error('mapel_id') is-invalid @enderror">
-                            <option value="">-- Pilih Mapel --</option>
-                            @foreach ($mapel as $data)
-                                <option value="{{ $data->id }}">{{ $data->nama_mapel }}</option>
+                        <label for="team_id">Team</label>
+                        <select id="team_id" name="team_id" class="select2bs4 form-control @error('team_id') is-invalid @enderror">
+                            <option value="">-- Pilih Team --</option>
+                            @foreach ($team as $data)
+                                <option value="{{ $data->id }}">{{ $data->nama_team }}</option>
                             @endforeach
                         </select>
                     </div>

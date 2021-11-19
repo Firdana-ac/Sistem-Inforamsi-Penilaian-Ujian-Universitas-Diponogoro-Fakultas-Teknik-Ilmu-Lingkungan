@@ -23,7 +23,7 @@
                             <input type="text" id="nama_gur" name="nama_gur" value="{{ $dosen->nama_dosen }}" class="form-control" readonly>
                         </div>
                         <div class="form-group">
-                            <label for="dosen_id">Kode Mapel</label>
+                            <label for="dosen_id">Kode Team</label>
                             <input type="text" id="dosen_id" name="dosen_id" value="{{ $dosen->kode }}" class="form-control" readonly>
                         </div>
                         <div class="form-group">
@@ -37,8 +37,8 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="mapel">Mata Pelajaran</label>
-                            <input type="text" id="mapel" name="mapel" value="{{ $dosen->mapel->nama_mapel }}" class="form-control" readonly>
+                            <label for="team">Mata Pelajaran</label>
+                            <input type="text" id="team" name="team" value="{{ $dosen->team->nama_team }}" class="form-control" readonly>
                         </div>
                         <div class="form-group">
                             <label for="kkm">KKM</label>

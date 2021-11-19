@@ -3,14 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Jadwal;
-use App\Mapel;
+use App\Team;
 use App\Paket;
 use App\Dosen;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Str;
 
-class MapelController extends Controller
+class TeamController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,9 +19,9 @@ class MapelController extends Controller
      */
     public function index()
     {
-        $mapel = Mapel::OrderBy('kelompok', 'asc')->OrderBy('nama_mapel', 'asc')->get();
+        $team = Team::OrderBy('kelompok', 'asc')->OrderBy('nama_team', 'asc')->get();
         $paket = Paket::all();
-        return view('admin.mapel.index', compact('mapel', 'paket'));
+        return view('admin.team.index', compact('team', 'paket'));
     }
 
     /**
@@ -43,23 +43,23 @@ class MapelController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'nama_mapel' => 'required',
+            'nama_team' => 'required',
             'paket_id' => 'required',
             'kelompok' => 'required'
         ]);
 
-        Mapel::updateOrCreate(
+        Team::updateOrCreate(
             [
-                'id' => $request->mapel_id
+                'id' => $request->team_id
             ],
             [
-                'nama_mapel' => $request->nama_mapel,
+                'nama_team' => $request->nama_team,
                 'paket_id' => $request->paket_id,
                 'kelompok' => $request->kelompok,
             ]
         );
 
-        return redirect()->back()->with('success', 'Data mapel berhasil diperbarui!');
+        return redirect()->back()->with('success', 'Data team berhasil diperbarui!');
     }
 
     /**
@@ -82,9 +82,9 @@ class MapelController extends Controller
     public function edit($id)
     {
         $id = Crypt::decrypt($id);
-        $mapel = Mapel::findorfail($id);
+        $team = Team::findorfail($id);
         $paket = Paket::all();
-        return view('admin.mapel.edit', compact('mapel', 'paket'));
+        return view('admin.team.edit', compact('team', 'paket'));
     }
 
     /**
@@ -107,70 +107,70 @@ class MapelController extends Controller
      */
     public function destroy($id)
     {
-        $mapel = Mapel::findorfail($id);
-        $countJadwal = Jadwal::where('mapel_id', $mapel->id)->count();
+        $team = Team::findorfail($id);
+        $countJadwal = Jadwal::where('team_id', $team->id)->count();
         if ($countJadwal >= 1) {
-            $jadwal = Jadwal::where('mapel_id', $mapel->id)->delete();
+            $jadwal = Jadwal::where('team_id', $team->id)->delete();
         } else {
         }
-        $countDosen = Dosen::where('mapel_id', $mapel->id)->count();
+        $countDosen = Dosen::where('team_id', $team->id)->count();
         if ($countDosen >= 1) {
-            $dosen = Dosen::where('mapel_id', $mapel->id)->delete();
+            $dosen = Dosen::where('team_id', $team->id)->delete();
         } else {
         }
-        $mapel->delete();
-        return redirect()->back()->with('warning', 'Data mapel berhasil dihapus! (Silahkan cek trash data mapel)');
+        $team->delete();
+        return redirect()->back()->with('warning', 'Data team berhasil dihapus! (Silahkan cek trash data team)');
     }
 
     public function trash()
     {
-        $mapel = Mapel::onlyTrashed()->get();
-        return view('admin.mapel.trash', compact('mapel'));
+        $team = Team::onlyTrashed()->get();
+        return view('admin.team.trash', compact('team'));
     }
 
     public function restore($id)
     {
         $id = Crypt::decrypt($id);
-        $mapel = Mapel::withTrashed()->findorfail($id);
-        $countJadwal = Jadwal::withTrashed()->where('mapel_id', $mapel->id)->count();
+        $team = Team::withTrashed()->findorfail($id);
+        $countJadwal = Jadwal::withTrashed()->where('team_id', $team->id)->count();
         if ($countJadwal >= 1) {
-            $jadwal = Jadwal::withTrashed()->where('mapel_id', $mapel->id)->restore();
+            $jadwal = Jadwal::withTrashed()->where('team_id', $team->id)->restore();
         } else {
         }
-        $countDosen = Dosen::withTrashed()->where('mapel_id', $mapel->id)->count();
+        $countDosen = Dosen::withTrashed()->where('team_id', $team->id)->count();
         if ($countDosen >= 1) {
-            $dosen = Dosen::withTrashed()->where('mapel_id', $mapel->id)->restore();
+            $dosen = Dosen::withTrashed()->where('team_id', $team->id)->restore();
         } else {
         }
-        $mapel->restore();
-        return redirect()->back()->with('info', 'Data mapel berhasil direstore! (Silahkan cek data mapel)');
+        $team->restore();
+        return redirect()->back()->with('info', 'Data team berhasil direstore! (Silahkan cek data team)');
     }
 
     public function kill($id)
     {
-        $mapel = Mapel::withTrashed()->findorfail($id);
-        $countJadwal = Jadwal::withTrashed()->where('mapel_id', $mapel->id)->count();
+        $team = Team::withTrashed()->findorfail($id);
+        $countJadwal = Jadwal::withTrashed()->where('team_id', $team->id)->count();
         if ($countJadwal >= 1) {
-            $jadwal = Jadwal::withTrashed()->where('mapel_id', $mapel->id)->forceDelete();
+            $jadwal = Jadwal::withTrashed()->where('team_id', $team->id)->forceDelete();
         } else {
         }
-        $countDosen = Dosen::withTrashed()->where('mapel_id', $mapel->id)->count();
+        $countDosen = Dosen::withTrashed()->where('team_id', $team->id)->count();
         if ($countDosen >= 1) {
-            $dosen = Dosen::withTrashed()->where('mapel_id', $mapel->id)->forceDelete();
+            $dosen = Dosen::withTrashed()->where('team_id', $team->id)->forceDelete();
         } else {
         }
-        $mapel->forceDelete();
-        return redirect()->back()->with('success', 'Data mapel berhasil dihapus secara permanent');
+        $team->forceDelete();
+        return redirect()->back()->with('success', 'Data team berhasil dihapus secara permanent');
     }
 
-    public function getMapelJson(Request $request)
+    public function getTeamJson(Request $request)
     {
-        $jadwal = Jadwal::OrderBy('mapel_id', 'asc')->where('kelas_id', $request->kelas_id)->get();
-        $jadwal = $jadwal->groupBy('mapel_id');
+        $jadwal = Jadwal::OrderBy('team_id', 'asc')->where('kelas_id', $request->kelas_id)->get();
+        $jadwal = $jadwal->groupBy('team_id');
 
         foreach ($jadwal as $val => $data) {
             $newForm[] = array(
-                'mapel' => $data[0]->pelajaran($val)->nama_mapel,
+                'team' => $data[0]->pelajaran($val)->nama_team,
                 'dosen' => $data[0]->pengajar($data[0]->dosen_id)->id
             );
         }

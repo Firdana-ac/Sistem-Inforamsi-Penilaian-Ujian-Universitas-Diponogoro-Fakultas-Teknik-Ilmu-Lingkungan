@@ -1,7 +1,7 @@
 @extends('template_backend.home')
-@section('heading', 'Trash Mapel')
+@section('heading', 'Trash Team')
 @section('page')
-  <li class="breadcrumb-item active">Trash Mapel</li>
+  <li class="breadcrumb-item active">Trash Team</li>
 @endsection
 @section('content')
 @php
@@ -10,7 +10,7 @@
 <div class="col-md-12">
     <div class="card card-primary">
         <div class="card-header">
-          <h3 class="card-title">Trash Data Mapel</h3>
+          <h3 class="card-title">Trash Data Team</h3>
         </div>
         <!-- /.card-header -->
         <div class="card-body">
@@ -18,17 +18,17 @@
             <thead>
                 <tr>
                     <th>No.</th>
-                    <th>Nama Mapel</th>
+                    <th>Nama Team</th>
                     <th>Paket</th>
                     <th>Kelompok</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($mapel as $data)
+                @foreach ($team as $data)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
-                    <td>{{ $data->nama_mapel }}</td>
+                    <td>{{ $data->nama_team }}</td>
                     @if ( $data->paket_id == 9 )
                       <td>{{ 'Semua' }}</td>
                     @else
@@ -36,10 +36,10 @@
                     @endif
                     <td>{{ $data->kelompok }}</td>
                     <td>
-                        <form action="{{ route('mapel.kill', $data->id) }}" method="post">
+                        <form action="{{ route('team.kill', $data->id) }}" method="post">
                             @csrf
                             @method('delete')
-                            <a href="{{ route('mapel.restore', Crypt::encrypt($data->id)) }}" class="btn btn-success btn-sm mt-2"><i class="nav-icon fas fa-undo"></i> &nbsp; Restore</a>
+                            <a href="{{ route('team.restore', Crypt::encrypt($data->id)) }}" class="btn btn-success btn-sm mt-2"><i class="nav-icon fas fa-undo"></i> &nbsp; Restore</a>
                             <button class="btn btn-danger btn-sm mt-2"><i class="nav-icon fas fa-trash-alt"></i> &nbsp; Hapus</button>
                         </form>
                     </td>
@@ -55,6 +55,6 @@
     <script>
         $("#ViewTrash").addClass("active");
         $("#liViewTrash").addClass("menu-open");
-        $("#TrashMapel").addClass("active");
+        $("#TrashTeam").addClass("active");
     </script>
 @endsection

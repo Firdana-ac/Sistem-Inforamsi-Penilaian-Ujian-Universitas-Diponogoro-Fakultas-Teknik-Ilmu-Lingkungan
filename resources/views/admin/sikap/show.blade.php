@@ -79,12 +79,12 @@
                         </tr>
                     </thead>
                     <tbody>
-                            @foreach ($mapel as  $data)
+                            @foreach ($team as  $data)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $data->nama_mapel }}</td>
+                                    <td>{{ $data->nama_team }}</td>
                                     @php
-                                        $array = array('mapel' => $data->id, 'mhs' => $mhs->id);
+                                        $array = array('team' => $data->id, 'mhs' => $mhs->id);
                                         $jsonData = json_encode($array);
                                     @endphp
                                     <td class="ctr">{{ $data->cekSikap($jsonData)['sikap_1'] }}</td>

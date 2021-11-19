@@ -1,10 +1,10 @@
 @extends('template_backend.home')
 @section('heading')
-  Data Dosen {{ $mapel->nama_mapel }}
+  Data Dosen {{ $team->nama_team }}
 @endsection
 @section('page')
   <li class="breadcrumb-item active"><a href="{{ route('dosen.index') }}">Dosen</a></li>
-  <li class="breadcrumb-item active">{{ $mapel->nama_mapel }}</li>
+  <li class="breadcrumb-item active">{{ $team->nama_team }}</li>
 @endsection
 @section('content')
 <div class="col-md-12">

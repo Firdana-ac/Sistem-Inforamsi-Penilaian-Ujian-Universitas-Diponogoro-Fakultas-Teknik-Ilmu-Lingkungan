@@ -6,7 +6,7 @@ use Auth;
 use App\User;
 use App\Dosen;
 use App\Mhs;
-use App\Mapel;
+use App\Team;
 use App\Kelas;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Crypt;
@@ -227,9 +227,9 @@ class UserController extends Controller
 
     public function edit_profile()
     {
-        $mapel = Mapel::all();
+        $team = Team::all();
         $kelas = Kelas::all();
-        return view('user.profile', compact('mapel', 'kelas'));
+        return view('user.profile', compact('team', 'kelas'));
     }
 
     public function ubah_profile(Request $request)
@@ -237,7 +237,7 @@ class UserController extends Controller
         if ($request->role == 'Dosen') {
             $this->validate($request, [
                 'nama_dosen' => 'required',
-                'mapel_id' => 'required',
+                'team_id' => 'required',
                 'jk' => 'required',
             ]);
             $dosen = Dosen::where('id_card', Auth::user()->id_card)->first();
@@ -252,7 +252,7 @@ class UserController extends Controller
             }
             $dosen_data = [
                 'nama_dosen' => $request->name,
-                'mapel_id' => $request->mapel_id,
+                'team_id' => $request->team_id,
                 'jk' => $request->jk,
                 'telp' => $request->telp,
                 'tmp_lahir' => $request->tmp_lahir,

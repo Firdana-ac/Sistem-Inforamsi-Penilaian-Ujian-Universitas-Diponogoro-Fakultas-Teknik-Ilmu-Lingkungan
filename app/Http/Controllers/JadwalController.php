@@ -69,7 +69,7 @@ class JadwalController extends Controller
             [
                 'hari_id' => $request->hari_id,
                 'kelas_id' => $request->kelas_id,
-                'mapel_id' => $dosen->mapel_id,
+                'team_id' => $dosen->team_id,
                 'dosen_id' => $request->dosen_id,
                 'jam_mulai' => $request->jam_mulai,
                 'jam_selesai' => $request->jam_selesai,
@@ -164,7 +164,7 @@ class JadwalController extends Controller
         foreach ($jadwal as $val) {
             $newForm[] = array(
                 'hari' => $val->hari->nama_hari,
-                'mapel' => $val->mapel->nama_mapel,
+                'team' => $val->team->nama_team,
                 'kelas' => $val->kelas->nama_kelas,
                 'dosen' => $val->dosen->nama_dosen,
                 'jam_mulai' => $val->jam_mulai,
@@ -180,7 +180,7 @@ class JadwalController extends Controller
         $jadwal = Jadwal::OrderBy('jam_mulai')->OrderBy('jam_selesai')->OrderBy('kelas_id')->where('hari_id', $request->hari)->where('jam_mulai', '<=', $request->jam)->where('jam_selesai', '>=', $request->jam)->get();
         foreach ($jadwal as $val) {
             $newForm[] = array(
-                'mapel' => $val->mapel->nama_mapel,
+                'team' => $val->team->nama_team,
                 'kelas' => $val->kelas->nama_kelas,
                 'dosen' => $val->dosen->nama_dosen,
                 'jam_mulai' => $val->jam_mulai,

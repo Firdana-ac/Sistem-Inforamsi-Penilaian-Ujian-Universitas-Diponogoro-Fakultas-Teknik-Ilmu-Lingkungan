@@ -18,7 +18,7 @@
                     <tr>
                         <td>Mata Pelajaran</td>
                         <td>:</td>
-                        <td>{{ $dosen->mapel->nama_mapel }}</td>
+                        <td>{{ $dosen->team->nama_team }}</td>
                     </tr>
                 </table>
                 <hr>

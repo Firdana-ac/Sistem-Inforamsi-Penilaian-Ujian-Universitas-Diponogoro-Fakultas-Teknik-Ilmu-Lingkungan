@@ -18,7 +18,7 @@ class CreateDosenTable extends Migration
             $table->string('id_card', 10);
             $table->string('nip', 30)->nullable();
             $table->string('nama_dosen', 50);
-            $table->integer('mapel_id');
+            $table->integer('team_id');
             $table->string('kode', 5)->nullable();
             $table->enum('jk', ['L', 'P']);
             $table->string('telp', 15)->nullable();

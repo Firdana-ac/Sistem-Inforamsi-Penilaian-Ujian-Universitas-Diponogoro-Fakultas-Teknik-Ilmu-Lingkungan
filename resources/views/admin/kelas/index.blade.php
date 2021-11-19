@@ -293,7 +293,7 @@
               $("#judul-jadwal").text('View Data Jadwal ' + val.kelas);
               jadwal += "<tr>";
                 jadwal += "<td>"+val.hari+"</td>";
-                jadwal += "<td><h5 class='card-title'>"+val.mapel+"</h5><p class='card-text'><small class='text-muted'>"+val.dosen+"</small></p></td>";
+                jadwal += "<td><h5 class='card-title'>"+val.team+"</h5><p class='card-text'><small class='text-muted'>"+val.dosen+"</small></p></td>";
                 jadwal += "<td>"+val.jam_mulai+" - "+val.jam_selesai+"</td>";
                 jadwal += "<td>"+val.ruang+"</td>";
               jadwal+="</tr>";

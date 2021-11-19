@@ -81,10 +81,10 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($mapel as $data)
+                        @foreach ($team as $data)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $data->nama_mapel }}</td>
+                                <td>{{ $data->nama_team }}</td>
                                 <td class="ctr">{{ $data->sikap($data->id)['sikap_1'] }}</td>
                                 <td class="ctr">{{ $data->sikap($data->id)['sikap_2'] }}</td>
                                 <td class="ctr">{{ $data->sikap($data->id)['sikap_3'] }}</td>

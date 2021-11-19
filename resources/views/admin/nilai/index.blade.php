@@ -14,7 +14,7 @@
             <thead>
               <tr>
                 <th rowspan="2">No.</th>
-                <th rowspan="2">Kode Mapel</th>
+                <th rowspan="2">Kode Team</th>
                 <th rowspan="2">Team Penguji</th>
                 <th rowspan="2">KKM</th>
                 <th colspan="4" class="text-center">Predikat</th>
@@ -32,7 +32,7 @@
                   <td>{{ $loop->iteration }}</td>
                   <td>{{ $data->kode }}</td>
                   <td>
-                      <h5 class="card-title">{{ $data->mapel->nama_mapel }}</h5>
+                      <h5 class="card-title">{{ $data->team->nama_team }}</h5>
                       <p class="card-text"><small class="text-muted">{{ $data->nama_dosen }}</small></p>
                   </td>
                   @if ($data->dsk($data->id))

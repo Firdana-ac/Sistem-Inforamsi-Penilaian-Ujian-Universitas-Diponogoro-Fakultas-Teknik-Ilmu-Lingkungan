@@ -63,7 +63,7 @@ class UlanganController extends Controller
                             'mhs_id' => $request->mhs_id,
                             'kelas_id' => $request->kelas_id,
                             'dosen_id' => $request->dosen_id,
-                            'mapel_id' => $dosen->mapel_id,
+                            'team_id' => $dosen->team_id,
                             'p_nilai' => $nilai,
                             'p_predikat' => 'A',
                             'p_deskripsi' => $deskripsi->deskripsi_a,
@@ -73,7 +73,7 @@ class UlanganController extends Controller
                             'mhs_id' => $request->mhs_id,
                             'kelas_id' => $request->kelas_id,
                             'dosen_id' => $request->dosen_id,
-                            'mapel_id' => $dosen->mapel_id,
+                            'team_id' => $dosen->team_id,
                             'p_nilai' => $nilai,
                             'p_predikat' => 'B',
                             'p_deskripsi' => $deskripsi->deskripsi_b,
@@ -83,7 +83,7 @@ class UlanganController extends Controller
                             'mhs_id' => $request->mhs_id,
                             'kelas_id' => $request->kelas_id,
                             'dosen_id' => $request->dosen_id,
-                            'mapel_id' => $dosen->mapel_id,
+                            'team_id' => $dosen->team_id,
                             'p_nilai' => $nilai,
                             'p_predikat' => 'C',
                             'p_deskripsi' => $deskripsi->deskripsi_c,
@@ -93,7 +93,7 @@ class UlanganController extends Controller
                             'mhs_id' => $request->mhs_id,
                             'kelas_id' => $request->kelas_id,
                             'dosen_id' => $request->dosen_id,
-                            'mapel_id' => $dosen->mapel_id,
+                            'team_id' => $dosen->team_id,
                             'p_nilai' => $nilai,
                             'p_predikat' => 'D',
                             'p_deskripsi' => $deskripsi->deskripsi_d,
@@ -112,7 +112,7 @@ class UlanganController extends Controller
                     'mhs_id' => $request->mhs_id,
                     'kelas_id' => $request->kelas_id,
                     'dosen_id' => $request->dosen_id,
-                    'mapel_id' => $dosen->mapel_id,
+                    'team_id' => $dosen->team_id,
                     'ulha_1' => $request->ulha_1,
                     'ulha_2' => $request->ulha_2,
                     'uts' => $request->uts,
@@ -183,17 +183,17 @@ class UlanganController extends Controller
         $id = Crypt::decrypt($id);
         $mhs = Mhs::findorfail($id);
         $kelas = Kelas::findorfail($mhs->kelas_id);
-        $jadwal = Jadwal::orderBy('mapel_id')->where('kelas_id', $kelas->id)->get();
-        $mapel = $jadwal->groupBy('mapel_id');
-        return view('admin.ulangan.show', compact('mapel', 'mhs', 'kelas'));
+        $jadwal = Jadwal::orderBy('team_id')->where('kelas_id', $kelas->id)->get();
+        $team = $jadwal->groupBy('team_id');
+        return view('admin.ulangan.show', compact('team', 'mhs', 'kelas'));
     }
 
     public function mhs()
     {
         $mhs = Mhs::where('no_induk', Auth::user()->no_induk)->first();
         $kelas = Kelas::findorfail($mhs->kelas_id);
-        $jadwal = Jadwal::where('kelas_id', $kelas->id)->orderBy('mapel_id')->get();
-        $mapel = $jadwal->groupBy('mapel_id');
-        return view('mhs.ulangan', compact('mhs', 'kelas', 'mapel'));
+        $jadwal = Jadwal::where('kelas_id', $kelas->id)->orderBy('team_id')->get();
+        $team = $jadwal->groupBy('team_id');
+        return view('mhs.ulangan', compact('mhs', 'kelas', 'team'));
     }
 }

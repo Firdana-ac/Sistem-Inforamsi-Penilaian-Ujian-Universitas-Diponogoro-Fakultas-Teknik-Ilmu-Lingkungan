@@ -83,13 +83,13 @@
                         </tr>
                     </thead>
                     <tbody>
-                            @foreach ($mapel as $val => $data)
+                            @foreach ($team as $val => $data)
                                 <?php $data = $data[0]; ?>
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $data->mapel->nama_mapel }}</td>
+                                    <td>{{ $data->team->nama_team }}</td>
                                     @php
-                                        $array = array('mapel' => $val, 'mhs' => $mhs->id);
+                                        $array = array('team' => $val, 'mhs' => $mhs->id);
                                         $jsonData = json_encode($array);
                                     @endphp
                                     <td class="ctr">{{ $data->cekRapot($jsonData)['p_nilai'] }}</td>

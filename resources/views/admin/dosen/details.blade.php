@@ -8,7 +8,7 @@
 <div class="col-md-12">
     <div class="card">
         <div class="card-header">
-            <a href="{{ route("dosen.mapel", Crypt::encrypt($dosen->mapel_id)) }}" class="btn btn-default btn-sm"><i class='nav-icon fas fa-arrow-left'></i> &nbsp; Kembali</a>
+            <a href="{{ route("dosen.team", Crypt::encrypt($dosen->team_id)) }}" class="btn btn-default btn-sm"><i class='nav-icon fas fa-arrow-left'></i> &nbsp; Kembali</a>
         </div>
         <div class="card-body">
             <div class="row no-gutters ml-2 mb-2 mr-2">
@@ -20,7 +20,7 @@
                     <h5 class="card-title card-text mb-2">Nama : {{ $dosen->nama_dosen }}</h5>
                     <h5 class="card-title card-text mb-2">NIP : {{ $dosen->nip }}</h5>
                     <h5 class="card-title card-text mb-2">No Id Card : {{ $dosen->id_card }}</h5>
-                    <h5 class="card-title card-text mb-2">Team : {{ $dosen->mapel->nama_mapel }}</h5>
+                    <h5 class="card-title card-text mb-2">Team : {{ $dosen->team->nama_team }}</h5>
                     <h5 class="card-title card-text mb-2">Kode Jadwal : {{ $dosen->kode }}</h5>
                     @if ($dosen->jk == 'L')
                         <h5 class="card-title card-text mb-2">Jenis Kelamin : Laki-laki</h5>

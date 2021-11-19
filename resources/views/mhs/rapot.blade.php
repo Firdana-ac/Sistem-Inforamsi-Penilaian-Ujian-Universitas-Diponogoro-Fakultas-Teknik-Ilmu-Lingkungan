@@ -128,11 +128,11 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($mapel as $val => $data)
+                                @foreach ($team as $val => $data)
                                     <tr>
                                         <?php $data = $data[0]; ?>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $data->mapel->nama_mapel }}</td>
+                                        <td>{{ $data->team->nama_team }}</td>
                                         {{-- <td class="ctr">{{ $data->kkm($data->nilai($val)['dosen_id']) }}</td> --}}
                                         <td class="ctr">{{ $data->kkm($data->dosen_id) }}</td>
                                         <td class="ctr">{{ $data->nilai($val)['p_nilai'] }}</td>

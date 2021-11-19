@@ -69,9 +69,9 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ route('mapel.index') }}" class="nav-link" id="DataMapel">
+                                <a href="{{ route('team.index') }}" class="nav-link" id="DataTeam">
                                     <i class="fas fa-book nav-icon"></i>
-                                    <p>Data Mapel</p>
+                                    <p>Data Team</p>
                                 </a>
                             </li>
                             <li class="nav-item">
@@ -117,9 +117,9 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ route('mapel.trash') }}" class="nav-link" id="TrashMapel">
+                                    <a href="{{ route('team.trash') }}" class="nav-link" id="TrashTeam">
                                         <i class="fas fa-book nav-icon"></i>
-                                        <p>Trash Mapel</p>
+                                        <p>Trash Team</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
@@ -214,8 +214,8 @@
                                 </a>
                             </li>
                             @if (
-                                Auth::user()->dosen(Auth::user()->id_card)->mapel->nama_mapel == "Pendidikan Agama dan Budi Pekerti" ||
-                                Auth::user()->dosen(Auth::user()->id_card)->mapel->nama_mapel == "Pendidikan Pancasila dan Kewarganegaraan"
+                                Auth::user()->dosen(Auth::user()->id_card)->team->nama_team == "Pendidikan Agama dan Budi Pekerti" ||
+                                Auth::user()->dosen(Auth::user()->id_card)->team->nama_team == "Pendidikan Pancasila dan Kewarganegaraan"
                             )
                                 <li class="nav-item">
                                     <a href="{{ route('sikap.index') }}" class="nav-link" id="SikapDosen">

@@ -24,15 +24,15 @@
                     <input type="text" id="nama_dosen" name="nama_dosen" value="{{ $dosen->nama_dosen }}" class="form-control @error('nama_dosen') is-invalid @enderror">
                 </div>
                 <div class="form-group">
-                    <label for="mapel_id">Mapel</label>
-                    <select id="mapel_id" name="mapel_id" class="select2bs4 form-control @error('mapel_id') is-invalid @enderror">
-                        <option value="">-- Pilih Mapel --</option>
-                        @foreach ($mapel as $data)
+                    <label for="team_id">Team</label>
+                    <select id="team_id" name="team_id" class="select2bs4 form-control @error('team_id') is-invalid @enderror">
+                        <option value="">-- Pilih Team --</option>
+                        @foreach ($team as $data)
                             <option value="{{ $data->id }}"
-                                @if ($dosen->mapel_id == $data->id)
+                                @if ($dosen->team_id == $data->id)
                                     selected
                                 @endif
-                            >{{ $data->nama_mapel }}</option>
+                            >{{ $data->nama_team }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -96,7 +96,7 @@
 <script type="text/javascript">
     $(document).ready(function() {
         $('#back').click(function() {
-        window.location="{{ route('dosen.mapel', Crypt::encrypt($dosen->mapel_id)) }}";
+        window.location="{{ route('dosen.team', Crypt::encrypt($dosen->team_id)) }}";
         });
     });
     $("#MasterData").addClass("active");

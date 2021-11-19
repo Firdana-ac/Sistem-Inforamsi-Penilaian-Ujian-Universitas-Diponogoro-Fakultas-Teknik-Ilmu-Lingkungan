@@ -79,9 +79,9 @@ Route::middleware(['auth'])->group(function () {
       Route::get('/mhs/trash', 'MhsController@trash')->name('mhs.trash');
       Route::get('/mhs/restore/{id}', 'MhsController@restore')->name('mhs.restore');
       Route::delete('/mhs/kill/{id}', 'MhsController@kill')->name('mhs.kill');
-      Route::get('/mapel/trash', 'MapelController@trash')->name('mapel.trash');
-      Route::get('/mapel/restore/{id}', 'MapelController@restore')->name('mapel.restore');
-      Route::delete('/mapel/kill/{id}', 'MapelController@kill')->name('mapel.kill');
+      Route::get('/team/trash', 'TeamController@trash')->name('team.trash');
+      Route::get('/team/restore/{id}', 'TeamController@restore')->name('team.restore');
+      Route::delete('/team/kill/{id}', 'TeamController@kill')->name('team.kill');
       Route::get('/user/trash', 'UserController@trash')->name('user.trash');
       Route::get('/user/restore/{id}', 'UserController@restore')->name('user.restore');
       Route::delete('/user/kill/{id}', 'UserController@kill')->name('user.kill');
@@ -92,7 +92,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dosen/absensi', 'DosenController@absensi')->name('dosen.absensi');
     Route::get('/dosen/kehadiran/{id}', 'DosenController@kehadiran')->name('dosen.kehadiran');
     Route::get('/absen/json', 'DosenController@json');
-    Route::get('/dosen/mapel/{id}', 'DosenController@mapel')->name('dosen.mapel');
+    Route::get('/dosen/team/{id}', 'DosenController@team')->name('dosen.team');
     Route::get('/dosen/ubah-foto/{id}', 'DosenController@ubah_foto')->name('dosen.ubah-foto');
     Route::post('/dosen/update-foto/{id}', 'DosenController@update_foto')->name('dosen.update-foto');
     Route::post('/dosen/upload', 'DosenController@upload')->name('dosen.upload');
@@ -111,8 +111,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/mhs/import_excel', 'MhsController@import_excel')->name('mhs.import_excel');
     Route::delete('/mhs/deleteAll', 'MhsController@deleteAll')->name('mhs.deleteAll');
     Route::resource('/mhs', 'MhsController');
-    Route::get('/mapel/getMapelJson', 'MapelController@getMapelJson');
-    Route::resource('/mapel', 'MapelController');
+    Route::get('/team/getTeamJson', 'TeamController@getTeamJson');
+    Route::resource('/team', 'TeamController');
     Route::get('/jadwal/view/json', 'JadwalController@view');
     Route::get('/jadwalkelaspdf/{id}', 'JadwalController@cetak_pdf');
     Route::get('/jadwal/export_excel', 'JadwalController@export_excel')->name('jadwal.export_excel');

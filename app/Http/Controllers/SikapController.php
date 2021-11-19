@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Auth;
-use App\Mapel;
+use App\Team;
 use App\Dosen;
 use App\Mhs;
 use App\Kelas;
@@ -25,8 +25,8 @@ class SikapController extends Controller
     {
         $dosen = Dosen::where('id_card', Auth::user()->id_card)->first();
         if (
-            $dosen->mapel->nama_mapel == "Pendidikan Agama dan Budi Pekerti" ||
-            $dosen->mapel->nama_mapel == "Pendidikan Pancasila dan Kewarganegaraan"
+            $dosen->team->nama_team == "Pendidikan Agama dan Budi Pekerti" ||
+            $dosen->team->nama_team == "Pendidikan Pancasila dan Kewarganegaraan"
         ) {
             $jadwal = Jadwal::where('dosen_id', $dosen->id)->orderBy('kelas_id')->get();
             $kelas = $jadwal->groupBy('kelas_id');
@@ -59,8 +59,8 @@ class SikapController extends Controller
         $cekJadwal = Jadwal::where('dosen_id', $dosen->id)->where('kelas_id', $request->kelas_id)->count();
         if ($cekJadwal >= 1) {
             if (
-                $dosen->mapel->nama_mapel == "Pendidikan Agama dan Budi Pekerti" ||
-                $dosen->mapel->nama_mapel == "Pendidikan Pancasila dan Kewarganegaraan"
+                $dosen->team->nama_team == "Pendidikan Agama dan Budi Pekerti" ||
+                $dosen->team->nama_team == "Pendidikan Pancasila dan Kewarganegaraan"
             ) {
                 Sikap::updateOrCreate(
                     [
@@ -70,7 +70,7 @@ class SikapController extends Controller
                         'mhs_id' => $request->mhs_id,
                         'kelas_id' => $request->kelas_id,
                         'dosen_id' => $request->dosen_id,
-                        'mapel_id' => $dosen->mapel_id,
+                        'team_id' => $dosen->team_id,
                         'sikap_1' => $request->sikap_1,
                         'sikap_2' => $request->sikap_2,
                         'sikap_3' => $request->sikap_3
@@ -142,15 +142,15 @@ class SikapController extends Controller
         $id = Crypt::decrypt($id);
         $mhs = Mhs::findorfail($id);
         $kelas = Kelas::findorfail($mhs->kelas_id);
-        $mapel = Mapel::where('nama_mapel', 'Pendidikan Agama dan Budi Pekerti')->orWhere('nama_mapel', 'Pendidikan Pancasila dan Kewarganegaraan')->get();
-        return view('admin.sikap.show', compact('mapel', 'mhs', 'kelas'));
+        $team = Team::where('nama_team', 'Pendidikan Agama dan Budi Pekerti')->orWhere('nama_team', 'Pendidikan Pancasila dan Kewarganegaraan')->get();
+        return view('admin.sikap.show', compact('team', 'mhs', 'kelas'));
     }
 
     public function mhs()
     {
         $mhs = Mhs::where('no_induk', Auth::user()->no_induk)->first();
         $kelas = Kelas::findorfail($mhs->kelas_id);
-        $mapel = Mapel::where('nama_mapel', 'Pendidikan Agama dan Budi Pekerti')->orWhere('nama_mapel', 'Pendidikan Pancasila dan Kewarganegaraan')->get();
-        return view('mhs.sikap', compact('mhs', 'kelas', 'mapel'));
+        $team = Team::where('nama_team', 'Pendidikan Agama dan Budi Pekerti')->orWhere('nama_team', 'Pendidikan Pancasila dan Kewarganegaraan')->get();
+        return view('mhs.sikap', compact('mhs', 'kelas', 'team'));
     }
 }

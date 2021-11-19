@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Auth;
 use App\User;
 use App\Dosen;
-use App\Mapel;
+use App\Team;
 use App\Jadwal;
 use App\Absen;
 use App\Kehadiran;
@@ -27,9 +27,9 @@ class DosenController extends Controller
      */
     public function index()
     {
-        $mapel = Mapel::orderBy('nama_mapel')->get();
+        $team = Team::orderBy('nama_team')->get();
         $max = Dosen::max('id_card');
-        return view('admin.dosen.index', compact('mapel', 'max'));
+        return view('admin.dosen.index', compact('team', 'max'));
     }
 
     /**
@@ -53,7 +53,7 @@ class DosenController extends Controller
         $this->validate($request, [
             'id_card' => 'required',
             'nama_dosen' => 'required',
-            'mapel_id' => 'required',
+            'team_id' => 'required',
             'kode' => 'required|string|unique:dosen|min:2|max:3',
             'jk' => 'required'
         ]);
@@ -75,7 +75,7 @@ class DosenController extends Controller
             'id_card' => $request->id_card,
             'nip' => $request->nip,
             'nama_dosen' => $request->nama_dosen,
-            'mapel_id' => $request->mapel_id,
+            'team_id' => $request->team_id,
             'kode' => $request->kode,
             'jk' => $request->jk,
             'telp' => $request->telp,
@@ -114,8 +114,8 @@ class DosenController extends Controller
     {
         $id = Crypt::decrypt($id);
         $dosen = Dosen::findorfail($id);
-        $mapel = Mapel::all();
-        return view('admin.dosen.edit', compact('dosen', 'mapel'));
+        $team = Team::all();
+        return view('admin.dosen.edit', compact('dosen', 'team'));
     }
 
     /**
@@ -129,7 +129,7 @@ class DosenController extends Controller
     {
         $this->validate($request, [
             'nama_dosen' => 'required',
-            'mapel_id' => 'required',
+            'team_id' => 'required',
             'jk' => 'required',
         ]);
 
@@ -144,7 +144,7 @@ class DosenController extends Controller
         }
         $dosen_data = [
             'nama_dosen' => $request->nama_dosen,
-            'mapel_id' => $request->mapel_id,
+            'team_id' => $request->team_id,
             'jk' => $request->jk,
             'telp' => $request->telp,
             'tmp_lahir' => $request->tmp_lahir,
@@ -244,12 +244,12 @@ class DosenController extends Controller
         return redirect()->route('dosen.index')->with('success', 'Berhasil merubah foto!');
     }
 
-    public function mapel($id)
+    public function team($id)
     {
         $id = Crypt::decrypt($id);
-        $mapel = Mapel::findorfail($id);
-        $dosen = Dosen::where('mapel_id', $id)->orderBy('kode', 'asc')->get();
-        return view('admin.dosen.show', compact('mapel', 'dosen'));
+        $team = Team::findorfail($id);
+        $dosen = Dosen::where('team_id', $id)->orderBy('kode', 'asc')->get();
+        return view('admin.dosen.show', compact('team', 'dosen'));
     }
 
     public function absen()
