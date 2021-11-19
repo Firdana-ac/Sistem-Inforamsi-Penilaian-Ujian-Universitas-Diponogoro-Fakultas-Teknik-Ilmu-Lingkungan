@@ -34,8 +34,8 @@
                         <form action="{{ route('kelas.destroy', $data->id) }}" method="post">
                             @csrf
                             @method('delete')
-                            <button type="button" class="btn btn-info btn-sm" onclick="getSubsSiswa({{$data->id}})" data-toggle="modal" data-target=".view-siswa">
-                              <i class="nav-icon fas fa-users"></i> &nbsp; View Siswa
+                            <button type="button" class="btn btn-info btn-sm" onclick="getSubsMhs({{$data->id}})" data-toggle="modal" data-target=".view-mhs">
+                              <i class="nav-icon fas fa-users"></i> &nbsp; View Mhs
                             </button>
                             <button type="button" class="btn btn-info btn-sm" onclick="getSubsJadwal({{$data->id}})" data-toggle="modal" data-target=".view-jadwal">
                               <i class="nav-icon fas fa-calendar-alt"></i> &nbsp; View Jadwal
@@ -97,11 +97,11 @@
 </div>
 
 <!-- Extra large modal -->
-<div class="modal fade bd-example-modal-lg view-siswa" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+<div class="modal fade bd-example-modal-lg view-mhs" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title" id="judul-siswa">View Siswa</h4>
+        <h4 class="modal-title" id="judul-mhs">View Mhs</h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -113,20 +113,20 @@
               <table class="table table-bordered table-striped table-hover" width="100%">
                 <thead>
                   <tr>
-                    <th>No Induk Siswa</th>
-                    <th>Nama Siswa</th>
+                    <th>No Induk Mhs</th>
+                    <th>Nama Mhs</th>
                     <th>L/P</th>
-                    <th>Foto Siswa</th>
+                    <th>Foto Mhs</th>
                   </tr>
                 </thead>
-                <tbody id="data-siswa">
+                <tbody id="data-mhs">
                 </tbody>
                 <tfoot>
                   <tr>
-                    <th>No Induk Siswa</th>
-                    <th>Nama Siswa</th>
+                    <th>No Induk Mhs</th>
+                    <th>Nama Mhs</th>
                     <th>L/P</th>
-                    <th>Foto Siswa</th>
+                    <th>Foto Mhs</th>
                   </tr>
                 </tfoot>
               </table>
@@ -136,7 +136,7 @@
         </div>
         <div class="modal-footer justify-content-between">
           <button type="button" class="btn btn-default" data-dismiss="modal"><i class="nav-icon fas fa-arrow-left"></i> &nbsp; Kembali</button>
-          <a id="link-siswa" href="#" class="btn btn-primary"><i class="nav-icon fas fa-download"></i> &nbsp; Download PDF</a>
+          <a id="link-mhs" href="#" class="btn btn-primary"><i class="nav-icon fas fa-download"></i> &nbsp; Download PDF</a>
         </div>
       </div>
     </div>
@@ -246,27 +246,27 @@
       });
     }
 
-    function getSubsSiswa(id){
+    function getSubsMhs(id){
       var parent = id;
       $.ajax({
         type:"GET",
         data:"id="+parent,
         dataType:"JSON",
-        url:"{{ url('/siswa/view/json') }}",
+        url:"{{ url('/mhs/view/json') }}",
         success:function(result){
           // console.log(result);
-          var siswa = "";
+          var mhs = "";
           if(result){
             $.each(result,function(index, val){
-              $("#judul-siswa").text('View Data Siswa ' + val.kelas);
-              siswa += "<tr>";
-                siswa += "<td>"+val.no_induk+"</td>";
-                siswa += "<td>"+val.nama_siswa+"</td>";
-                siswa += "<td>"+val.jk+"</td>";
-                siswa += "<td><img src='"+val.foto+"' width='100px'></td>";
-              siswa+="</tr>";
+              $("#judul-mhs").text('View Data Mhs ' + val.kelas);
+              mhs += "<tr>";
+                mhs += "<td>"+val.no_induk+"</td>";
+                mhs += "<td>"+val.nama_mhs+"</td>";
+                mhs += "<td>"+val.jk+"</td>";
+                mhs += "<td><img src='"+val.foto+"' width='100px'></td>";
+              mhs+="</tr>";
             });
-            $("#data-siswa").html(siswa);
+            $("#data-mhs").html(mhs);
           }
         },
         error:function(){
@@ -275,7 +275,7 @@
         complete:function(){
         }
       });
-      $("#link-siswa").attr("href", "https://siakad.didev.id/listsiswapdf/"+id);
+      $("#link-mhs").attr("href", "https://siakad.didev.id/listmhspdf/"+id);
     }
     
     function getSubsJadwal(id){

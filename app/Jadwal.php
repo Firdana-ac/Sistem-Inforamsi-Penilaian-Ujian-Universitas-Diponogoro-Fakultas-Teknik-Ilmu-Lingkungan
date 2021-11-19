@@ -51,15 +51,15 @@ class Jadwal extends Model
 
   public function ulangan($id)
   {
-    $siswa = Siswa::where('no_induk', Auth::user()->no_induk)->first();
-    $nilai = Ulangan::where('siswa_id', $siswa->id)->where('mapel_id', $id)->first();
+    $mhs = Mhs::where('no_induk', Auth::user()->no_induk)->first();
+    $nilai = Ulangan::where('mhs_id', $mhs->id)->where('mapel_id', $id)->first();
     return $nilai;
   }
 
   public function nilai($id)
   {
-    $siswa = Siswa::where('no_induk', Auth::user()->no_induk)->first();
-    $nilai = Rapot::where('siswa_id', $siswa->id)->where('mapel_id', $id)->first();
+    $mhs = Mhs::where('no_induk', Auth::user()->no_induk)->first();
+    $nilai = Rapot::where('mhs_id', $mhs->id)->where('mapel_id', $id)->first();
     return $nilai;
   }
 
@@ -79,14 +79,14 @@ class Jadwal extends Model
   public function cekUlangan($id)
   {
     $data = json_decode($id, true);
-    $ulangan = Ulangan::where('siswa_id', $data['siswa'])->where('mapel_id', $data['mapel'])->first();
+    $ulangan = Ulangan::where('mhs_id', $data['mhs'])->where('mapel_id', $data['mapel'])->first();
     return $ulangan;
   }
 
   public function cekRapot($id)
   {
     $data = json_decode($id, true);
-    $rapot = Rapot::where('siswa_id', $data['siswa'])->where('mapel_id', $data['mapel'])->first();
+    $rapot = Rapot::where('mhs_id', $data['mhs'])->where('mapel_id', $data['mapel'])->first();
     return $rapot;
   }
 

@@ -27,10 +27,10 @@ class User extends Authenticatable
         return $dosen;
     }
 
-    public function siswa($id)
+    public function mhs($id)
     {
-        $siswa = Siswa::where('no_induk', $id)->first();
-        return $siswa;
+        $mhs = Mhs::where('no_induk', $id)->first();
+        return $mhs;
     }
 
     /**

@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\User;
 use App\Dosen;
-use App\Siswa;
+use App\Mhs;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -80,9 +80,9 @@ class RegisterController extends Controller
                     'id_card' => ['required'],
                 ]);
             }
-        } elseif ($data['role'] == 'Siswa') {
-            $siswa = Siswa::where('no_induk', $data['nomer'])->count();
-            if ($siswa >= 1) {
+        } elseif ($data['role'] == 'Mhs') {
+            $mhs = Mhs::where('no_induk', $data['nomer'])->count();
+            if ($mhs >= 1) {
                 $user = User::where('no_induk', $data['nomer'])->count();
                 if ($user >= 1) {
                     return Validator::make($data, [
@@ -90,7 +90,7 @@ class RegisterController extends Controller
                         'password' => ['required', 'string', 'min:8', 'confirmed'],
                         'role' => ['required'],
                         'nomer' => ['required'],
-                        'siswa' => ['required'],
+                        'mhs' => ['required'],
                     ]);
                 } else {
                     return Validator::make($data, [
@@ -140,12 +140,12 @@ class RegisterController extends Controller
                 'id_card' => $data['nomer'],
             ]);
         } else {
-            $siswaId = Siswa::where('no_induk', $data['nomer'])->get();
-            foreach ($siswaId as $val) {
-                $siswa = Siswa::findorfail($val->id);
+            $mhsId = Mhs::where('no_induk', $data['nomer'])->get();
+            foreach ($mhsId as $val) {
+                $mhs = Mhs::findorfail($val->id);
             }
             return User::create([
-                'name' => strtolower($siswa->nama_siswa),
+                'name' => strtolower($mhs->nama_mhs),
                 'email' => $data['email'],
                 'password' => Hash::make($data['password']),
                 'role' => $data['role'],

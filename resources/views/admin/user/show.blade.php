@@ -26,8 +26,8 @@
                 @foreach ($role as $d => $data)
                   @if ($d == 'Dosen')
                     <th>No Id Card</th>
-                  @elseif ($d == 'Siswa')
-                    <th>No Induk Siswa</th>
+                  @elseif ($d == 'Mhs')
+                    <th>No Induk Mhs</th>
                   @else
                       
                   @endif
@@ -43,7 +43,7 @@
                 <td>{{ $loop->iteration }}</td>
                 <td class="text-capitalize">{{ $data->name }}</td>
                 <td>{{ $data->email }}</td>
-                @if ($data->role == 'Siswa')
+                @if ($data->role == 'Mhs')
                   <td>{{ $data->no_induk }}</td>
                 @elseif ($data->role == 'Dosen')
                   <td>{{ $data->id_card }}</td>

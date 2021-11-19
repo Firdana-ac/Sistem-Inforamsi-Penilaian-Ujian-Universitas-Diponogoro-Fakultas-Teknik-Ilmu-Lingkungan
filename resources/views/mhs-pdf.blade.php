@@ -19,16 +19,16 @@
                     </tr>
                     <tr>
                         <th>No. Induk</th>
-                        <th>Nama Siswa</th>
+                        <th>Nama Mhs</th>
                         <th>L/P</th>
                         <th>Foto</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($siswa as $data)
+                    @foreach ($mhs as $data)
                         <tr>
                             <td>{{ $data->no_induk }}</td>
-                            <td>{{ $data->nama_siswa }}</td>
+                            <td>{{ $data->nama_mhs }}</td>
                             <td>{{ $data->jk }}</td>
                             <td><img src="{{ asset($data->foto) }}" width="100" alt=""></td>
                         </tr>

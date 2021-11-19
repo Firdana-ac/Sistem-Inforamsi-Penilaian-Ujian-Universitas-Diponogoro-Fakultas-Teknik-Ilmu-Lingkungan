@@ -57,10 +57,10 @@
                 </span>
               @enderror
             `);
-          } else if(kel == "Siswa") {
+          } else if(kel == "Mhs") {
             $("#noId").addClass("mb-3");
             $("#noId").html(`
-              <input id="nomer" type="text" placeholder="No Induk Siswa" class="form-control" name="nomer" autocomplete="nomer">
+              <input id="nomer" type="text" placeholder="No Induk Mhs" class="form-control" name="nomer" autocomplete="nomer">
               <div class="input-group-append">
                 <div class="input-group-text">
                   <span class="fas fa-id-card"></span>
@@ -102,12 +102,12 @@
 @enderror
 @error('no_induk')
   <script>
-    toastr.error("Maaf User ini tidak terdaftar sebagai Siswa SMKN 1 Jenangan Ponorogo!");
+    toastr.error("Maaf User ini tidak terdaftar sebagai Mhs SMKN 1 Jenangan Ponorogo!");
   </script>
 @enderror
-@error('siswa')
+@error('mhs')
   <script>
-    toastr.error("Maaf Siswa ini sudah terdaftar sebagai User!");
+    toastr.error("Maaf Mhs ini sudah terdaftar sebagai User!");
   </script>
 @enderror
 @if (session('status'))

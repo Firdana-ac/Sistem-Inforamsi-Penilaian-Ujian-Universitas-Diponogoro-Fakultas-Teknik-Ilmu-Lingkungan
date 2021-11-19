@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Auth;
 use App\User;
 use App\Dosen;
-use App\Siswa;
+use App\Mhs;
 use App\Mapel;
 use App\Kelas;
 use Illuminate\Support\Facades\Hash;
@@ -69,23 +69,23 @@ class UserController extends Controller
             } else {
                 return redirect()->back()->with('error', 'Maaf User ini tidak terdaftar sebagai dosen!');
             }
-        } elseif ($request->role == 'Siswa') {
-            $countSiswa = Siswa::where('no_induk', $request->nomer)->count();
-            $siswaId = Siswa::where('no_induk', $request->nomer)->get();
-            foreach ($siswaId as $val) {
-                $siswa = Siswa::findorfail($val->id);
+        } elseif ($request->role == 'Mhs') {
+            $countMhs = Mhs::where('no_induk', $request->nomer)->count();
+            $mhsId = Mhs::where('no_induk', $request->nomer)->get();
+            foreach ($mhsId as $val) {
+                $mhs = Mhs::findorfail($val->id);
             }
-            if ($countSiswa >= 1) {
+            if ($countMhs >= 1) {
                 User::create([
-                    'name' => strtolower($siswa->nama_siswa),
+                    'name' => strtolower($mhs->nama_mhs),
                     'email' => $request->email,
                     'password' => Hash::make($request->password),
                     'role' => $request->role,
                     'no_induk' => $request->nomer,
                 ]);
-                return redirect()->back()->with('success', 'Berhasil menambahkan user Siswa baru!');
+                return redirect()->back()->with('success', 'Berhasil menambahkan user Mhs baru!');
             } else {
-                return redirect()->back()->with('error', 'Maaf User ini tidak terdaftar sebagai siswa!');
+                return redirect()->back()->with('error', 'Maaf User ini tidak terdaftar sebagai mhs!');
             }
         } else {
             User::create([
@@ -260,13 +260,13 @@ class UserController extends Controller
             ];
             $dosen->update($dosen_data);
             return redirect()->route('profile')->with('success', 'Profile anda berhasil diperbarui!');
-        } elseif ($request->role == 'Siswa') {
+        } elseif ($request->role == 'Mhs') {
             $this->validate($request, [
-                'nama_siswa' => 'required',
+                'nama_mhs' => 'required',
                 'jk' => 'required',
                 'kelas_id' => 'required'
             ]);
-            $siswa = Siswa::where('no_induk', Auth::user()->no_induk)->first();
+            $mhs = Mhs::where('no_induk', Auth::user()->no_induk)->first();
             $user = User::where('no_induk', Auth::user()->no_induk)->first();
             if ($user) {
                 $user_data = [
@@ -275,16 +275,16 @@ class UserController extends Controller
                 $user->update($user_data);
             } else {
             }
-            $siswa_data = [
+            $mhs_data = [
                 'nis' => $request->nis,
-                'nama_siswa' => $request->name,
+                'nama_mhs' => $request->name,
                 'jk' => $request->jk,
                 'kelas_id' => $request->kelas_id,
                 'telp' => $request->telp,
                 'tmp_lahir' => $request->tmp_lahir,
                 'tgl_lahir' => $request->tgl_lahir,
             ];
-            $siswa->update($siswa_data);
+            $mhs->update($mhs_data);
             return redirect()->route('profile')->with('success', 'Profile anda berhasil diperbarui!');
         } else {
             $user = User::findorfail(Auth::user()->id);
@@ -298,7 +298,7 @@ class UserController extends Controller
 
     public function edit_foto()
     {
-        if (Auth::user()->role == 'Dosen' || Auth::user()->role == 'Siswa') {
+        if (Auth::user()->role == 'Dosen' || Auth::user()->role == 'Mhs') {
             return view('user.foto');
         } else {
             return redirect()->back()->with('error', 'Not Found 404!');
@@ -324,14 +324,14 @@ class UserController extends Controller
             $this->validate($request, [
                 'foto' => 'required'
             ]);
-            $siswa = Siswa::where('no_induk', Auth::user()->no_induk)->first();
+            $mhs = Mhs::where('no_induk', Auth::user()->no_induk)->first();
             $foto = $request->foto;
             $new_foto = date('s' . 'i' . 'H' . 'd' . 'm' . 'Y') . "_" . $foto->getClientOriginalName();
-            $siswa_data = [
-                'foto' => 'uploads/siswa/' . $new_foto,
+            $mhs_data = [
+                'foto' => 'uploads/mhs/' . $new_foto,
             ];
-            $foto->move('uploads/siswa/', $new_foto);
-            $siswa->update($siswa_data);
+            $foto->move('uploads/mhs/', $new_foto);
+            $mhs->update($mhs_data);
             return redirect()->route('profile')->with('success', 'Foto Profile anda berhasil diperbarui!!');
         }
     }

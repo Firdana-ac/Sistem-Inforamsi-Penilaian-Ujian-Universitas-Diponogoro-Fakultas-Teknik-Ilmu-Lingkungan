@@ -41,6 +41,6 @@
 @endsection
 @section('script')
     <script>
-        $("#JadwalSiswa").addClass("active");
+        $("#JadwalMhs").addClass("active");
     </script>
 @endsection

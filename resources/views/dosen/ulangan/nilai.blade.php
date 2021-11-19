@@ -26,9 +26,9 @@
                         <td>{{ $kelas->dosen->nama_dosen }}</td>
                     </tr>
                     <tr>
-                        <td>Jumlah Siswa</td>
+                        <td>Jumlah Mhs</td>
                         <td>:</td>
-                        <td>{{ $siswa->count() }}</td>
+                        <td>{{ $mhs->count() }}</td>
                     </tr>
                     <tr>
                         <td>Mata Pelajaran</td>
@@ -74,7 +74,7 @@
                     <thead>
                         <tr>
                             <th class="ctr">No.</th>
-                            <th>Nama Siswa</th>
+                            <th>Nama Mhs</th>
                             <th class="ctr">ULHA 1</th>
                             <th class="ctr">ULHA 2</th>
                             <th class="ctr">UTS</th>
@@ -88,12 +88,12 @@
                             @csrf
                             <input type="hidden" name="dosen_id" value="{{$dosen->id}}">
                             <input type="hidden" name="kelas_id" value="{{$kelas->id}}">
-                            @foreach ($siswa as $data)
-                                <input type="hidden" name="siswa_id" value="{{$data->id}}">
+                            @foreach ($mhs as $data)
+                                <input type="hidden" name="mhs_id" value="{{$data->id}}">
                                 <tr>
                                     <td class="ctr">{{ $loop->iteration }}</td>
                                     <td>
-                                        {{ $data->nama_siswa }}
+                                        {{ $data->nama_mhs }}
                                         @if ($data->ulangan($data->id) && $data->ulangan($data->id)['id'])
                                             <input type="hidden" name="ulangan_id" class="ulangan_id_{{$data->id}}" value="{{ $data->ulangan($data->id)->id }}">
                                         @else
@@ -180,7 +180,7 @@
                 data 	: {
                     _token: '{{ csrf_token() }}',
                     id : ulangan_id,
-                    siswa_id : id,
+                    mhs_id : id,
                     kelas_id : kelas_id,
                     dosen_id : dosen_id,
                     ulha_1 : ulha_1,
@@ -190,7 +190,7 @@
                     uas : uas,
                 },
                 success: function(data){
-                    toastr.success("Nilai ulangan siswa berhasil ditambahkan!");
+                    toastr.success("Nilai ulangan mhs berhasil ditambahkan!");
                     location.reload();
                 },
                 error: function (data) {

@@ -6,7 +6,7 @@ use App\Jadwal;
 use App\Dosen;
 use App\Kehadiran;
 use App\Kelas;
-use App\Siswa;
+use App\Mhs;
 use App\Mapel;
 use App\User;
 use App\Paket;
@@ -47,9 +47,9 @@ class HomeController extends Controller
         $dosen = Dosen::count();
         $dosenlk = Dosen::where('jk', 'L')->count();
         $dosenpr = Dosen::where('jk', 'P')->count();
-        $siswa = Siswa::count();
-        $siswalk = Siswa::where('jk', 'L')->count();
-        $siswapr = Siswa::where('jk', 'P')->count();
+        $mhs = Mhs::count();
+        $mhslk = Mhs::where('jk', 'L')->count();
+        $mhspr = Mhs::where('jk', 'P')->count();
         $kelas = Kelas::count();
         $bkp = Kelas::where('paket_id', '1')->count();
         $dpib = Kelas::where('paket_id', '2')->count();
@@ -67,9 +67,9 @@ class HomeController extends Controller
             'dosen',
             'dosenlk',
             'dosenpr',
-            'siswalk',
-            'siswapr',
-            'siswa',
+            'mhslk',
+            'mhspr',
+            'mhs',
             'kelas',
             'bkp',
             'dpib',

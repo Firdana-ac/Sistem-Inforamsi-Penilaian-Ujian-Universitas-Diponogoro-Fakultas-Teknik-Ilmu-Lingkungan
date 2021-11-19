@@ -5,15 +5,15 @@ namespace App\Http\Controllers;
 use PDF;
 use App\User;
 use App\Kelas;
-use App\Siswa;
-use App\Exports\SiswaExport;
-use App\Imports\SiswaImport;
+use App\Mhs;
+use App\Exports\MhsExport;
+use App\Imports\MhsImport;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Crypt;
 
-class SiswaController extends Controller
+class MhsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -23,7 +23,7 @@ class SiswaController extends Controller
     public function index()
     {
         $kelas = Kelas::OrderBy('nama_kelas', 'asc')->get();
-        return view('admin.siswa.index', compact('kelas'));
+        return view('admin.mhs.index', compact('kelas'));
     }
 
     /**
@@ -45,8 +45,8 @@ class SiswaController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'no_induk' => 'required|string|unique:siswa',
-            'nama_siswa' => 'required',
+            'no_induk' => 'required|string|unique:mhs',
+            'nama_mhs' => 'required',
             'jk' => 'required',
             'kelas_id' => 'required'
         ]);
@@ -54,20 +54,20 @@ class SiswaController extends Controller
         if ($request->foto) {
             $foto = $request->foto;
             $new_foto = date('siHdmY') . "_" . $foto->getClientOriginalName();
-            $foto->move('uploads/siswa/', $new_foto);
-            $nameFoto = 'uploads/siswa/' . $new_foto;
+            $foto->move('uploads/mhs/', $new_foto);
+            $nameFoto = 'uploads/mhs/' . $new_foto;
         } else {
             if ($request->jk == 'L') {
-                $nameFoto = 'uploads/siswa/52471919042020_male.jpg';
+                $nameFoto = 'uploads/mhs/52471919042020_male.jpg';
             } else {
-                $nameFoto = 'uploads/siswa/50271431012020_female.jpg';
+                $nameFoto = 'uploads/mhs/50271431012020_female.jpg';
             }
         }
 
-        Siswa::create([
+        Mhs::create([
             'no_induk' => $request->no_induk,
             'nis' => $request->nis,
-            'nama_siswa' => $request->nama_siswa,
+            'nama_mhs' => $request->nama_mhs,
             'jk' => $request->jk,
             'kelas_id' => $request->kelas_id,
             'telp' => $request->telp,
@@ -76,7 +76,7 @@ class SiswaController extends Controller
             'foto' => $nameFoto
         ]);
 
-        return redirect()->back()->with('success', 'Berhasil menambahkan data siswa baru!');
+        return redirect()->back()->with('success', 'Berhasil menambahkan data mhs baru!');
     }
 
     /**
@@ -88,8 +88,8 @@ class SiswaController extends Controller
     public function show($id)
     {
         $id = Crypt::decrypt($id);
-        $siswa = Siswa::findorfail($id);
-        return view('admin.siswa.details', compact('siswa'));
+        $mhs = Mhs::findorfail($id);
+        return view('admin.mhs.details', compact('mhs'));
     }
 
     /**
@@ -101,9 +101,9 @@ class SiswaController extends Controller
     public function edit($id)
     {
         $id = Crypt::decrypt($id);
-        $siswa = Siswa::findorfail($id);
+        $mhs = Mhs::findorfail($id);
         $kelas = Kelas::all();
-        return view('admin.siswa.edit', compact('siswa', 'kelas'));
+        return view('admin.mhs.edit', compact('mhs', 'kelas'));
     }
 
     /**
@@ -116,32 +116,32 @@ class SiswaController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'nama_siswa' => 'required',
+            'nama_mhs' => 'required',
             'jk' => 'required',
             'kelas_id' => 'required'
         ]);
 
-        $siswa = Siswa::findorfail($id);
-        $user = User::where('no_induk', $siswa->no_induk)->first();
+        $mhs = Mhs::findorfail($id);
+        $user = User::where('no_induk', $mhs->no_induk)->first();
         if ($user) {
             $user_data = [
-                'name' => $request->nama_siswa
+                'name' => $request->nama_mhs
             ];
             $user->update($user_data);
         } else {
         }
-        $siswa_data = [
+        $mhs_data = [
             'nis' => $request->nis,
-            'nama_siswa' => $request->nama_siswa,
+            'nama_mhs' => $request->nama_mhs,
             'jk' => $request->jk,
             'kelas_id' => $request->kelas_id,
             'telp' => $request->telp,
             'tmp_lahir' => $request->tmp_lahir,
             'tgl_lahir' => $request->tgl_lahir,
         ];
-        $siswa->update($siswa_data);
+        $mhs->update($mhs_data);
 
-        return redirect()->route('siswa.index')->with('success', 'Data siswa berhasil diperbarui!');
+        return redirect()->route('mhs.index')->with('success', 'Data mhs berhasil diperbarui!');
     }
 
     /**
@@ -152,61 +152,61 @@ class SiswaController extends Controller
      */
     public function destroy($id)
     {
-        $siswa = Siswa::findorfail($id);
-        $countUser = User::where('no_induk', $siswa->no_induk)->count();
+        $mhs = Mhs::findorfail($id);
+        $countUser = User::where('no_induk', $mhs->no_induk)->count();
         if ($countUser >= 1) {
-            $user = User::where('no_induk', $siswa->no_induk)->first();
-            $siswa->delete();
+            $user = User::where('no_induk', $mhs->no_induk)->first();
+            $mhs->delete();
             $user->delete();
-            return redirect()->back()->with('warning', 'Data siswa berhasil dihapus! (Silahkan cek trash data siswa)');
+            return redirect()->back()->with('warning', 'Data mhs berhasil dihapus! (Silahkan cek trash data mhs)');
         } else {
-            $siswa->delete();
-            return redirect()->back()->with('warning', 'Data siswa berhasil dihapus! (Silahkan cek trash data siswa)');
+            $mhs->delete();
+            return redirect()->back()->with('warning', 'Data mhs berhasil dihapus! (Silahkan cek trash data mhs)');
         }
     }
 
     public function trash()
     {
-        $siswa = Siswa::onlyTrashed()->get();
-        return view('admin.siswa.trash', compact('siswa'));
+        $mhs = Mhs::onlyTrashed()->get();
+        return view('admin.mhs.trash', compact('mhs'));
     }
 
     public function restore($id)
     {
         $id = Crypt::decrypt($id);
-        $siswa = Siswa::withTrashed()->findorfail($id);
-        $countUser = User::withTrashed()->where('no_induk', $siswa->no_induk)->count();
+        $mhs = Mhs::withTrashed()->findorfail($id);
+        $countUser = User::withTrashed()->where('no_induk', $mhs->no_induk)->count();
         if ($countUser >= 1) {
-            $user = User::withTrashed()->where('no_induk', $siswa->no_induk)->first();
-            $siswa->restore();
+            $user = User::withTrashed()->where('no_induk', $mhs->no_induk)->first();
+            $mhs->restore();
             $user->restore();
-            return redirect()->back()->with('info', 'Data siswa berhasil direstore! (Silahkan cek data siswa)');
+            return redirect()->back()->with('info', 'Data mhs berhasil direstore! (Silahkan cek data mhs)');
         } else {
-            $siswa->restore();
-            return redirect()->back()->with('info', 'Data siswa berhasil direstore! (Silahkan cek data siswa)');
+            $mhs->restore();
+            return redirect()->back()->with('info', 'Data mhs berhasil direstore! (Silahkan cek data mhs)');
         }
     }
 
     public function kill($id)
     {
-        $siswa = Siswa::withTrashed()->findorfail($id);
-        $countUser = User::withTrashed()->where('no_induk', $siswa->no_induk)->count();
+        $mhs = Mhs::withTrashed()->findorfail($id);
+        $countUser = User::withTrashed()->where('no_induk', $mhs->no_induk)->count();
         if ($countUser >= 1) {
-            $user = User::withTrashed()->where('no_induk', $siswa->no_induk)->first();
-            $siswa->forceDelete();
+            $user = User::withTrashed()->where('no_induk', $mhs->no_induk)->first();
+            $mhs->forceDelete();
             $user->forceDelete();
-            return redirect()->back()->with('success', 'Data siswa berhasil dihapus secara permanent');
+            return redirect()->back()->with('success', 'Data mhs berhasil dihapus secara permanent');
         } else {
-            $siswa->forceDelete();
-            return redirect()->back()->with('success', 'Data siswa berhasil dihapus secara permanent');
+            $mhs->forceDelete();
+            return redirect()->back()->with('success', 'Data mhs berhasil dihapus secara permanent');
         }
     }
 
     public function ubah_foto($id)
     {
         $id = Crypt::decrypt($id);
-        $siswa = Siswa::findorfail($id);
-        return view('admin.siswa.ubah-foto', compact('siswa'));
+        $mhs = Mhs::findorfail($id);
+        return view('admin.mhs.ubah-foto', compact('mhs'));
     }
 
     public function update_foto(Request $request, $id)
@@ -215,27 +215,27 @@ class SiswaController extends Controller
             'foto' => 'required'
         ]);
 
-        $siswa = Siswa::findorfail($id);
+        $mhs = Mhs::findorfail($id);
         $foto = $request->foto;
         $new_foto = date('s' . 'i' . 'H' . 'd' . 'm' . 'Y') . "_" . $foto->getClientOriginalName();
-        $siswa_data = [
-            'foto' => 'uploads/siswa/' . $new_foto,
+        $mhs_data = [
+            'foto' => 'uploads/mhs/' . $new_foto,
         ];
-        $foto->move('uploads/siswa/', $new_foto);
-        $siswa->update($siswa_data);
+        $foto->move('uploads/mhs/', $new_foto);
+        $mhs->update($mhs_data);
 
-        return redirect()->route('siswa.index')->with('success', 'Berhasil merubah foto!');
+        return redirect()->route('mhs.index')->with('success', 'Berhasil merubah foto!');
     }
 
     public function view(Request $request)
     {
-        $siswa = Siswa::OrderBy('nama_siswa', 'asc')->where('kelas_id', $request->id)->get();
+        $mhs = Mhs::OrderBy('nama_mhs', 'asc')->where('kelas_id', $request->id)->get();
 
-        foreach ($siswa as $val) {
+        foreach ($mhs as $val) {
             $newForm[] = array(
                 'kelas' => $val->kelas->nama_kelas,
                 'no_induk' => $val->no_induk,
-                'nama_siswa' => $val->nama_siswa,
+                'nama_mhs' => $val->nama_mhs,
                 'jk' => $val->jk,
                 'foto' => $val->foto
             );
@@ -246,10 +246,10 @@ class SiswaController extends Controller
 
     public function cetak_pdf(Request $request)
     {
-        $siswa = siswa::OrderBy('nama_siswa', 'asc')->where('kelas_id', $request->id)->get();
+        $mhs = Mhs::OrderBy('nama_mhs', 'asc')->where('kelas_id', $request->id)->get();
         $kelas = Kelas::findorfail($request->id);
 
-        $pdf = PDF::loadView('siswa-pdf', ['siswa' => $siswa, 'kelas' => $kelas]);
+        $pdf = PDF::loadView('mhs-pdf', ['mhs' => $mhs, 'kelas' => $kelas]);
         return $pdf->stream();
         // return $pdf->stream('jadwal-pdf.pdf');
     }
@@ -257,14 +257,14 @@ class SiswaController extends Controller
     public function kelas($id)
     {
         $id = Crypt::decrypt($id);
-        $siswa = Siswa::where('kelas_id', $id)->OrderBy('nama_siswa', 'asc')->get();
+        $mhs = Mhs::where('kelas_id', $id)->OrderBy('nama_mhs', 'asc')->get();
         $kelas = Kelas::findorfail($id);
-        return view('admin.siswa.show', compact('siswa', 'kelas'));
+        return view('admin.mhs.show', compact('mhs', 'kelas'));
     }
 
     public function export_excel()
     {
-        return Excel::download(new SiswaExport, 'siswa.xlsx');
+        return Excel::download(new MhsExport, 'mhs.xlsx');
     }
 
     public function import_excel(Request $request)
@@ -274,20 +274,20 @@ class SiswaController extends Controller
         ]);
         $file = $request->file('file');
         $nama_file = rand() . $file->getClientOriginalName();
-        $file->move('file_siswa', $nama_file);
-        Excel::import(new SiswaImport, public_path('/file_siswa/' . $nama_file));
-        return redirect()->back()->with('success', 'Data Siswa Berhasil Diimport!');
+        $file->move('file_mhs', $nama_file);
+        Excel::import(new MhsImport, public_path('/file_mhs/' . $nama_file));
+        return redirect()->back()->with('success', 'Data Mhs Berhasil Diimport!');
     }
 
     public function deleteAll()
     {
-        $siswa = Siswa::all();
-        if ($siswa->count() >= 1) {
-            Siswa::whereNotNull('id')->delete();
-            Siswa::withTrashed()->whereNotNull('id')->forceDelete();
-            return redirect()->back()->with('success', 'Data table siswa berhasil dihapus!');
+        $mhs = Mhs::all();
+        if ($mhs->count() >= 1) {
+            Mhs::whereNotNull('id')->delete();
+            Mhs::withTrashed()->whereNotNull('id')->forceDelete();
+            return redirect()->back()->with('success', 'Data table mhs berhasil dihapus!');
         } else {
-            return redirect()->back()->with('warning', 'Data table siswa kosong!');
+            return redirect()->back()->with('warning', 'Data table mhs kosong!');
         }
     }
 }

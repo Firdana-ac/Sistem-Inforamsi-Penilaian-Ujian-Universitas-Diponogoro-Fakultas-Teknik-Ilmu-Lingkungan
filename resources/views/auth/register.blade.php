@@ -23,7 +23,7 @@
       <select id="role" type="text" class="form-control @error('role') is-invalid @enderror" name="role" value="{{ old('role') }}" autocomplete="role">
         <option value="">-- Select {{ __('Level User') }} --</option>
         <option value="Dosen">Dosen</option>
-        <option value="Siswa">Siswa</option>
+        <option value="Mhs">Mhs</option>
       </select>
       <div class="input-group-append">
         <div class="input-group-text">

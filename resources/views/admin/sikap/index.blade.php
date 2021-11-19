@@ -21,15 +21,15 @@
               <thead>
                 <tr>
                   <th>No.</th>
-                  <th>Nama Siswa</th>
+                  <th>Nama Mhs</th>
                   <th>No. Induk</th>
                   <th>Aksi</th>
               </thead>
               <tbody>
-                @foreach ($siswa as $data)
+                @foreach ($mhs as $data)
                   <tr>
                     <td>{{ $loop->iteration }}</td>
-                    <td>{{ $data->nama_siswa }}</td>
+                    <td>{{ $data->nama_mhs }}</td>
                     <td>{{ $data->no_induk }}</td>
                     <td><a href="{{ route('sikap-show', Crypt::encrypt($data->id)) }}" class="btn btn-info btn-sm"><i class="nav-icon fas fa-search-plus"></i> &nbsp; Show Nilai Sikap</a></td>
                   </tr>

@@ -8,7 +8,7 @@
     <!-- general form elements -->
     <div class="card card-primary">
       <div class="card-header">
-        <h3 class="card-title">Nilai Rapot Siswa</h3>
+        <h3 class="card-title">Nilai Rapot Mhs</h3>
       </div>
       <!-- /.card-header -->
       <!-- form start -->
@@ -18,12 +18,12 @@
             <div class="col-md-12">
                 <table class="table" style="margin-top: -10px;">
                     <tr>
-                        <td>No Induk Siswa</td>
+                        <td>No Induk Mhs</td>
                         <td>:</td>
                         <td>{{ Auth::user()->no_induk }}</td>
                     </tr>
                     <tr>
-                        <td>Nama Siswa</td>
+                        <td>Nama Mhs</td>
                         <td>:</td>
                         <td class="text-capitalize">{{ Auth::user()->name }}</td>
                     </tr>
@@ -70,26 +70,24 @@
                 <table class="table table-bordered table-striped table-hover">
                     <thead>
                         <tr>
-                            <th class="ctr">No.</th>
-                            <th>Mata Pelajaran</th>
-                            <th class="ctr">ULHA 1</th>
-                            <th class="ctr">ULHA 2</th>
-                            <th class="ctr">UTS</th>
-                            <th class="ctr">ULHA 3</th>
-                            <th class="ctr">UAS</th>
+                            <th rowspan="2" class="ctr">No.</th>
+                            <th rowspan="2">Nama Mhs</th>
+                            <th colspan="3" class="ctr">Nilai Sikap</th>
+                        </tr>
+                        <tr>
+                            <th class="ctr">Teman</th>
+                            <th class="ctr">Sendiri</th>
+                            <th class="ctr">Dosen</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($mapel as $val => $data)
+                        @foreach ($mapel as $data)
                             <tr>
-                                <?php $data = $data[0]; ?>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $data->mapel->nama_mapel }}</td>
-                                <td class="ctr">{{ ($data->ulangan($val)) ? $data->ulangan($val)['ulha_1'] : " - " }}</td>
-                                <td class="ctr">{{ ($data->ulangan($val)) ? $data->ulangan($val)['ulha_2'] : " - " }}</td>
-                                <td class="ctr">{{ ($data->ulangan($val)) ? $data->ulangan($val)['uts'] : " - " }}</td>
-                                <td class="ctr">{{ ($data->ulangan($val)) ? $data->ulangan($val)['ulha_3'] : " - " }}</td>
-                                <td class="ctr">{{ ($data->ulangan($val)) ? $data->ulangan($val)['uas'] : " - " }}</td>
+                                <td>{{ $data->nama_mapel }}</td>
+                                <td class="ctr">{{ $data->sikap($data->id)['sikap_1'] }}</td>
+                                <td class="ctr">{{ $data->sikap($data->id)['sikap_2'] }}</td>
+                                <td class="ctr">{{ $data->sikap($data->id)['sikap_3'] }}</td>
                             </tr>
                         @endforeach
                     </tbody>
@@ -104,6 +102,6 @@
 @endsection
 @section('script')
     <script>
-        $("#UlanganSiswa").addClass("active");
+        $("#SikapMhs").addClass("active");
     </script>
 @endsection

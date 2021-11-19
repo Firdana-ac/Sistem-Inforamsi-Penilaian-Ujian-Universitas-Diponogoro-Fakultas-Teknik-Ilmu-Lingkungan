@@ -6,7 +6,7 @@ use App\Kelas;
 use App\Dosen;
 use App\Paket;
 use App\Jadwal;
-use App\Siswa;
+use App\Mhs;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 
@@ -120,9 +120,9 @@ class KelasController extends Controller
             Jadwal::where('kelas_id', $kelas->id)->delete();
         } else {
         }
-        $countSiswa = Siswa::where('kelas_id', $kelas->id)->count();
-        if ($countSiswa >= 1) {
-            Siswa::where('kelas_id', $kelas->id)->delete();
+        $countMhs = Mhs::where('kelas_id', $kelas->id)->count();
+        if ($countMhs >= 1) {
+            Mhs::where('kelas_id', $kelas->id)->delete();
         } else {
         }
         $kelas->delete();
@@ -144,9 +144,9 @@ class KelasController extends Controller
             Jadwal::withTrashed()->where('kelas_id', $kelas->id)->restore();
         } else {
         }
-        $countSiswa = Siswa::withTrashed()->where('kelas_id', $kelas->id)->count();
-        if ($countSiswa >= 1) {
-            Siswa::withTrashed()->where('kelas_id', $kelas->id)->restore();
+        $countMhs = Mhs::withTrashed()->where('kelas_id', $kelas->id)->count();
+        if ($countMhs >= 1) {
+            Mhs::withTrashed()->where('kelas_id', $kelas->id)->restore();
         } else {
         }
         $kelas->restore();
@@ -161,9 +161,9 @@ class KelasController extends Controller
             Jadwal::withTrashed()->where('kelas_id', $kelas->id)->forceDelete();
         } else {
         }
-        $countSiswa = Siswa::withTrashed()->where('kelas_id', $kelas->id)->count();
-        if ($countSiswa >= 1) {
-            Siswa::withTrashed()->where('kelas_id', $kelas->id)->forceDelete();
+        $countMhs = Mhs::withTrashed()->where('kelas_id', $kelas->id)->count();
+        if ($countMhs >= 1) {
+            Mhs::withTrashed()->where('kelas_id', $kelas->id)->forceDelete();
         } else {
         }
         $kelas->forceDelete();

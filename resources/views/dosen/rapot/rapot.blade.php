@@ -26,9 +26,9 @@
                         <td>{{ $kelas->dosen->nama_dosen }}</td>
                     </tr>
                     <tr>
-                        <td>Jumlah Siswa</td>
+                        <td>Jumlah Mhs</td>
                         <td>:</td>
-                        <td>{{ $siswa->count() }}</td>
+                        <td>{{ $mhs->count() }}</td>
                     </tr>
                     <tr>
                         <td>Mata Pelajaran</td>
@@ -74,7 +74,7 @@
                     <thead>
                         <tr>
                             <th class="ctr" rowspan="2">No.</th>
-                            <th rowspan="2">Nama Siswa</th>
+                            <th rowspan="2">Nama Mhs</th>
                             <th class="ctr" colspan="3">Pengetahuan</th>
                             <th class="ctr" colspan="3">Keterampilan</th>
                             <th class="ctr" rowspan="2">Aksi</th>
@@ -93,11 +93,11 @@
                             @csrf
                             <input type="hidden" name="dosen_id" value="{{$dosen->id}}">
                             <input type="hidden" name="kelas_id" value="{{$kelas->id}}">
-                            @foreach ($siswa as $data)
-                                <input type="hidden" name="siswa_id" value="{{$data->id}}">
+                            @foreach ($mhs as $data)
+                                <input type="hidden" name="mhs_id" value="{{$data->id}}">
                                 <tr>
                                     <td class="ctr">{{ $loop->iteration }}</td>
-                                    <td>{{ $data->nama_siswa }}</td>
+                                    <td>{{ $data->nama_mhs }}</td>
                                     @if ($data->nilai($data->id))
                                         <td class="ctr">
                                             <input type="hidden" class="rapot_{{$data->id}}" value="{{ $data->nilai($data->id)->id }}">
@@ -224,7 +224,7 @@
                     data 	: {
                         _token: '{{ csrf_token() }}',
                         id : rapot,
-                        siswa_id : id,
+                        mhs_id : id,
                         kelas_id : kelas_id,
                         dosen_id : dosen_id,
                         nilai : nilai,
@@ -238,7 +238,7 @@
                         $(".knilai_"+id).append(nilai);
                         $(".kpredikat_"+id).append(predikat);
                         $(".sub_"+id).append(ok);
-                        toastr.success("Nilai rapot siswa berhasil ditambahkan!");
+                        toastr.success("Nilai rapot mhs berhasil ditambahkan!");
                     },
                     error: function (data) {
                         toastr.warning("Errors 404!");

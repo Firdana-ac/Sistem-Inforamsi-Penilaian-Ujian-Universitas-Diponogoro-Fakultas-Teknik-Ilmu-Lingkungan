@@ -45,7 +45,7 @@
                         <img src="{{ asset(Auth::user()->dosen(Auth::user()->id_card)->foto) }}" class="img img-responsive" alt="" width="30%" />
                     @else
                         <input type="hidden" name="role" value="{{ Auth::user()->role }}">
-                        <img src="{{ asset(Auth::user()->siswa(Auth::user()->no_induk)->foto) }}" class="img img-responsive" alt="" width="30%" />
+                        <img src="{{ asset(Auth::user()->mhs(Auth::user()->no_induk)->foto) }}" class="img img-responsive" alt="" width="30%" />
                     @endif
                 </div>
             </div>

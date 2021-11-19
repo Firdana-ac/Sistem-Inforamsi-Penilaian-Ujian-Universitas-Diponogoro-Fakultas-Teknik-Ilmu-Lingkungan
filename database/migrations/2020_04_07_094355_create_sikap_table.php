@@ -15,7 +15,7 @@ class CreateSikapTable extends Migration
     {
         Schema::create('sikap', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('siswa_id');
+            $table->integer('mhs_id');
             $table->integer('kelas_id');
             $table->integer('dosen_id');
             $table->integer('mapel_id');

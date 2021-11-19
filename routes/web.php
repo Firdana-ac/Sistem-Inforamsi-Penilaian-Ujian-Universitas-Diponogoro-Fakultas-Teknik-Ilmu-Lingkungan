@@ -47,11 +47,11 @@ Route::middleware(['auth'])->group(function () {
   Route::get('/pengaturan/password', 'UserController@edit_password')->name('pengaturan.password');
   Route::post('/pengaturan/ubah-password', 'UserController@ubah_password')->name('pengaturan.ubah-password');
 
-  Route::middleware(['siswa'])->group(function () {
-    Route::get('/jadwal/siswa', 'JadwalController@siswa')->name('jadwal.siswa');
-    Route::get('/ulangan/siswa', 'UlanganController@siswa')->name('ulangan.siswa');
-    Route::get('/sikap/siswa', 'SikapController@siswa')->name('sikap.siswa');
-    Route::get('/rapot/siswa', 'RapotController@siswa')->name('rapot.siswa');
+  Route::middleware(['mhs'])->group(function () {
+    Route::get('/jadwal/mhs', 'JadwalController@mhs')->name('jadwal.mhs');
+    Route::get('/ulangan/mhs', 'UlanganController@mhs')->name('ulangan.mhs');
+    Route::get('/sikap/mhs', 'SikapController@mhs')->name('sikap.mhs');
+    Route::get('/rapot/mhs', 'RapotController@mhs')->name('rapot.mhs');
   });
 
   Route::middleware(['dosen'])->group(function () {
@@ -76,9 +76,9 @@ Route::middleware(['auth'])->group(function () {
       Route::get('/kelas/trash', 'KelasController@trash')->name('kelas.trash');
       Route::get('/kelas/restore/{id}', 'KelasController@restore')->name('kelas.restore');
       Route::delete('/kelas/kill/{id}', 'KelasController@kill')->name('kelas.kill');
-      Route::get('/siswa/trash', 'SiswaController@trash')->name('siswa.trash');
-      Route::get('/siswa/restore/{id}', 'SiswaController@restore')->name('siswa.restore');
-      Route::delete('/siswa/kill/{id}', 'SiswaController@kill')->name('siswa.kill');
+      Route::get('/mhs/trash', 'MhsController@trash')->name('mhs.trash');
+      Route::get('/mhs/restore/{id}', 'MhsController@restore')->name('mhs.restore');
+      Route::delete('/mhs/kill/{id}', 'MhsController@kill')->name('mhs.kill');
       Route::get('/mapel/trash', 'MapelController@trash')->name('mapel.trash');
       Route::get('/mapel/restore/{id}', 'MapelController@restore')->name('mapel.restore');
       Route::delete('/mapel/kill/{id}', 'MapelController@kill')->name('mapel.kill');
@@ -102,15 +102,15 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/dosen', 'DosenController');
     Route::get('/kelas/edit/json', 'KelasController@getEdit');
     Route::resource('/kelas', 'KelasController');
-    Route::get('/siswa/kelas/{id}', 'SiswaController@kelas')->name('siswa.kelas');
-    Route::get('/siswa/view/json', 'SiswaController@view');
-    Route::get('/listsiswapdf/{id}', 'SiswaController@cetak_pdf');
-    Route::get('/siswa/ubah-foto/{id}', 'SiswaController@ubah_foto')->name('siswa.ubah-foto');
-    Route::post('/siswa/update-foto/{id}', 'SiswaController@update_foto')->name('siswa.update-foto');
-    Route::get('/siswa/export_excel', 'SiswaController@export_excel')->name('siswa.export_excel');
-    Route::post('/siswa/import_excel', 'SiswaController@import_excel')->name('siswa.import_excel');
-    Route::delete('/siswa/deleteAll', 'SiswaController@deleteAll')->name('siswa.deleteAll');
-    Route::resource('/siswa', 'SiswaController');
+    Route::get('/mhs/kelas/{id}', 'MhsController@kelas')->name('mhs.kelas');
+    Route::get('/mhs/view/json', 'MhsController@view');
+    Route::get('/listmhspdf/{id}', 'MhsController@cetak_pdf');
+    Route::get('/mhs/ubah-foto/{id}', 'MhsController@ubah_foto')->name('mhs.ubah-foto');
+    Route::post('/mhs/update-foto/{id}', 'MhsController@update_foto')->name('mhs.update-foto');
+    Route::get('/mhs/export_excel', 'MhsController@export_excel')->name('mhs.export_excel');
+    Route::post('/mhs/import_excel', 'MhsController@import_excel')->name('mhs.import_excel');
+    Route::delete('/mhs/deleteAll', 'MhsController@deleteAll')->name('mhs.deleteAll');
+    Route::resource('/mhs', 'MhsController');
     Route::get('/mapel/getMapelJson', 'MapelController@getMapelJson');
     Route::resource('/mapel', 'MapelController');
     Route::get('/jadwal/view/json', 'JadwalController@view');
@@ -120,13 +120,13 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/jadwal/deleteAll', 'JadwalController@deleteAll')->name('jadwal.deleteAll');
     Route::resource('/jadwal', 'JadwalController');
     Route::get('/ulangan-kelas', 'UlanganController@create')->name('ulangan-kelas');
-    Route::get('/ulangan-siswa/{id}', 'UlanganController@edit')->name('ulangan-siswa');
+    Route::get('/ulangan-mhs/{id}', 'UlanganController@edit')->name('ulangan-mhs');
     Route::get('/ulangan-show/{id}', 'UlanganController@ulangan')->name('ulangan-show');
     Route::get('/sikap-kelas', 'SikapController@create')->name('sikap-kelas');
-    Route::get('/sikap-siswa/{id}', 'SikapController@edit')->name('sikap-siswa');
+    Route::get('/sikap-mhs/{id}', 'SikapController@edit')->name('sikap-mhs');
     Route::get('/sikap-show/{id}', 'SikapController@sikap')->name('sikap-show');
     Route::get('/rapot-kelas', 'RapotController@create')->name('rapot-kelas');
-    Route::get('/rapot-siswa/{id}', 'RapotController@edit')->name('rapot-siswa');
+    Route::get('/rapot-mhs/{id}', 'RapotController@edit')->name('rapot-mhs');
     Route::get('/rapot-show/{id}', 'RapotController@rapot')->name('rapot-show');
     Route::get('/predikat', 'NilaiController@create')->name('predikat');
     Route::resource('/user', 'UserController');

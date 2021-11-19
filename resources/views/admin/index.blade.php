@@ -32,13 +32,13 @@
     <div class="col-lg-4 col-6">
         <div class="small-box bg-success">
             <div class="inner">
-                <h3>{{ $siswa }}</h3>
-                <p>Siswa</p>
+                <h3>{{ $mhs }}</h3>
+                <p>Mhs</p>
             </div>
             <div class="icon">
                 <i class="fas fa-id-card nav-icon"></i>
             </div>
-            <a href="{{ route('siswa.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            <a href="{{ route('mhs.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
         </div>
     </div>
     <div class="col-lg-4 col-6">
@@ -113,11 +113,11 @@
             <div class="card-body">
                 <div class="d-flex">
                     <p class="d-flex flex-column">
-                        <span class="text-bold text-lg">Data Siswa</span>
+                        <span class="text-bold text-lg">Data Mhs</span>
                     </p>
                     <p class="ml-auto d-flex flex-column text-right">
                         <span class="text-success">
-                            <i class="fas fa-arrow-up"></i> {{ $siswa }}
+                            <i class="fas fa-arrow-up"></i> {{ $mhs }}
                         </span>
                     </p>
                 </div>
@@ -125,7 +125,7 @@
                     <div class="row">
                         <div class="col-md-8">
                             <div class="chart-responsive">
-                                <canvas id="pieChartSiswa" height="200"></canvas>
+                                <canvas id="pieChartMhs" height="200"></canvas>
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -183,7 +183,7 @@
             'use strict'
 
             var pieChartCanvasDosen = $('#pieChartDosen').get(0).getContext('2d')
-            var pieDataDosen        = {
+            var pieDataGuru        = {
                 labels: [
                     'Laki-laki', 
                     'Perempuan',
@@ -200,21 +200,21 @@
                     display: false
                 }
             }
-            var pieChart = new Chart(pieChartCanvasDosen, {
+            var pieChart = new Chart(pieChartCanvasGuru, {
                 type: 'doughnut',
-                data: pieDataDosen,
+                data: pieDataGuru,
                 options: pieOptions      
             })
 
-            var pieChartCanvasSiswa = $('#pieChartSiswa').get(0).getContext('2d')
-            var pieDataSiswa        = {
+            var pieChartCanvasMhs = $('#pieChartMhs').get(0).getContext('2d')
+            var pieDataMhs        = {
                 labels: [
                     'Laki-laki', 
                     'Perempuan',
                 ],
                 datasets: [
                     {
-                    data: [{{ $siswalk }}, {{ $siswapr }}],
+                    data: [{{ $mhslk }}, {{ $mhspr }}],
                     backgroundColor : ['#007BFF', '#DC3545'],
                     }
                 ]
@@ -224,9 +224,9 @@
                     display: false
                 }
             }
-            var pieChart = new Chart(pieChartCanvasSiswa, {
+            var pieChart = new Chart(pieChartCanvasMhs, {
                 type: 'doughnut',
-                data: pieDataSiswa,
+                data: pieDataMhs,
                 options: pieOptions      
             })
 

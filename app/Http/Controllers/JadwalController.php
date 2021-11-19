@@ -7,7 +7,7 @@ use App\Jadwal;
 use App\Hari;
 use App\Kelas;
 use App\Dosen;
-use App\Siswa;
+use App\Mhs;
 use App\Ruang;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
@@ -208,12 +208,12 @@ class JadwalController extends Controller
         return view('dosen.jadwal', compact('jadwal', 'dosen'));
     }
 
-    public function siswa()
+    public function mhs()
     {
-        $siswa = Siswa::where('no_induk', Auth::user()->no_induk)->first();
-        $kelas = Kelas::findorfail($siswa->kelas_id);
+        $mhs = Mhs::where('no_induk', Auth::user()->no_induk)->first();
+        $kelas = Kelas::findorfail($mhs->kelas_id);
         $jadwal = Jadwal::orderBy('hari_id')->OrderBy('jam_mulai')->where('kelas_id', $kelas->id)->get();
-        return view('siswa.jadwal', compact('jadwal', 'kelas', 'siswa'));
+        return view('mhs.jadwal', compact('jadwal', 'kelas', 'mhs'));
     }
 
     public function export_excel()
@@ -230,7 +230,7 @@ class JadwalController extends Controller
         $nama_file = rand() . $file->getClientOriginalName();
         $file->move('file_jadwal', $nama_file);
         Excel::import(new JadwalImport, public_path('/file_jadwal/' . $nama_file));
-        return redirect()->back()->with('success', 'Data Siswa Berhasil Diimport!');
+        return redirect()->back()->with('success', 'Data Mhs Berhasil Diimport!');
     }
 
     public function deleteAll()

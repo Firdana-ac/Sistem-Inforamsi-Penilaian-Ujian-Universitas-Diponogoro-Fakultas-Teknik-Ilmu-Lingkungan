@@ -19,15 +19,15 @@ class Mapel extends Model
 
     public function sikap($id)
     {
-        $siswa = Siswa::where('no_induk', Auth::user()->no_induk)->first();
-        $nilai = Sikap::where('siswa_id', $siswa->id)->where('mapel_id', $id)->first();
+        $mhs = Mhs::where('no_induk', Auth::user()->no_induk)->first();
+        $nilai = Sikap::where('mhs_id', $mhs->id)->where('mapel_id', $id)->first();
         return $nilai;
     }
 
     public function cekSikap($id)
     {
         $data = json_decode($id, true);
-        $sikap = Sikap::where('siswa_id', $data['siswa'])->where('mapel_id', $data['mapel'])->first();
+        $sikap = Sikap::where('mhs_id', $data['mhs'])->where('mapel_id', $data['mapel'])->first();
         return $sikap;
     }
 

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Auth;
 use App\Dosen;
-use App\Siswa;
+use App\Mhs;
 use App\Kelas;
 use App\Jadwal;
 use App\Nilai;
@@ -60,7 +60,7 @@ class UlanganController extends Controller
                 if ($isi >= 1) {
                     if ($nilai > 90) {
                         Rapot::create([
-                            'siswa_id' => $request->siswa_id,
+                            'mhs_id' => $request->mhs_id,
                             'kelas_id' => $request->kelas_id,
                             'dosen_id' => $request->dosen_id,
                             'mapel_id' => $dosen->mapel_id,
@@ -70,7 +70,7 @@ class UlanganController extends Controller
                         ]);
                     } else if ($nilai > 80) {
                         Rapot::create([
-                            'siswa_id' => $request->siswa_id,
+                            'mhs_id' => $request->mhs_id,
                             'kelas_id' => $request->kelas_id,
                             'dosen_id' => $request->dosen_id,
                             'mapel_id' => $dosen->mapel_id,
@@ -80,7 +80,7 @@ class UlanganController extends Controller
                         ]);
                     } else if ($nilai > 70) {
                         Rapot::create([
-                            'siswa_id' => $request->siswa_id,
+                            'mhs_id' => $request->mhs_id,
                             'kelas_id' => $request->kelas_id,
                             'dosen_id' => $request->dosen_id,
                             'mapel_id' => $dosen->mapel_id,
@@ -90,7 +90,7 @@ class UlanganController extends Controller
                         ]);
                     } else {
                         Rapot::create([
-                            'siswa_id' => $request->siswa_id,
+                            'mhs_id' => $request->mhs_id,
                             'kelas_id' => $request->kelas_id,
                             'dosen_id' => $request->dosen_id,
                             'mapel_id' => $dosen->mapel_id,
@@ -109,7 +109,7 @@ class UlanganController extends Controller
                     'id' => $request->id
                 ],
                 [
-                    'siswa_id' => $request->siswa_id,
+                    'mhs_id' => $request->mhs_id,
                     'kelas_id' => $request->kelas_id,
                     'dosen_id' => $request->dosen_id,
                     'mapel_id' => $dosen->mapel_id,
@@ -120,7 +120,7 @@ class UlanganController extends Controller
                     'uas' => $request->uas,
                 ]
             );
-            return response()->json(['success' => 'Nilai ulangan siswa berhasil ditambahkan!']);
+            return response()->json(['success' => 'Nilai ulangan mhs berhasil ditambahkan!']);
         } else {
             return response()->json(['error' => 'Maaf dosen ini tidak mengajar kelas ini!']);
         }
@@ -137,8 +137,8 @@ class UlanganController extends Controller
         $id = Crypt::decrypt($id);
         $dosen = Dosen::where('id_card', Auth::user()->id_card)->first();
         $kelas = Kelas::findorfail($id);
-        $siswa = Siswa::where('kelas_id', $id)->get();
-        return view('dosen.ulangan.nilai', compact('dosen', 'kelas', 'siswa'));
+        $mhs = Mhs::where('kelas_id', $id)->get();
+        return view('dosen.ulangan.nilai', compact('dosen', 'kelas', 'mhs'));
     }
 
     /**
@@ -151,8 +151,8 @@ class UlanganController extends Controller
     {
         $id = Crypt::decrypt($id);
         $kelas = Kelas::findorfail($id);
-        $siswa = Siswa::orderBy('nama_siswa')->where('kelas_id', $id)->get();
-        return view('admin.ulangan.index', compact('kelas', 'siswa'));
+        $mhs = Mhs::orderBy('nama_mhs')->where('kelas_id', $id)->get();
+        return view('admin.ulangan.index', compact('kelas', 'mhs'));
     }
 
     /**
@@ -181,19 +181,19 @@ class UlanganController extends Controller
     public function ulangan($id)
     {
         $id = Crypt::decrypt($id);
-        $siswa = Siswa::findorfail($id);
-        $kelas = Kelas::findorfail($siswa->kelas_id);
+        $mhs = Mhs::findorfail($id);
+        $kelas = Kelas::findorfail($mhs->kelas_id);
         $jadwal = Jadwal::orderBy('mapel_id')->where('kelas_id', $kelas->id)->get();
         $mapel = $jadwal->groupBy('mapel_id');
-        return view('admin.ulangan.show', compact('mapel', 'siswa', 'kelas'));
+        return view('admin.ulangan.show', compact('mapel', 'mhs', 'kelas'));
     }
 
-    public function siswa()
+    public function mhs()
     {
-        $siswa = Siswa::where('no_induk', Auth::user()->no_induk)->first();
-        $kelas = Kelas::findorfail($siswa->kelas_id);
+        $mhs = Mhs::where('no_induk', Auth::user()->no_induk)->first();
+        $kelas = Kelas::findorfail($mhs->kelas_id);
         $jadwal = Jadwal::where('kelas_id', $kelas->id)->orderBy('mapel_id')->get();
         $mapel = $jadwal->groupBy('mapel_id');
-        return view('siswa.ulangan', compact('siswa', 'kelas', 'mapel'));
+        return view('mhs.ulangan', compact('mhs', 'kelas', 'mapel'));
     }
 }

@@ -15,9 +15,9 @@
                         <a href="{{ asset(Auth::user()->dosen(Auth::user()->id_card)->foto) }}" data-toggle="lightbox" data-title="Foto {{ Auth::user()->name }}" data-gallery="gallery" data-footer='<a href="{{ route('pengaturan.edit-foto') }}" id="linkFotoDosen" class="btn btn-link btn-block btn-light"><i class="nav-icon fas fa-file-upload"></i> &nbsp; Ubah Foto</a>'>
                             <img src="{{ asset(Auth::user()->dosen(Auth::user()->id_card)->foto) }}" width="130px" class="profile-user-img img-fluid img-circle" alt="User profile picture">
                         </a>
-                    @elseif (Auth::user()->role == 'Siswa')
-                        <a href="{{ asset(Auth::user()->siswa(Auth::user()->no_induk)->foto) }}" data-toggle="lightbox" data-title="Foto {{ Auth::user()->name }}" data-gallery="gallery" data-footer='<a href="{{ route('pengaturan.edit-foto') }}" id="linkFotoDosen" class="btn btn-link btn-block btn-light"><i class="nav-icon fas fa-file-upload"></i> &nbsp; Ubah Foto</a>'>
-                            <img src="{{ asset(Auth::user()->siswa(Auth::user()->no_induk)->foto) }}" width="130px" class="profile-user-img img-fluid img-circle" alt="User profile picture">
+                    @elseif (Auth::user()->role == 'Mhs')
+                        <a href="{{ asset(Auth::user()->mhs(Auth::user()->no_induk)->foto) }}" data-toggle="lightbox" data-title="Foto {{ Auth::user()->name }}" data-gallery="gallery" data-footer='<a href="{{ route('pengaturan.edit-foto') }}" id="linkFotoDosen" class="btn btn-link btn-block btn-light"><i class="nav-icon fas fa-file-upload"></i> &nbsp; Ubah Foto</a>'>
+                            <img src="{{ asset(Auth::user()->mhs(Auth::user()->no_induk)->foto) }}" width="130px" class="profile-user-img img-fluid img-circle" alt="User profile picture">
                         </a>
                     @else
                         <img class="profile-user-img img-fluid img-circle" src="{{ asset('img/male.jpg') }}" alt="User profile picture">
@@ -34,13 +34,13 @@
                                 <b>NIP</b> <a class="float-right">{{ Auth::user()->dosen(Auth::user()->id_card)->nip }}</a>
                             </li>
                         </ul>
-                    @elseif (Auth::user()->role == 'Siswa')
+                    @elseif (Auth::user()->role == 'Mhs')
                         <ul class="list-group list-group-unbordered mb-3">
                             <li class="list-group-item">
                                 <b>No INduk</b> <a class="float-right">{{ Auth::user()->no_induk }}</a>
                             </li>
                             <li class="list-group-item">
-                                <b>NIS</b> <a class="float-right">{{ Auth::user()->siswa(Auth::user()->no_induk)->nis }}</a>
+                                <b>NIS</b> <a class="float-right">{{ Auth::user()->mhs(Auth::user()->no_induk)->nis }}</a>
                             </li>
                         </ul>
                     @else
@@ -92,9 +92,9 @@
                         <strong><i class="far fa-file-alt mr-1"></i> Kode Jadwal</strong>
                         <p class="text-muted">{{ Auth::user()->dosen(Auth::user()->id_card)->kode }}</p>
                         <hr>
-                    @elseif (Auth::user()->role == 'Siswa')
+                    @elseif (Auth::user()->role == 'Mhs')
                         <strong><i class="fas fa-home mr-1"></i> Tempat Lahir</strong>
-                        <p class="text-muted">{{ Auth::user()->siswa(Auth::user()->no_induk)->kelas->nama_kelas }}</p>
+                        <p class="text-muted">{{ Auth::user()->mhs(Auth::user()->no_induk)->kelas->nama_kelas }}</p>
                         <hr>
                     @else
                     @endif
@@ -103,9 +103,9 @@
                         <strong><i class="fas fa-map-marker-alt mr-1"></i> Tempat Lahir</strong>
                         <p class="text-muted">{{ Auth::user()->dosen(Auth::user()->id_card)->tmp_lahir }}</p>
                         <hr>
-                    @elseif (Auth::user()->role == 'Siswa')
+                    @elseif (Auth::user()->role == 'Mhs')
                         <strong><i class="fas fa-map-marker-alt mr-1"></i> Tempat Lahir</strong>
-                        <p class="text-muted">{{ Auth::user()->siswa(Auth::user()->no_induk)->tmp_lahir }}</p>
+                        <p class="text-muted">{{ Auth::user()->mhs(Auth::user()->no_induk)->tmp_lahir }}</p>
                         <hr>
                     @else
                     @endif
@@ -114,9 +114,9 @@
                         <strong><i class="far fa-calendar mr-1"></i> Tanggal Lahir</strong>
                         <p class="text-muted">{{ date('l, d F Y', strtotime(Auth::user()->dosen(Auth::user()->id_card)->tgl_lahir)) }}</p>
                         <hr>
-                    @elseif (Auth::user()->role == 'Siswa')
+                    @elseif (Auth::user()->role == 'Mhs')
                         <strong><i class="far fa-calendar mr-1"></i> Tanggal Lahir</strong>
-                        <p class="text-muted">{{ date('l, d F Y', strtotime(Auth::user()->siswa(Auth::user()->no_induk)->tgl_lahir)) }}</p>
+                        <p class="text-muted">{{ date('l, d F Y', strtotime(Auth::user()->mhs(Auth::user()->no_induk)->tgl_lahir)) }}</p>
                         <hr>
                     @else
                     @endif
@@ -124,9 +124,9 @@
                     @if (Auth::user()->role == 'Dosen')
                         <strong><i class="fas fa-phone mr-1"></i> No Telepon</strong>
                         <p class="text-muted">{{ Auth::user()->dosen(Auth::user()->id_card)->telp }}</p>
-                    @elseif (Auth::user()->role == 'Siswa')
+                    @elseif (Auth::user()->role == 'Mhs')
                         <strong><i class="fas fa-phone mr-1"></i> No Telepon</strong>
-                        <p class="text-muted">{{ Auth::user()->siswa(Auth::user()->no_induk)->telp }}</p>
+                        <p class="text-muted">{{ Auth::user()->mhs(Auth::user()->no_induk)->telp }}</p>
                     @else
                     @endif
                 </div>

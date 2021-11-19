@@ -16,14 +16,14 @@
             <div class="col-md-12">
                 <table class="table" style="margin-top: -10px;">
                     <tr>
-                        <td>No Induk Siswa</td>
+                        <td>No Induk Mhs</td>
                         <td>:</td>
-                        <td>{{ $siswa->no_induk }}</td>
+                        <td>{{ $mhs->no_induk }}</td>
                     </tr>
                     <tr>
-                        <td>Nama Siswa</td>
+                        <td>Nama Mhs</td>
                         <td>:</td>
-                        <td>{{ $siswa->nama_siswa }}</td>
+                        <td>{{ $mhs->nama_mhs }}</td>
                     </tr>
                     <tr>
                         <td>Nama Kelas</td>
@@ -69,7 +69,7 @@
                     <thead>
                         <tr>
                             <th rowspan="2" class="ctr">No.</th>
-                            <th rowspan="2">Nama Siswa</th>
+                            <th rowspan="2">Nama Mhs</th>
                             <th colspan="3" class="ctr">Nilai Sikap</th>
                         </tr>
                         <tr>
@@ -84,7 +84,7 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $data->nama_mapel }}</td>
                                     @php
-                                        $array = array('mapel' => $data->id, 'siswa' => $siswa->id);
+                                        $array = array('mapel' => $data->id, 'mhs' => $mhs->id);
                                         $jsonData = json_encode($array);
                                     @endphp
                                     <td class="ctr">{{ $data->cekSikap($jsonData)['sikap_1'] }}</td>

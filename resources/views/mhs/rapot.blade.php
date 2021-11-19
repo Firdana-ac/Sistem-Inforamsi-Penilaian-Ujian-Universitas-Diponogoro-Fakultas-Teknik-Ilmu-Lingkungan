@@ -8,7 +8,7 @@
     <!-- general form elements -->
     <div class="card card-primary">
       <div class="card-header">
-        <h3 class="card-title">Nilai Rapot Siswa</h3>
+        <h3 class="card-title">Nilai Rapot Mhs</h3>
       </div>
       <!-- /.card-header -->
       <!-- form start -->
@@ -18,12 +18,12 @@
             <div class="col-md-12">
                 <table class="table" style="margin-top: -10px;">
                     <tr>
-                        <td>No Induk Siswa</td>
+                        <td>No Induk Mhs</td>
                         <td>:</td>
                         <td>{{ Auth::user()->no_induk }}</td>
                     </tr>
                     <tr>
-                        <td>Nama Siswa</td>
+                        <td>Nama Mhs</td>
                         <td>:</td>
                         <td class="text-capitalize">{{ Auth::user()->name }}</td>
                     </tr>
@@ -157,6 +157,6 @@
 @endsection
 @section('script')
     <script>
-        $("#RapotSiswa").addClass("active");
+        $("#RapotMhs").addClass("active");
     </script>
 @endsection

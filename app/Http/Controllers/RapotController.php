@@ -8,7 +8,7 @@ use App\Mapel;
 use App\Nilai;
 use App\Rapot;
 use App\Sikap;
-use App\Siswa;
+use App\Mhs;
 use App\Jadwal;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -57,7 +57,7 @@ class RapotController extends Controller
                     'id' => $request->id
                 ],
                 [
-                    'siswa_id' => $request->siswa_id,
+                    'mhs_id' => $request->mhs_id,
                     'kelas_id' => $request->kelas_id,
                     'dosen_id' => $request->dosen_id,
                     'mapel_id' => $dosen->mapel_id,
@@ -66,7 +66,7 @@ class RapotController extends Controller
                     'k_deskripsi' => $request->deskripsi,
                 ]
             );
-            return response()->json(['success' => 'Nilai rapot siswa berhasil ditambahkan!']);
+            return response()->json(['success' => 'Nilai rapot mhs berhasil ditambahkan!']);
         } else {
             return response()->json(['error' => 'Maaf dosen ini tidak mengajar kelas ini!']);
         }
@@ -83,8 +83,8 @@ class RapotController extends Controller
         $id = Crypt::decrypt($id);
         $dosen = Dosen::where('id_card', Auth::user()->id_card)->first();
         $kelas = Kelas::findorfail($id);
-        $siswa = Siswa::where('kelas_id', $id)->get();
-        return view('dosen.rapot.rapot', compact('dosen', 'kelas', 'siswa'));
+        $mhs = Mhs::where('kelas_id', $id)->get();
+        return view('dosen.rapot.rapot', compact('dosen', 'kelas', 'mhs'));
     }
 
     /**
@@ -97,8 +97,8 @@ class RapotController extends Controller
     {
         $id = Crypt::decrypt($id);
         $kelas = Kelas::findorfail($id);
-        $siswa = Siswa::orderBy('nama_siswa')->where('kelas_id', $id)->get();
-        return view('admin.rapot.index', compact('kelas', 'siswa'));
+        $mhs = Mhs::orderBy('nama_mhs')->where('kelas_id', $id)->get();
+        return view('admin.rapot.index', compact('kelas', 'mhs'));
     }
 
     /**
@@ -127,11 +127,11 @@ class RapotController extends Controller
     public function rapot($id)
     {
         $id = Crypt::decrypt($id);
-        $siswa = Siswa::findorfail($id);
-        $kelas = Kelas::findorfail($siswa->kelas_id);
+        $mhs = Mhs::findorfail($id);
+        $kelas = Kelas::findorfail($mhs->kelas_id);
         $jadwal = Jadwal::orderBy('mapel_id')->where('kelas_id', $kelas->id)->get();
         $mapel = $jadwal->groupBy('mapel_id');
-        return view('admin.rapot.show', compact('mapel', 'siswa', 'kelas'));
+        return view('admin.rapot.show', compact('mapel', 'mhs', 'kelas'));
     }
 
     public function predikat(Request $request)
@@ -161,21 +161,21 @@ class RapotController extends Controller
         return response()->json($newForm);
     }
 
-    public function siswa()
+    public function mhs()
     {
-        $siswa = Siswa::where('no_induk', Auth::user()->no_induk)->first();
-        $kelas = Kelas::findorfail($siswa->kelas_id);
+        $mhs = Mhs::where('no_induk', Auth::user()->no_induk)->first();
+        $kelas = Kelas::findorfail($mhs->kelas_id);
         $pai = Mapel::where('nama_mapel', 'Pendidikan Agama dan Budi Pekerti')->first();
         $ppkn = Mapel::where('nama_mapel', 'Pendidikan Pancasila dan Kewarganegaraan')->first();
         if ($pai != null && $ppkn != null) {
-            $Spai = Sikap::where('siswa_id', $siswa->id)->where('mapel_id', $pai->id)->first();
-            $Sppkn = Sikap::where('siswa_id', $siswa->id)->where('mapel_id', $ppkn->id)->first();
+            $Spai = Sikap::where('mhs_id', $mhs->id)->where('mapel_id', $pai->id)->first();
+            $Sppkn = Sikap::where('mhs_id', $mhs->id)->where('mapel_id', $ppkn->id)->first();
         } else {
             $Spai = "";
             $Sppkn = "";
         }
         $jadwal = Jadwal::where('kelas_id', $kelas->id)->orderBy('mapel_id')->get();
         $mapel = $jadwal->groupBy('mapel_id');
-        return view('siswa.rapot', compact('siswa', 'kelas', 'mapel', 'Spai', 'Sppkn'));
+        return view('mhs.rapot', compact('mhs', 'kelas', 'mapel', 'Spai', 'Sppkn'));
     }
 }

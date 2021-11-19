@@ -93,7 +93,7 @@
             .btn-details {
                 margin-top: 28px !important;
             }
-            .btn-details-siswa {
+            .btn-details-mhs {
                 margin-top: 175px !important;
             }
         }

@@ -1,7 +1,7 @@
 @extends('template_backend.home')
 @section('heading', 'Ubah Foto')
 @section('page')
-  <li class="breadcrumb-item active"><a href="{{ route('siswa.index') }}">Siswa</a></li>
+  <li class="breadcrumb-item active"><a href="{{ route('mhs.index') }}">Mhs</a></li>
   <li class="breadcrumb-item active">Ubah Foto</li>
 @endsection
 @section('content')
@@ -20,14 +20,14 @@
       </div>
       <!-- /.card-header -->
       <!-- form start -->
-      <form action="{{ route('siswa.update-foto', $siswa->id) }}"  enctype="multipart/form-data" method="post">
+      <form action="{{ route('mhs.update-foto', $mhs->id) }}"  enctype="multipart/form-data" method="post">
         @csrf
         <div class="card-body">
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="nama_siswa">Nama Siswa</label>
-                        <input type="text" name="nama_siswa" class="form-control" value="{{ $siswa->nama_siswa }}" readonly>
+                        <label for="nama_mhs">Nama Mhs</label>
+                        <input type="text" name="nama_mhs" class="form-control" value="{{ $mhs->nama_mhs }}" readonly>
                     </div>
                     <div class="form-group">
                         <label for="foto">File input</label>
@@ -40,14 +40,14 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <img src="{{ asset($siswa->foto) }}" class="img img-responsive" alt="" width="30%" />
+                    <img src="{{ asset($mhs->foto) }}" class="img img-responsive" alt="" width="30%" />
                 </div>
             </div>
         </div>
         <!-- /.card-body -->
 
         <div class="card-footer">
-            <a href="{{ route("siswa.index") }}" class="btn btn-default"><i class='nav-icon fas fa-arrow-left'></i> &nbsp; Kembali</a> &nbsp;
+            <a href="{{ route("mhs.index") }}" class="btn btn-default"><i class='nav-icon fas fa-arrow-left'></i> &nbsp; Kembali</a> &nbsp;
             <button name="submit" class="btn btn-primary"><i class="nav-icon fas fa-upload"></i> &nbsp; Upload</button>
         </div>
       </form>
@@ -59,6 +59,6 @@
     <script>
         $("#MasterData").addClass("active");
         $("#liMasterData").addClass("menu-open");
-        $("#DataSiswa").addClass("active");
+        $("#DataMhs").addClass("active");
     </script>
 @endsection

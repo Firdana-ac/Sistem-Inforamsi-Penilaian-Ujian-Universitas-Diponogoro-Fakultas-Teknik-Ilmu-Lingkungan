@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Auth;
 use App\Mapel;
 use App\Dosen;
-use App\Siswa;
+use App\Mhs;
 use App\Kelas;
 use App\Jadwal;
 use App\Sikap;
@@ -67,7 +67,7 @@ class SikapController extends Controller
                         'id' => $request->id
                     ],
                     [
-                        'siswa_id' => $request->siswa_id,
+                        'mhs_id' => $request->mhs_id,
                         'kelas_id' => $request->kelas_id,
                         'dosen_id' => $request->dosen_id,
                         'mapel_id' => $dosen->mapel_id,
@@ -76,7 +76,7 @@ class SikapController extends Controller
                         'sikap_3' => $request->sikap_3
                     ]
                 );
-                return response()->json(['success' => 'Nilai sikap siswa berhasil ditambahkan!']);
+                return response()->json(['success' => 'Nilai sikap mhs berhasil ditambahkan!']);
             } else {
                 return redirect()->json(['error' => 'Maaf dosen ini tidak dapat menambahkan nilai sikap!']);
             }
@@ -96,8 +96,8 @@ class SikapController extends Controller
         $id = Crypt::decrypt($id);
         $dosen = Dosen::where('id_card', Auth::user()->id_card)->first();
         $kelas = Kelas::findorfail($id);
-        $siswa = Siswa::where('kelas_id', $id)->get();
-        return view('dosen.sikap.show', compact('dosen', 'kelas', 'siswa'));
+        $mhs = Mhs::where('kelas_id', $id)->get();
+        return view('dosen.sikap.show', compact('dosen', 'kelas', 'mhs'));
     }
 
     /**
@@ -110,8 +110,8 @@ class SikapController extends Controller
     {
         $id = Crypt::decrypt($id);
         $kelas = Kelas::findorfail($id);
-        $siswa = Siswa::orderBy('nama_siswa')->where('kelas_id', $id)->get();
-        return view('admin.sikap.index', compact('kelas', 'siswa'));
+        $mhs = Mhs::orderBy('nama_mhs')->where('kelas_id', $id)->get();
+        return view('admin.sikap.index', compact('kelas', 'mhs'));
     }
 
     /**
@@ -140,17 +140,17 @@ class SikapController extends Controller
     public function sikap($id)
     {
         $id = Crypt::decrypt($id);
-        $siswa = Siswa::findorfail($id);
-        $kelas = Kelas::findorfail($siswa->kelas_id);
+        $mhs = Mhs::findorfail($id);
+        $kelas = Kelas::findorfail($mhs->kelas_id);
         $mapel = Mapel::where('nama_mapel', 'Pendidikan Agama dan Budi Pekerti')->orWhere('nama_mapel', 'Pendidikan Pancasila dan Kewarganegaraan')->get();
-        return view('admin.sikap.show', compact('mapel', 'siswa', 'kelas'));
+        return view('admin.sikap.show', compact('mapel', 'mhs', 'kelas'));
     }
 
-    public function siswa()
+    public function mhs()
     {
-        $siswa = Siswa::where('no_induk', Auth::user()->no_induk)->first();
-        $kelas = Kelas::findorfail($siswa->kelas_id);
+        $mhs = Mhs::where('no_induk', Auth::user()->no_induk)->first();
+        $kelas = Kelas::findorfail($mhs->kelas_id);
         $mapel = Mapel::where('nama_mapel', 'Pendidikan Agama dan Budi Pekerti')->orWhere('nama_mapel', 'Pendidikan Pancasila dan Kewarganegaraan')->get();
-        return view('siswa.sikap', compact('siswa', 'kelas', 'mapel'));
+        return view('mhs.sikap', compact('mhs', 'kelas', 'mapel'));
     }
 }

@@ -26,9 +26,9 @@
                         <td>{{ $kelas->dosen->nama_dosen }}</td>
                     </tr>
                     <tr>
-                        <td>Jumlah Siswa</td>
+                        <td>Jumlah Mhs</td>
                         <td>:</td>
-                        <td>{{ $siswa->count() }}</td>
+                        <td>{{ $mhs->count() }}</td>
                     </tr>
                     <tr>
                         <td>Mata Pelajaran</td>
@@ -74,7 +74,7 @@
                     <thead>
                         <tr>
                             <th rowspan="2" class="ctr">No.</th>
-                            <th rowspan="2">Nama Siswa</th>
+                            <th rowspan="2">Nama Mhs</th>
                             <th colspan="3" class="ctr">Nilai Sikap</th>
                             <th rowspan="2" class="ctr">Aksi</th>
                         </tr>
@@ -89,12 +89,12 @@
                             @csrf
                             <input type="hidden" name="dosen_id" value="{{$dosen->id}}">
                             <input type="hidden" name="kelas_id" value="{{$kelas->id}}">
-                            @foreach ($siswa as $data)
-                                <input type="hidden" name="siswa_id" value="{{$data->id}}">
+                            @foreach ($mhs as $data)
+                                <input type="hidden" name="mhs_id" value="{{$data->id}}">
                                 <tr>
                                     <td class="ctr">{{ $loop->iteration }}</td>
                                     <td>
-                                        {{ $data->nama_siswa }}
+                                        {{ $data->nama_mhs }}
                                         @if ($data->sikap($data->id) && $data->sikap($data->id)['id'])
                                             <input type="hidden" name="sikap_id" class="sikap_id_{{$data->id}}" value="{{ $data->sikap($data->id)['id'] }}">
                                         @else
@@ -161,7 +161,7 @@
                 data 	: {
                     _token: '{{ csrf_token() }}',
                     id : sikap_id,
-                    siswa_id : id,
+                    mhs_id : id,
                     kelas_id : kelas_id,
                     dosen_id : dosen_id,
                     sikap_1 : sikap_1,
@@ -169,7 +169,7 @@
                     sikap_3 : sikap_3
                 },
                 success: function(data){
-                    toastr.success("Nilai sikap siswa berhasil ditambahkan!");
+                    toastr.success("Nilai sikap mhs berhasil ditambahkan!");
                     location.reload();
                 },
                 error: function (data) {

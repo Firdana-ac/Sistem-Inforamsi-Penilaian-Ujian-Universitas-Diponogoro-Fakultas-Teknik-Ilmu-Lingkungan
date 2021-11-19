@@ -63,9 +63,9 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ route('siswa.index') }}" class="nav-link" id="DataSiswa">
+                                <a href="{{ route('mhs.index') }}" class="nav-link" id="DataMhs">
                                     <i class="fas fa-users nav-icon"></i>
-                                    <p>Data Mahasiswa</p>
+                                    <p>Data MahaMhs</p>
                                 </a>
                             </li>
                             <li class="nav-item">
@@ -111,9 +111,9 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ route('siswa.trash') }}" class="nav-link" id="TrashSiswa">
+                                    <a href="{{ route('mhs.trash') }}" class="nav-link" id="TrashMhs">
                                         <i class="fas fa-users nav-icon"></i>
-                                        <p>Trash Mahasiswa</p>
+                                        <p>Trash MahaMhs</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
@@ -239,7 +239,7 @@
                             </li>
                         </ul>
                     </li>
-                @elseif (Auth::user()->role == 'Siswa' && Auth::user()->siswa(Auth::user()->no_induk))
+                @elseif (Auth::user()->role == 'Mhs' && Auth::user()->mhs(Auth::user()->no_induk))
                     <li class="nav-item has-treeview">
                         <a href="{{ url('/') }}" class="nav-link" id="Home">
                             <i class="nav-icon fas fa-home"></i>
@@ -247,25 +247,25 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('jadwal.siswa') }}" class="nav-link" id="JadwalSiswa">
+                        <a href="{{ route('jadwal.mhs') }}" class="nav-link" id="JadwalMhs">
                             <i class="fas fa-calendar-alt nav-icon"></i>
                             <p>Jadwal</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('ulangan.siswa') }}" class="nav-link" id="UlanganSiswa">
+                        <a href="{{ route('ulangan.mhs') }}" class="nav-link" id="UlanganMhs">
                             <i class="fas fa-file-alt nav-icon"></i>
                             <p>Ulangan</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('sikap.siswa') }}" class="nav-link" id="SikapSiswa">
+                        <a href="{{ route('sikap.mhs') }}" class="nav-link" id="SikapMhs">
                             <i class="fas fa-file-alt nav-icon"></i>
                             <p>Sikap</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('rapot.siswa') }}" class="nav-link" id="RapotSiswa">
+                        <a href="{{ route('rapot.mhs') }}" class="nav-link" id="RapotMhs">
                             <i class="fas fa-file-alt nav-icon"></i>
                             <p>Rapot</p>
                         </a>
