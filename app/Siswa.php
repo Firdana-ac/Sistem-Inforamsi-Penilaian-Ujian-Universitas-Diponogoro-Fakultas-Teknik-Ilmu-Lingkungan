@@ -19,22 +19,22 @@ class Siswa extends Model
 
     public function ulangan($id)
     {
-        $guru = Guru::where('id_card', Auth::user()->id_card)->first();
-        $nilai = Ulangan::where('siswa_id', $id)->where('guru_id', $guru->id)->first();
+        $dosen = Dosen::where('id_card', Auth::user()->id_card)->first();
+        $nilai = Ulangan::where('siswa_id', $id)->where('dosen_id', $dosen->id)->first();
         return $nilai;
     }
 
     public function sikap($id)
     {
-        $guru = Guru::where('id_card', Auth::user()->id_card)->first();
-        $nilai = Sikap::where('siswa_id', $id)->where('guru_id', $guru->id)->first();
+        $dosen = Dosen::where('id_card', Auth::user()->id_card)->first();
+        $nilai = Sikap::where('siswa_id', $id)->where('dosen_id', $dosen->id)->first();
         return $nilai;
     }
 
     public function nilai($id)
     {
-        $guru = Guru::where('id_card', Auth::user()->id_card)->first();
-        $nilai = Rapot::where('siswa_id', $id)->where('guru_id', $guru->id)->first();
+        $dosen = Dosen::where('id_card', Auth::user()->id_card)->first();
+        $nilai = Rapot::where('siswa_id', $id)->where('dosen_id', $dosen->id)->first();
         return $nilai;
     }
 

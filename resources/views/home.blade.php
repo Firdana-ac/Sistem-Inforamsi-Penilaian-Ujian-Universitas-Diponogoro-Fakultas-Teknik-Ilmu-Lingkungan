@@ -44,13 +44,13 @@
                           <td>{{ $data->jam_mulai.' - '.$data->jam_selesai }}</td>
                           <td>
                               <h5 class="card-title">{{ $data->mapel->nama_mapel }}</h5>
-                              <p class="card-text"><small class="text-muted">{{ $data->guru->nama_guru }}</small></p>
+                              <p class="card-text"><small class="text-muted">{{ $data->dosen->nama_dosen }}</small></p>
                           </td>
                           <td>{{ $data->kelas->nama_kelas }}</td>
                           <td>{{ $data->ruang->nama_ruang }}</td>
                           <td>
-                            @if ($data->absen($data->guru_id))
-                              <div style="margin-left:20px;width:30px;height:30px;background:#{{ $data->absen($data->guru_id) }}"></div>
+                            @if ($data->absen($data->dosen_id))
+                              <div style="margin-left:20px;width:30px;height:30px;background:#{{ $data->absen($data->dosen_id) }}"></div>
                             @elseif (date('H:i:s') >= '09:00:00')
                               <div style="margin-left:20px;width:30px;height:30px;background:#F00"></div>
                             @else
@@ -207,7 +207,7 @@
                     $.each(data, function (index, val) {
                         html += "<tr>";
                           html += "<td>" + val.jam_mulai + ' - ' + val.jam_selesai + "</td>";
-                          html += "<td><h5 class='card-title'>" + val.mapel + "</h5><p class='card-text'><small class='text-muted'>" + val.guru + "</small></p></td>";
+                          html += "<td><h5 class='card-title'>" + val.mapel + "</h5><p class='card-text'><small class='text-muted'>" + val.dosen + "</small></p></td>";
                           html += "<td>" + val.kelas + "</td>";
                           html += "<td>" + val.ruang + "</td>";
                           if (val.ket != null) {

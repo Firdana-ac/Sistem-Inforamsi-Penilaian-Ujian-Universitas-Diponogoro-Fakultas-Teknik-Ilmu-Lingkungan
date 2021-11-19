@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Jadwal;
 use App\Mapel;
 use App\Paket;
-use App\Guru;
+use App\Dosen;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Str;
@@ -113,9 +113,9 @@ class MapelController extends Controller
             $jadwal = Jadwal::where('mapel_id', $mapel->id)->delete();
         } else {
         }
-        $countGuru = Guru::where('mapel_id', $mapel->id)->count();
-        if ($countGuru >= 1) {
-            $guru = Guru::where('mapel_id', $mapel->id)->delete();
+        $countDosen = Dosen::where('mapel_id', $mapel->id)->count();
+        if ($countDosen >= 1) {
+            $dosen = Dosen::where('mapel_id', $mapel->id)->delete();
         } else {
         }
         $mapel->delete();
@@ -137,9 +137,9 @@ class MapelController extends Controller
             $jadwal = Jadwal::withTrashed()->where('mapel_id', $mapel->id)->restore();
         } else {
         }
-        $countGuru = Guru::withTrashed()->where('mapel_id', $mapel->id)->count();
-        if ($countGuru >= 1) {
-            $guru = Guru::withTrashed()->where('mapel_id', $mapel->id)->restore();
+        $countDosen = Dosen::withTrashed()->where('mapel_id', $mapel->id)->count();
+        if ($countDosen >= 1) {
+            $dosen = Dosen::withTrashed()->where('mapel_id', $mapel->id)->restore();
         } else {
         }
         $mapel->restore();
@@ -154,9 +154,9 @@ class MapelController extends Controller
             $jadwal = Jadwal::withTrashed()->where('mapel_id', $mapel->id)->forceDelete();
         } else {
         }
-        $countGuru = Guru::withTrashed()->where('mapel_id', $mapel->id)->count();
-        if ($countGuru >= 1) {
-            $guru = Guru::withTrashed()->where('mapel_id', $mapel->id)->forceDelete();
+        $countDosen = Dosen::withTrashed()->where('mapel_id', $mapel->id)->count();
+        if ($countDosen >= 1) {
+            $dosen = Dosen::withTrashed()->where('mapel_id', $mapel->id)->forceDelete();
         } else {
         }
         $mapel->forceDelete();
@@ -171,7 +171,7 @@ class MapelController extends Controller
         foreach ($jadwal as $val => $data) {
             $newForm[] = array(
                 'mapel' => $data[0]->pelajaran($val)->nama_mapel,
-                'guru' => $data[0]->pengajar($data[0]->guru_id)->id
+                'dosen' => $data[0]->pengajar($data[0]->dosen_id)->id
             );
         }
 

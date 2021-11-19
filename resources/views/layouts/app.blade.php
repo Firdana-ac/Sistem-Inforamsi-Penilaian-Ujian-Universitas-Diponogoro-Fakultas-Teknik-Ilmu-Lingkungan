@@ -40,7 +40,7 @@
   $(document).ready(function(){
       $('#role').change(function(){
           var kel = $('#role option:selected').val();
-          if (kel == "Guru") {
+          if (kel == "Dosen") {
             $("#noId").addClass("mb-3");
             $("#noId").html(`
               <input id="nomer" type="text" maxlength="5" onkeypress="return inputAngka(event)" placeholder="No Id Card" class="form-control @error('nomer') is-invalid @enderror" name="nomer" autocomplete="nomer">
@@ -92,12 +92,12 @@
 
 @error('id_card')
   <script>
-    toastr.error("Maaf User ini tidak terdaftar sebagai Guru SMKN 1 Jenangan Ponorogo!");
+    toastr.error("Maaf User ini tidak terdaftar sebagai Dosen SMKN 1 Jenangan Ponorogo!");
   </script>
 @enderror
-@error('guru')
+@error('dosen')
   <script>
-    toastr.error("Maaf Guru ini sudah terdaftar sebagai User!");
+    toastr.error("Maaf Dosen ini sudah terdaftar sebagai User!");
   </script>
 @enderror
 @error('no_induk')

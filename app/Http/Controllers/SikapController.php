@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Auth;
 use App\Mapel;
-use App\Guru;
+use App\Dosen;
 use App\Siswa;
 use App\Kelas;
 use App\Jadwal;
@@ -23,16 +23,16 @@ class SikapController extends Controller
      */
     public function index()
     {
-        $guru = Guru::where('id_card', Auth::user()->id_card)->first();
+        $dosen = Dosen::where('id_card', Auth::user()->id_card)->first();
         if (
-            $guru->mapel->nama_mapel == "Pendidikan Agama dan Budi Pekerti" ||
-            $guru->mapel->nama_mapel == "Pendidikan Pancasila dan Kewarganegaraan"
+            $dosen->mapel->nama_mapel == "Pendidikan Agama dan Budi Pekerti" ||
+            $dosen->mapel->nama_mapel == "Pendidikan Pancasila dan Kewarganegaraan"
         ) {
-            $jadwal = Jadwal::where('guru_id', $guru->id)->orderBy('kelas_id')->get();
+            $jadwal = Jadwal::where('dosen_id', $dosen->id)->orderBy('kelas_id')->get();
             $kelas = $jadwal->groupBy('kelas_id');
-            return view('guru.sikap.index', compact('kelas', 'guru'));
+            return view('dosen.sikap.index', compact('kelas', 'dosen'));
         } else {
-            return redirect()->back()->with('error', 'Maaf guru ini tidak dapat menambahkan nilai sikap!');
+            return redirect()->back()->with('error', 'Maaf dosen ini tidak dapat menambahkan nilai sikap!');
         }
     }
 
@@ -55,12 +55,12 @@ class SikapController extends Controller
      */
     public function store(Request $request)
     {
-        $guru = Guru::findorfail($request->guru_id);
-        $cekJadwal = Jadwal::where('guru_id', $guru->id)->where('kelas_id', $request->kelas_id)->count();
+        $dosen = Dosen::findorfail($request->dosen_id);
+        $cekJadwal = Jadwal::where('dosen_id', $dosen->id)->where('kelas_id', $request->kelas_id)->count();
         if ($cekJadwal >= 1) {
             if (
-                $guru->mapel->nama_mapel == "Pendidikan Agama dan Budi Pekerti" ||
-                $guru->mapel->nama_mapel == "Pendidikan Pancasila dan Kewarganegaraan"
+                $dosen->mapel->nama_mapel == "Pendidikan Agama dan Budi Pekerti" ||
+                $dosen->mapel->nama_mapel == "Pendidikan Pancasila dan Kewarganegaraan"
             ) {
                 Sikap::updateOrCreate(
                     [
@@ -69,8 +69,8 @@ class SikapController extends Controller
                     [
                         'siswa_id' => $request->siswa_id,
                         'kelas_id' => $request->kelas_id,
-                        'guru_id' => $request->guru_id,
-                        'mapel_id' => $guru->mapel_id,
+                        'dosen_id' => $request->dosen_id,
+                        'mapel_id' => $dosen->mapel_id,
                         'sikap_1' => $request->sikap_1,
                         'sikap_2' => $request->sikap_2,
                         'sikap_3' => $request->sikap_3
@@ -78,10 +78,10 @@ class SikapController extends Controller
                 );
                 return response()->json(['success' => 'Nilai sikap siswa berhasil ditambahkan!']);
             } else {
-                return redirect()->json(['error' => 'Maaf guru ini tidak dapat menambahkan nilai sikap!']);
+                return redirect()->json(['error' => 'Maaf dosen ini tidak dapat menambahkan nilai sikap!']);
             }
         } else {
-            return response()->json(['error' => 'Maaf guru ini tidak mengajar kelas ini!']);
+            return response()->json(['error' => 'Maaf dosen ini tidak mengajar kelas ini!']);
         }
     }
 
@@ -94,10 +94,10 @@ class SikapController extends Controller
     public function show($id)
     {
         $id = Crypt::decrypt($id);
-        $guru = Guru::where('id_card', Auth::user()->id_card)->first();
+        $dosen = Dosen::where('id_card', Auth::user()->id_card)->first();
         $kelas = Kelas::findorfail($id);
         $siswa = Siswa::where('kelas_id', $id)->get();
-        return view('guru.sikap.show', compact('guru', 'kelas', 'siswa'));
+        return view('dosen.sikap.show', compact('dosen', 'kelas', 'siswa'));
     }
 
     /**

@@ -11,12 +11,12 @@
             <div class="card card-primary card-outline">
                 <div class="card-body box-profile">
                     <div class="text-center">
-                    @if (Auth::user()->role == 'Guru')
-                        <a href="{{ asset(Auth::user()->guru(Auth::user()->id_card)->foto) }}" data-toggle="lightbox" data-title="Foto {{ Auth::user()->name }}" data-gallery="gallery" data-footer='<a href="{{ route('pengaturan.edit-foto') }}" id="linkFotoGuru" class="btn btn-link btn-block btn-light"><i class="nav-icon fas fa-file-upload"></i> &nbsp; Ubah Foto</a>'>
-                            <img src="{{ asset(Auth::user()->guru(Auth::user()->id_card)->foto) }}" width="130px" class="profile-user-img img-fluid img-circle" alt="User profile picture">
+                    @if (Auth::user()->role == 'Dosen')
+                        <a href="{{ asset(Auth::user()->dosen(Auth::user()->id_card)->foto) }}" data-toggle="lightbox" data-title="Foto {{ Auth::user()->name }}" data-gallery="gallery" data-footer='<a href="{{ route('pengaturan.edit-foto') }}" id="linkFotoDosen" class="btn btn-link btn-block btn-light"><i class="nav-icon fas fa-file-upload"></i> &nbsp; Ubah Foto</a>'>
+                            <img src="{{ asset(Auth::user()->dosen(Auth::user()->id_card)->foto) }}" width="130px" class="profile-user-img img-fluid img-circle" alt="User profile picture">
                         </a>
                     @elseif (Auth::user()->role == 'Siswa')
-                        <a href="{{ asset(Auth::user()->siswa(Auth::user()->no_induk)->foto) }}" data-toggle="lightbox" data-title="Foto {{ Auth::user()->name }}" data-gallery="gallery" data-footer='<a href="{{ route('pengaturan.edit-foto') }}" id="linkFotoGuru" class="btn btn-link btn-block btn-light"><i class="nav-icon fas fa-file-upload"></i> &nbsp; Ubah Foto</a>'>
+                        <a href="{{ asset(Auth::user()->siswa(Auth::user()->no_induk)->foto) }}" data-toggle="lightbox" data-title="Foto {{ Auth::user()->name }}" data-gallery="gallery" data-footer='<a href="{{ route('pengaturan.edit-foto') }}" id="linkFotoDosen" class="btn btn-link btn-block btn-light"><i class="nav-icon fas fa-file-upload"></i> &nbsp; Ubah Foto</a>'>
                             <img src="{{ asset(Auth::user()->siswa(Auth::user()->no_induk)->foto) }}" width="130px" class="profile-user-img img-fluid img-circle" alt="User profile picture">
                         </a>
                     @else
@@ -25,13 +25,13 @@
                     </div>
                     <h3 class="profile-username text-center">{{ Auth::user()->name }}</h3>
                     <p class="text-muted text-center">{{ Auth::user()->role }}</p>
-                    @if (Auth::user()->role == 'Guru')
+                    @if (Auth::user()->role == 'Dosen')
                         <ul class="list-group list-group-unbordered mb-3">
                             <li class="list-group-item">
                                 <b>Id Card</b> <a class="float-right">{{ Auth::user()->id_card }}</a>
                             </li>
                             <li class="list-group-item">
-                                <b>NIP</b> <a class="float-right">{{ Auth::user()->guru(Auth::user()->id_card)->nip }}</a>
+                                <b>NIP</b> <a class="float-right">{{ Auth::user()->dosen(Auth::user()->id_card)->nip }}</a>
                             </li>
                         </ul>
                     @elseif (Auth::user()->role == 'Siswa')
@@ -85,12 +85,12 @@
                     <p class="text-muted">{{ Auth::user()->email }}</p>
                     <hr>
 
-                    @if (Auth::user()->role == 'Guru')
-                        <strong><i class="fas fa-book mr-1"></i> Guru Mapel</strong>
-                        <p class="text-muted">{{ Auth::user()->guru(Auth::user()->id_card)->mapel->nama_mapel }}</p>
+                    @if (Auth::user()->role == 'Dosen')
+                        <strong><i class="fas fa-book mr-1"></i> Dosen Mapel</strong>
+                        <p class="text-muted">{{ Auth::user()->dosen(Auth::user()->id_card)->mapel->nama_mapel }}</p>
                         <hr>
                         <strong><i class="far fa-file-alt mr-1"></i> Kode Jadwal</strong>
-                        <p class="text-muted">{{ Auth::user()->guru(Auth::user()->id_card)->kode }}</p>
+                        <p class="text-muted">{{ Auth::user()->dosen(Auth::user()->id_card)->kode }}</p>
                         <hr>
                     @elseif (Auth::user()->role == 'Siswa')
                         <strong><i class="fas fa-home mr-1"></i> Tempat Lahir</strong>
@@ -99,9 +99,9 @@
                     @else
                     @endif
 
-                    @if (Auth::user()->role == 'Guru')
+                    @if (Auth::user()->role == 'Dosen')
                         <strong><i class="fas fa-map-marker-alt mr-1"></i> Tempat Lahir</strong>
-                        <p class="text-muted">{{ Auth::user()->guru(Auth::user()->id_card)->tmp_lahir }}</p>
+                        <p class="text-muted">{{ Auth::user()->dosen(Auth::user()->id_card)->tmp_lahir }}</p>
                         <hr>
                     @elseif (Auth::user()->role == 'Siswa')
                         <strong><i class="fas fa-map-marker-alt mr-1"></i> Tempat Lahir</strong>
@@ -110,9 +110,9 @@
                     @else
                     @endif
 
-                    @if (Auth::user()->role == 'Guru')
+                    @if (Auth::user()->role == 'Dosen')
                         <strong><i class="far fa-calendar mr-1"></i> Tanggal Lahir</strong>
-                        <p class="text-muted">{{ date('l, d F Y', strtotime(Auth::user()->guru(Auth::user()->id_card)->tgl_lahir)) }}</p>
+                        <p class="text-muted">{{ date('l, d F Y', strtotime(Auth::user()->dosen(Auth::user()->id_card)->tgl_lahir)) }}</p>
                         <hr>
                     @elseif (Auth::user()->role == 'Siswa')
                         <strong><i class="far fa-calendar mr-1"></i> Tanggal Lahir</strong>
@@ -121,9 +121,9 @@
                     @else
                     @endif
 
-                    @if (Auth::user()->role == 'Guru')
+                    @if (Auth::user()->role == 'Dosen')
                         <strong><i class="fas fa-phone mr-1"></i> No Telepon</strong>
-                        <p class="text-muted">{{ Auth::user()->guru(Auth::user()->id_card)->telp }}</p>
+                        <p class="text-muted">{{ Auth::user()->dosen(Auth::user()->id_card)->telp }}</p>
                     @elseif (Auth::user()->role == 'Siswa')
                         <strong><i class="fas fa-phone mr-1"></i> No Telepon</strong>
                         <p class="text-muted">{{ Auth::user()->siswa(Auth::user()->no_induk)->telp }}</p>

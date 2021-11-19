@@ -10,7 +10,7 @@ class Jadwal extends Model
 {
   use SoftDeletes;
 
-  protected $fillable = ['hari_id', 'kelas_id', 'mapel_id', 'guru_id', 'jam_mulai', 'jam_selesai', 'ruang_id'];
+  protected $fillable = ['hari_id', 'kelas_id', 'mapel_id', 'dosen_id', 'jam_mulai', 'jam_selesai', 'ruang_id'];
 
   public function hari()
   {
@@ -27,9 +27,9 @@ class Jadwal extends Model
     return $this->belongsTo('App\Mapel')->withDefault();
   }
 
-  public function guru()
+  public function dosen()
   {
-    return $this->belongsTo('App\Guru')->withDefault();
+    return $this->belongsTo('App\Dosen')->withDefault();
   }
 
   public function ruang()
@@ -45,8 +45,8 @@ class Jadwal extends Model
 
   public function pengajar($id)
   {
-    $guru = Guru::where('id', $id)->first();
-    return $guru;
+    $dosen = Dosen::where('id', $id)->first();
+    return $dosen;
   }
 
   public function ulangan($id)
@@ -65,13 +65,13 @@ class Jadwal extends Model
 
   public function kkm($id)
   {
-    $kkm = Nilai::where('guru_id', $id)->first();
+    $kkm = Nilai::where('dosen_id', $id)->first();
     return $kkm['kkm'];
   }
 
   public function absen($id)
   {
-    $absen = Absen::where('tanggal', date('Y-m-d'))->where('guru_id', $id)->first();
+    $absen = Absen::where('tanggal', date('Y-m-d'))->where('dosen_id', $id)->first();
     $ket = Kehadiran::where('id', $absen['kehadiran_id'])->first();
     return $ket['color'];
   }

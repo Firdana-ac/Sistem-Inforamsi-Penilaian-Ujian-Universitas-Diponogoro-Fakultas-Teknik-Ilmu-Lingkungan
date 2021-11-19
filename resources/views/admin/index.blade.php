@@ -20,13 +20,13 @@
     <div class="col-lg-4 col-6">
         <div class="small-box bg-warning">
             <div class="inner" style="color: #FFFFFF;">
-                <h3>{{ $guru }}</h3>
-                <p>Guru</p>
+                <h3>{{ $dosen }}</h3>
+                <p>Dosen</p>
             </div>
             <div class="icon">
                 <i class="fas fa-id-card nav-icon"></i>
             </div>
-            <a href="{{ route('guru.index') }}" style="color: #FFFFFF !important;" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            <a href="{{ route('dosen.index') }}" style="color: #FFFFFF !important;" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
         </div>
     </div>
     <div class="col-lg-4 col-6">
@@ -82,11 +82,11 @@
             <div class="card-body">
                 <div class="d-flex">
                     <p class="d-flex flex-column">
-                        <span class="text-bold text-lg">DataGuru</span>
+                        <span class="text-bold text-lg">DataDosen</span>
                     </p>
                     <p class="ml-auto d-flex flex-column text-right">
                         <span class="text-success">
-                            <i class="fas fa-arrow-up"></i> {{ $guru }}
+                            <i class="fas fa-arrow-up"></i> {{ $dosen }}
                         </span>
                     </p>
                 </div>
@@ -94,7 +94,7 @@
                     <div class="row">
                         <div class="col-md-8">
                             <div class="chart-responsive">
-                                <canvas id="pieChartGuru" height="200"></canvas>
+                                <canvas id="pieChartDosen" height="200"></canvas>
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -182,15 +182,15 @@
         $(document).ready(function () {
             'use strict'
 
-            var pieChartCanvasGuru = $('#pieChartGuru').get(0).getContext('2d')
-            var pieDataGuru        = {
+            var pieChartCanvasDosen = $('#pieChartDosen').get(0).getContext('2d')
+            var pieDataDosen        = {
                 labels: [
                     'Laki-laki', 
                     'Perempuan',
                 ],
                 datasets: [
                     {
-                    data: [{{ $gurulk }}, {{ $gurupr }}],
+                    data: [{{ $dosenlk }}, {{ $dosenpr }}],
                     backgroundColor : ['#007BFF', '#DC3545'],
                     }
                 ]
@@ -200,9 +200,9 @@
                     display: false
                 }
             }
-            var pieChart = new Chart(pieChartCanvasGuru, {
+            var pieChart = new Chart(pieChartCanvasDosen, {
                 type: 'doughnut',
-                data: pieDataGuru,
+                data: pieDataDosen,
                 options: pieOptions      
             })
 

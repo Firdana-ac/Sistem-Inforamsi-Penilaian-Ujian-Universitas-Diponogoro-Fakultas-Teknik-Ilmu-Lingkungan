@@ -6,7 +6,7 @@ use Auth;
 use App\Jadwal;
 use App\Hari;
 use App\Kelas;
-use App\Guru;
+use App\Dosen;
 use App\Siswa;
 use App\Ruang;
 use Illuminate\Http\Request;
@@ -30,8 +30,8 @@ class JadwalController extends Controller
         $hari = Hari::all();
         $kelas = Kelas::OrderBy('nama_kelas', 'asc')->get();
         $ruang = Ruang::all();
-        $guru = Guru::OrderBy('kode', 'asc')->get();
-        return view('admin.jadwal.index', compact('hari', 'kelas', 'guru', 'ruang'));
+        $dosen = Dosen::OrderBy('kode', 'asc')->get();
+        return view('admin.jadwal.index', compact('hari', 'kelas', 'dosen', 'ruang'));
     }
 
     /**
@@ -55,13 +55,13 @@ class JadwalController extends Controller
         $this->validate($request, [
             'hari_id' => 'required',
             'kelas_id' => 'required',
-            'guru_id' => 'required',
+            'dosen_id' => 'required',
             'jam_mulai' => 'required',
             'jam_selesai' => 'required',
             'ruang_id' => 'required',
         ]);
 
-        $guru = Guru::findorfail($request->guru_id);
+        $dosen = Dosen::findorfail($request->dosen_id);
         Jadwal::updateOrCreate(
             [
                 'id' => $request->jadwal_id
@@ -69,8 +69,8 @@ class JadwalController extends Controller
             [
                 'hari_id' => $request->hari_id,
                 'kelas_id' => $request->kelas_id,
-                'mapel_id' => $guru->mapel_id,
-                'guru_id' => $request->guru_id,
+                'mapel_id' => $dosen->mapel_id,
+                'dosen_id' => $request->dosen_id,
                 'jam_mulai' => $request->jam_mulai,
                 'jam_selesai' => $request->jam_selesai,
                 'ruang_id' => $request->ruang_id,
@@ -107,8 +107,8 @@ class JadwalController extends Controller
         $hari = Hari::all();
         $kelas = Kelas::all();
         $ruang = Ruang::all();
-        $guru = Guru::OrderBy('kode', 'asc')->get();
-        return view('admin.jadwal.edit', compact('jadwal', 'hari', 'kelas', 'guru', 'ruang'));
+        $dosen = Dosen::OrderBy('kode', 'asc')->get();
+        return view('admin.jadwal.edit', compact('jadwal', 'hari', 'kelas', 'dosen', 'ruang'));
     }
 
     /**
@@ -166,7 +166,7 @@ class JadwalController extends Controller
                 'hari' => $val->hari->nama_hari,
                 'mapel' => $val->mapel->nama_mapel,
                 'kelas' => $val->kelas->nama_kelas,
-                'guru' => $val->guru->nama_guru,
+                'dosen' => $val->dosen->nama_dosen,
                 'jam_mulai' => $val->jam_mulai,
                 'jam_selesai' => $val->jam_selesai,
                 'ruang' => $val->ruang->nama_ruang,
@@ -182,11 +182,11 @@ class JadwalController extends Controller
             $newForm[] = array(
                 'mapel' => $val->mapel->nama_mapel,
                 'kelas' => $val->kelas->nama_kelas,
-                'guru' => $val->guru->nama_guru,
+                'dosen' => $val->dosen->nama_dosen,
                 'jam_mulai' => $val->jam_mulai,
                 'jam_selesai' => $val->jam_selesai,
                 'ruang' => $val->ruang->nama_ruang,
-                'ket' => $val->absen($val->guru_id),
+                'ket' => $val->absen($val->dosen_id),
             );
         }
         return response()->json($newForm);
@@ -201,11 +201,11 @@ class JadwalController extends Controller
         // return $pdf->stream('jadwal-pdf.pdf');
     }
 
-    public function guru()
+    public function dosen()
     {
-        $guru = Guru::where('id_card', Auth::user()->id_card)->first();
-        $jadwal = Jadwal::orderBy('hari_id')->OrderBy('jam_mulai')->where('guru_id', $guru->id)->get();
-        return view('guru.jadwal', compact('jadwal', 'guru'));
+        $dosen = Dosen::where('id_card', Auth::user()->id_card)->first();
+        $jadwal = Jadwal::orderBy('hari_id')->OrderBy('jam_mulai')->where('dosen_id', $dosen->id)->get();
+        return view('dosen.jadwal', compact('jadwal', 'dosen'));
     }
 
     public function siswa()

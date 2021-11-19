@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Guru;
+use App\Dosen;
 use App\Kelas;
 use App\Mapel;
 use App\Nilai;
@@ -23,11 +23,11 @@ class RapotController extends Controller
      */
     public function index()
     {
-        $guru = Guru::where('id_card', Auth::user()->id_card)->first();
-        $jadwal = Jadwal::where('guru_id', $guru->id)->orderBy('kelas_id')->get();
+        $dosen = Dosen::where('id_card', Auth::user()->id_card)->first();
+        $jadwal = Jadwal::where('dosen_id', $dosen->id)->orderBy('kelas_id')->get();
         $kelas = $jadwal->groupBy('kelas_id');
 
-        return view('guru.rapot.kelas', compact('kelas', 'guru'));
+        return view('dosen.rapot.kelas', compact('kelas', 'dosen'));
     }
 
     /**
@@ -49,8 +49,8 @@ class RapotController extends Controller
      */
     public function store(Request $request)
     {
-        $guru = Guru::findorfail($request->guru_id);
-        $cekJadwal = Jadwal::where('guru_id', $guru->id)->where('kelas_id', $request->kelas_id)->count();
+        $dosen = Dosen::findorfail($request->dosen_id);
+        $cekJadwal = Jadwal::where('dosen_id', $dosen->id)->where('kelas_id', $request->kelas_id)->count();
         if ($cekJadwal >= 1) {
             Rapot::updateOrCreate(
                 [
@@ -59,8 +59,8 @@ class RapotController extends Controller
                 [
                     'siswa_id' => $request->siswa_id,
                     'kelas_id' => $request->kelas_id,
-                    'guru_id' => $request->guru_id,
-                    'mapel_id' => $guru->mapel_id,
+                    'dosen_id' => $request->dosen_id,
+                    'mapel_id' => $dosen->mapel_id,
                     'k_nilai' => $request->nilai,
                     'k_predikat' => $request->predikat,
                     'k_deskripsi' => $request->deskripsi,
@@ -68,7 +68,7 @@ class RapotController extends Controller
             );
             return response()->json(['success' => 'Nilai rapot siswa berhasil ditambahkan!']);
         } else {
-            return response()->json(['error' => 'Maaf guru ini tidak mengajar kelas ini!']);
+            return response()->json(['error' => 'Maaf dosen ini tidak mengajar kelas ini!']);
         }
     }
 
@@ -81,10 +81,10 @@ class RapotController extends Controller
     public function show($id)
     {
         $id = Crypt::decrypt($id);
-        $guru = Guru::where('id_card', Auth::user()->id_card)->first();
+        $dosen = Dosen::where('id_card', Auth::user()->id_card)->first();
         $kelas = Kelas::findorfail($id);
         $siswa = Siswa::where('kelas_id', $id)->get();
-        return view('guru.rapot.rapot', compact('guru', 'kelas', 'siswa'));
+        return view('dosen.rapot.rapot', compact('dosen', 'kelas', 'siswa'));
     }
 
     /**
@@ -136,7 +136,7 @@ class RapotController extends Controller
 
     public function predikat(Request $request)
     {
-        $nilai = Nilai::where('guru_id', $request->id)->first();
+        $nilai = Nilai::where('dosen_id', $request->id)->first();
         if ($request->nilai > 90) {
             $newForm[] = array(
                 'predikat' => 'A',

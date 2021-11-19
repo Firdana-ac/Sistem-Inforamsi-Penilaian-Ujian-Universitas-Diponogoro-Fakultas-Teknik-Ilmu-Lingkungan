@@ -17,7 +17,7 @@ class CreateKelasTable extends Migration
             $table->bigIncrements('id');
             $table->string('nama_kelas', 50);
             $table->integer('paket_id');
-            $table->integer('guru_id');
+            $table->integer('dosen_id');
             $table->timestamps();
             $table->softDeletes();
         });

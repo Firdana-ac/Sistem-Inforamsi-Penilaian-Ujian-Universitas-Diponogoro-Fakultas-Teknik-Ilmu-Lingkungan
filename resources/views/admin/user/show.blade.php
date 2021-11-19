@@ -24,7 +24,7 @@
                 <th>Username</th>
                 <th>Email</th>
                 @foreach ($role as $d => $data)
-                  @if ($d == 'Guru')
+                  @if ($d == 'Dosen')
                     <th>No Id Card</th>
                   @elseif ($d == 'Siswa')
                     <th>No Induk Siswa</th>
@@ -45,7 +45,7 @@
                 <td>{{ $data->email }}</td>
                 @if ($data->role == 'Siswa')
                   <td>{{ $data->no_induk }}</td>
-                @elseif ($data->role == 'Guru')
+                @elseif ($data->role == 'Dosen')
                   <td>{{ $data->id_card }}</td>
                 @else
                 @endif

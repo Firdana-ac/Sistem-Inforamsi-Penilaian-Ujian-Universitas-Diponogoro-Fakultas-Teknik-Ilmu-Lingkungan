@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Jadwal;
-use App\Guru;
+use App\Dosen;
 use App\Kehadiran;
 use App\Kelas;
 use App\Siswa;
@@ -44,9 +44,9 @@ class HomeController extends Controller
     public function admin()
     {
         $jadwal = Jadwal::count();
-        $guru = Guru::count();
-        $gurulk = Guru::where('jk', 'L')->count();
-        $gurupr = Guru::where('jk', 'P')->count();
+        $dosen = Dosen::count();
+        $dosenlk = Dosen::where('jk', 'L')->count();
+        $dosenpr = Dosen::where('jk', 'P')->count();
         $siswa = Siswa::count();
         $siswalk = Siswa::where('jk', 'L')->count();
         $siswapr = Siswa::where('jk', 'P')->count();
@@ -64,9 +64,9 @@ class HomeController extends Controller
         $paket = Paket::all();
         return view('admin.index', compact(
             'jadwal',
-            'guru',
-            'gurulk',
-            'gurupr',
+            'dosen',
+            'dosenlk',
+            'dosenpr',
             'siswalk',
             'siswapr',
             'siswa',

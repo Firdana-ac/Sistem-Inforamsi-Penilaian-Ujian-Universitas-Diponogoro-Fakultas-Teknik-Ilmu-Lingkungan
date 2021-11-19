@@ -17,7 +17,7 @@ class CreateUlanganTable extends Migration
             $table->bigIncrements('id');
             $table->integer('siswa_id');
             $table->integer('kelas_id');
-            $table->integer('guru_id');
+            $table->integer('dosen_id');
             $table->integer('mapel_id');
             $table->string('ulha_1', 5)->nullable();
             $table->string('ulha_2', 5)->nullable();

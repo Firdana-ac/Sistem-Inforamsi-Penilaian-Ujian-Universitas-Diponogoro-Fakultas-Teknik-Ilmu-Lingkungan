@@ -17,7 +17,7 @@ class CreateRapotTable extends Migration
             $table->bigIncrements('id');
             $table->integer('siswa_id');
             $table->integer('kelas_id');
-            $table->integer('guru_id');
+            $table->integer('dosen_id');
             $table->integer('mapel_id');
             $table->string('p_nilai', 5);
             $table->string('p_predikat', 5);

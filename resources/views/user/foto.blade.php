@@ -1,7 +1,7 @@
 @extends('template_backend.home')
 @section('heading', 'Ubah Foto')
 @section('page')
-  <li class="breadcrumb-item active"><a href="{{ route('guru.index') }}">Guru</a></li>
+  <li class="breadcrumb-item active"><a href="{{ route('dosen.index') }}">Dosen</a></li>
   <li class="breadcrumb-item active">Ubah Foto</li>
 @endsection
 @section('content')
@@ -26,7 +26,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="name">Nama Guru</label>
+                        <label for="name">Nama Dosen</label>
                         <input type="text" name="name" class="form-control" value="{{ Auth::user()->name }}" disabled>
                     </div>
                     <div class="form-group">
@@ -40,9 +40,9 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                    @if (Auth::user()->role == 'Guru')
+                    @if (Auth::user()->role == 'Dosen')
                         <input type="hidden" name="role" value="{{ Auth::user()->role }}">
-                        <img src="{{ asset(Auth::user()->guru(Auth::user()->id_card)->foto) }}" class="img img-responsive" alt="" width="30%" />
+                        <img src="{{ asset(Auth::user()->dosen(Auth::user()->id_card)->foto) }}" class="img img-responsive" alt="" width="30%" />
                     @else
                         <input type="hidden" name="role" value="{{ Auth::user()->role }}">
                         <img src="{{ asset(Auth::user()->siswa(Auth::user()->no_induk)->foto) }}" class="img img-responsive" alt="" width="30%" />

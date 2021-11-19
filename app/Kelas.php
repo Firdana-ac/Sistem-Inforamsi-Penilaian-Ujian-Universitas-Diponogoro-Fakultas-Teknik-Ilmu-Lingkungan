@@ -9,11 +9,11 @@ class Kelas extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = ['paket_id', 'nama_kelas', 'guru_id'];
+    protected $fillable = ['paket_id', 'nama_kelas', 'dosen_id'];
 
-    public function guru()
+    public function dosen()
     {
-        return $this->belongsTo('App\Guru')->withDefault();
+        return $this->belongsTo('App\Dosen')->withDefault();
     }
 
     public function paket()

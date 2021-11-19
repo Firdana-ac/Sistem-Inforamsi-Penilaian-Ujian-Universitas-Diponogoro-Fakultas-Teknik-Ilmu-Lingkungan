@@ -69,7 +69,7 @@
                     <option value="">-- Select {{ __('Level User') }} --</option>
                     <option value="Admin">Admin</option>
                     <option value="Operator">Operator</option>
-                    <option value="Guru">Guru</option>
+                    <option value="Dosen">Dosen</option>
                     <option value="Siswa">Siswa</option>
                   </select>
                   @error('role')
@@ -115,7 +115,7 @@
     $(document).ready(function(){
         $('#role').change(function(){
             var kel = $('#role option:selected').val();
-            if (kel == "Guru") {
+            if (kel == "Dosen") {
               $("#noId").html('<label for="nomer">Nomer Id Card</label><input id="nomer" type="text" maxlength="5" onkeypress="return inputAngka(event)" placeholder="No Id Card" class="form-control" name="nomer" autocomplete="off">');
             } else if(kel == "Siswa") {
               $("#noId").html(`<label for="nomer">Nomer Induk Siswa</label><input id="nomer" type="text" placeholder="No Induk Siswa" class="form-control" name="nomer" autocomplete="off">`);

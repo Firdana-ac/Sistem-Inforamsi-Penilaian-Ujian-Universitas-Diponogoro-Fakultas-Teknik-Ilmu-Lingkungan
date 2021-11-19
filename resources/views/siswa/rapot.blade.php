@@ -35,7 +35,7 @@
                     <tr>
                         <td>Wali Kelas</td>
                         <td>:</td>
-                        <td>{{ $kelas->guru->nama_guru }}</td>
+                        <td>{{ $kelas->dosen->nama_dosen }}</td>
                     </tr>
                     @php
                         $bulan = date('m');
@@ -133,8 +133,8 @@
                                         <?php $data = $data[0]; ?>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $data->mapel->nama_mapel }}</td>
-                                        {{-- <td class="ctr">{{ $data->kkm($data->nilai($val)['guru_id']) }}</td> --}}
-                                        <td class="ctr">{{ $data->kkm($data->guru_id) }}</td>
+                                        {{-- <td class="ctr">{{ $data->kkm($data->nilai($val)['dosen_id']) }}</td> --}}
+                                        <td class="ctr">{{ $data->kkm($data->dosen_id) }}</td>
                                         <td class="ctr">{{ $data->nilai($val)['p_nilai'] }}</td>
                                         <td class="ctr">{{ $data->nilai($val)['p_predikat'] }}</td>
                                         <td class="ctr">{{ $data->nilai($val)['p_deskripsi'] }}</td>

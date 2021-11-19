@@ -29,7 +29,7 @@
                 <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $data->nama_kelas }}</td>
-                    <td>{{ $data->guru->nama_guru }}</td>
+                    <td>{{ $data->dosen->nama_dosen }}</td>
                     <td>
                         <form action="{{ route('kelas.destroy', $data->id) }}" method="post">
                             @csrf
@@ -76,11 +76,11 @@
               <div class="form-group" id="form_nama"></div>
               <div class="form-group" id="form_paket"></div>
               <div class="form-group">
-                <label for="guru_id">Wali Kelas</label>
-                <select id="guru_id" name="guru_id" class="select2bs4 form-control @error('guru_id') is-invalid @enderror">
+                <label for="dosen_id">Wali Kelas</label>
+                <select id="dosen_id" name="dosen_id" class="select2bs4 form-control @error('dosen_id') is-invalid @enderror">
                   <option value="">-- Pilih Wali Kelas --</option>
-                  @foreach ($guru as $data)
-                    <option value="{{ $data->id }}">{{ $data->nama_guru }}</option>
+                  @foreach ($dosen as $data)
+                    <option value="{{ $data->id }}">{{ $data->nama_dosen }}</option>
                   @endforeach
                 </select>
               </div>
@@ -209,7 +209,7 @@
           @endforeach
         </select>
       `);
-      $('#guru_id').val('');
+      $('#dosen_id').val('');
     }
 
     function getEditKelas(id){
@@ -234,7 +234,7 @@
               $("#form_paket").append(form_paket);
               $('#nama_kelas').val(val.nama);
               $("#paket_id").val(val.paket_id);
-              $('#guru_id').val(val.guru_id);
+              $('#dosen_id').val(val.dosen_id);
             });
           }
         },
@@ -293,7 +293,7 @@
               $("#judul-jadwal").text('View Data Jadwal ' + val.kelas);
               jadwal += "<tr>";
                 jadwal += "<td>"+val.hari+"</td>";
-                jadwal += "<td><h5 class='card-title'>"+val.mapel+"</h5><p class='card-text'><small class='text-muted'>"+val.guru+"</small></p></td>";
+                jadwal += "<td><h5 class='card-title'>"+val.mapel+"</h5><p class='card-text'><small class='text-muted'>"+val.dosen+"</small></p></td>";
                 jadwal += "<td>"+val.jam_mulai+" - "+val.jam_selesai+"</td>";
                 jadwal += "<td>"+val.ruang+"</td>";
               jadwal+="</tr>";

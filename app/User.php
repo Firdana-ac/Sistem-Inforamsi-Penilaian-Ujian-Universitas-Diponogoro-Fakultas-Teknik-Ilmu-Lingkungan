@@ -21,10 +21,10 @@ class User extends Authenticatable
         'name', 'email', 'password', 'role', 'no_induk', 'id_card'
     ];
 
-    public function guru($id)
+    public function dosen($id)
     {
-        $guru = Guru::where('id_card', $id)->first();
-        return $guru;
+        $dosen = Dosen::where('id_card', $id)->first();
+        return $dosen;
     }
 
     public function siswa($id)

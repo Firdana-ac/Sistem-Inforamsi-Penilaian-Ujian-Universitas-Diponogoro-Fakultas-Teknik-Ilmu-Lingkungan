@@ -22,7 +22,7 @@
     <div class="input-group mb-3">
       <select id="role" type="text" class="form-control @error('role') is-invalid @enderror" name="role" value="{{ old('role') }}" autocomplete="role">
         <option value="">-- Select {{ __('Level User') }} --</option>
-        <option value="Guru">Guru</option>
+        <option value="Dosen">Dosen</option>
         <option value="Siswa">Siswa</option>
       </select>
       <div class="input-group-append">

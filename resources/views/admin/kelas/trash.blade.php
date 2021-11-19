@@ -27,7 +27,7 @@
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $data->nama_kelas }}</td>
                     <td>{{ $data->paket->ket }}</td>
-                    <td>{{ $data->guru->nama_guru }}</td>
+                    <td>{{ $data->dosen->nama_dosen }}</td>
                     <td>
                         <form action="{{ route('kelas.kill', $data->id) }}" method="post">
                             @csrf

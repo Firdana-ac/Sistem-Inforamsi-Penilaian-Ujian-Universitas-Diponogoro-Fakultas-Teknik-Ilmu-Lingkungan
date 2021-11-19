@@ -35,7 +35,7 @@
                     <tr>
                         <td>Wali Kelas</td>
                         <td>:</td>
-                        <td>{{ $kelas->guru->nama_guru }}</td>
+                        <td>{{ $kelas->dosen->nama_dosen }}</td>
                     </tr>
                     @php
                         $bulan = date('m');
@@ -77,7 +77,7 @@
                         <tr>
                             <th class="ctr">Teman</th>
                             <th class="ctr">Sendiri</th>
-                            <th class="ctr">Guru</th>
+                            <th class="ctr">Dosen</th>
                         </tr>
                     </thead>
                     <tbody>

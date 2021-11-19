@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Kelas;
-use App\Guru;
+use App\Dosen;
 use App\Paket;
 use App\Jadwal;
 use App\Siswa;
@@ -20,9 +20,9 @@ class KelasController extends Controller
     public function index()
     {
         $kelas = Kelas::OrderBy('nama_kelas', 'asc')->get();
-        $guru = Guru::OrderBy('nama_guru', 'asc')->get();
+        $dosen = Dosen::OrderBy('nama_dosen', 'asc')->get();
         $paket = Paket::all();
-        return view('admin.kelas.index', compact('kelas', 'guru', 'paket'));
+        return view('admin.kelas.index', compact('kelas', 'dosen', 'paket'));
     }
 
     /**
@@ -32,8 +32,8 @@ class KelasController extends Controller
      */
     public function create()
     {
-        $guru = Guru::OrderBy('nama_guru', 'asc')->get();
-        return view('admin.kelas.create', compact('guru'));
+        $dosen = Dosen::OrderBy('nama_dosen', 'asc')->get();
+        return view('admin.kelas.create', compact('dosen'));
     }
 
     /**
@@ -48,13 +48,13 @@ class KelasController extends Controller
             $this->validate($request, [
                 'nama_kelas' => 'required|min:6|max:10',
                 'paket_id' => 'required',
-                'guru_id' => 'required|unique:kelas',
+                'dosen_id' => 'required|unique:kelas',
             ]);
         } else {
             $this->validate($request, [
                 'nama_kelas' => 'required|unique:kelas|min:6|max:10',
                 'paket_id' => 'required',
-                'guru_id' => 'required|unique:kelas',
+                'dosen_id' => 'required|unique:kelas',
             ]);
         }
 
@@ -65,7 +65,7 @@ class KelasController extends Controller
             [
                 'nama_kelas' => $request->nama_kelas,
                 'paket_id' => $request->paket_id,
-                'guru_id' => $request->guru_id,
+                'dosen_id' => $request->dosen_id,
             ]
         );
 
@@ -178,7 +178,7 @@ class KelasController extends Controller
                 'id' => $val->id,
                 'nama' => $val->nama_kelas,
                 'paket_id' => $val->paket_id,
-                'guru_id' => $val->guru_id,
+                'dosen_id' => $val->dosen_id,
             );
         }
         return response()->json($newForm);

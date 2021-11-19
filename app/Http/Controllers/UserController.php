@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Auth;
 use App\User;
-use App\Guru;
+use App\Dosen;
 use App\Siswa;
 use App\Mapel;
 use App\Kelas;
@@ -51,23 +51,23 @@ class UserController extends Controller
             'role' => 'required',
         ]);
 
-        if ($request->role == 'Guru') {
-            $countGuru = Guru::where('id_card', $request->nomer)->count();
-            $guruId = Guru::where('id_card', $request->nomer)->get();
-            foreach ($guruId as $val) {
-                $guru = Guru::findorfail($val->id);
+        if ($request->role == 'Dosen') {
+            $countDosen = Dosen::where('id_card', $request->nomer)->count();
+            $dosenId = Dosen::where('id_card', $request->nomer)->get();
+            foreach ($dosenId as $val) {
+                $dosen = Dosen::findorfail($val->id);
             }
-            if ($countGuru >= 1) {
+            if ($countDosen >= 1) {
                 User::create([
-                    'name' => $guru->nama_guru,
+                    'name' => $dosen->nama_dosen,
                     'email' => $request->email,
                     'password' => Hash::make($request->password),
                     'role' => $request->role,
                     'id_card' => $request->nomer,
                 ]);
-                return redirect()->back()->with('success', 'Berhasil menambahkan user Guru baru!');
+                return redirect()->back()->with('success', 'Berhasil menambahkan user dosen baru!');
             } else {
-                return redirect()->back()->with('error', 'Maaf User ini tidak terdaftar sebagai guru!');
+                return redirect()->back()->with('error', 'Maaf User ini tidak terdaftar sebagai dosen!');
             }
         } elseif ($request->role == 'Siswa') {
             $countSiswa = Siswa::where('no_induk', $request->nomer)->count();
@@ -234,13 +234,13 @@ class UserController extends Controller
 
     public function ubah_profile(Request $request)
     {
-        if ($request->role == 'Guru') {
+        if ($request->role == 'Dosen') {
             $this->validate($request, [
-                'nama_guru' => 'required',
+                'nama_dosen' => 'required',
                 'mapel_id' => 'required',
                 'jk' => 'required',
             ]);
-            $guru = Guru::where('id_card', Auth::user()->id_card)->first();
+            $dosen = Dosen::where('id_card', Auth::user()->id_card)->first();
             $user = User::where('id_card', Auth::user()->id_card)->first();
             dd($user);
             if ($user) {
@@ -250,15 +250,15 @@ class UserController extends Controller
                 $user->update($user_data);
             } else {
             }
-            $guru_data = [
-                'nama_guru' => $request->name,
+            $dosen_data = [
+                'nama_dosen' => $request->name,
                 'mapel_id' => $request->mapel_id,
                 'jk' => $request->jk,
                 'telp' => $request->telp,
                 'tmp_lahir' => $request->tmp_lahir,
                 'tgl_lahir' => $request->tgl_lahir
             ];
-            $guru->update($guru_data);
+            $dosen->update($dosen_data);
             return redirect()->route('profile')->with('success', 'Profile anda berhasil diperbarui!');
         } elseif ($request->role == 'Siswa') {
             $this->validate($request, [
@@ -298,7 +298,7 @@ class UserController extends Controller
 
     public function edit_foto()
     {
-        if (Auth::user()->role == 'Guru' || Auth::user()->role == 'Siswa') {
+        if (Auth::user()->role == 'Dosen' || Auth::user()->role == 'Siswa') {
             return view('user.foto');
         } else {
             return redirect()->back()->with('error', 'Not Found 404!');
@@ -307,18 +307,18 @@ class UserController extends Controller
 
     public function ubah_foto(Request $request)
     {
-        if ($request->role == 'Guru') {
+        if ($request->role == 'Dosen') {
             $this->validate($request, [
                 'foto' => 'required'
             ]);
-            $guru = Guru::where('id_card', Auth::user()->id_card)->first();
+            $dosen = Dosen::where('id_card', Auth::user()->id_card)->first();
             $foto = $request->foto;
             $new_foto = date('s' . 'i' . 'H' . 'd' . 'm' . 'Y') . "_" . $foto->getClientOriginalName();
-            $guru_data = [
-                'foto' => 'uploads/guru/' . $new_foto,
+            $dosen_data = [
+                'foto' => 'uploads/dosen/' . $new_foto,
             ];
-            $foto->move('uploads/guru/', $new_foto);
-            $guru->update($guru_data);
+            $foto->move('uploads/dosen/', $new_foto);
+            $dosen->update($dosen_data);
             return redirect()->route('profile')->with('success', 'Foto Profile anda berhasil diperbarui!');
         } else {
             $this->validate($request, [

@@ -54,10 +54,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/rapot/siswa', 'RapotController@siswa')->name('rapot.siswa');
   });
 
-  Route::middleware(['guru'])->group(function () {
-    Route::get('/absen/harian', 'GuruController@absen')->name('absen.harian');
-    Route::post('/absen/simpan', 'GuruController@simpan')->name('absen.simpan');
-    Route::get('/jadwal/guru', 'JadwalController@guru')->name('jadwal.guru');
+  Route::middleware(['dosen'])->group(function () {
+    Route::get('/absen/harian', 'DosenController@absen')->name('absen.harian');
+    Route::post('/absen/simpan', 'DosenController@simpan')->name('absen.simpan');
+    Route::get('/jadwal/dosen', 'JadwalController@dosen')->name('jadwal.dosen');
     Route::resource('/nilai', 'NilaiController');
     Route::resource('/ulangan', 'UlanganController');
     Route::resource('/sikap', 'SikapController');
@@ -70,9 +70,9 @@ Route::middleware(['auth'])->group(function () {
       Route::get('/jadwal/trash', 'JadwalController@trash')->name('jadwal.trash');
       Route::get('/jadwal/restore/{id}', 'JadwalController@restore')->name('jadwal.restore');
       Route::delete('/jadwal/kill/{id}', 'JadwalController@kill')->name('jadwal.kill');
-      Route::get('/guru/trash', 'GuruController@trash')->name('guru.trash');
-      Route::get('/guru/restore/{id}', 'GuruController@restore')->name('guru.restore');
-      Route::delete('/guru/kill/{id}', 'GuruController@kill')->name('guru.kill');
+      Route::get('/dosen/trash', 'DosenController@trash')->name('dosen.trash');
+      Route::get('/dosen/restore/{id}', 'DosenController@restore')->name('dosen.restore');
+      Route::delete('/dosen/kill/{id}', 'DosenController@kill')->name('dosen.kill');
       Route::get('/kelas/trash', 'KelasController@trash')->name('kelas.trash');
       Route::get('/kelas/restore/{id}', 'KelasController@restore')->name('kelas.restore');
       Route::delete('/kelas/kill/{id}', 'KelasController@kill')->name('kelas.kill');
@@ -89,17 +89,17 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin/home', 'HomeController@admin')->name('admin.home');
     Route::get('/admin/pengumuman', 'PengumumanController@index')->name('admin.pengumuman');
     Route::post('/admin/pengumuman/simpan', 'PengumumanController@simpan')->name('admin.pengumuman.simpan');
-    Route::get('/guru/absensi', 'GuruController@absensi')->name('guru.absensi');
-    Route::get('/guru/kehadiran/{id}', 'GuruController@kehadiran')->name('guru.kehadiran');
-    Route::get('/absen/json', 'GuruController@json');
-    Route::get('/guru/mapel/{id}', 'GuruController@mapel')->name('guru.mapel');
-    Route::get('/guru/ubah-foto/{id}', 'GuruController@ubah_foto')->name('guru.ubah-foto');
-    Route::post('/guru/update-foto/{id}', 'GuruController@update_foto')->name('guru.update-foto');
-    Route::post('/guru/upload', 'GuruController@upload')->name('guru.upload');
-    Route::get('/guru/export_excel', 'GuruController@export_excel')->name('guru.export_excel');
-    Route::post('/guru/import_excel', 'GuruController@import_excel')->name('guru.import_excel');
-    Route::delete('/guru/deleteAll', 'GuruController@deleteAll')->name('guru.deleteAll');
-    Route::resource('/guru', 'GuruController');
+    Route::get('/dosen/absensi', 'DosenController@absensi')->name('dosen.absensi');
+    Route::get('/dosen/kehadiran/{id}', 'DosenController@kehadiran')->name('dosen.kehadiran');
+    Route::get('/absen/json', 'DosenController@json');
+    Route::get('/dosen/mapel/{id}', 'DosenController@mapel')->name('dosen.mapel');
+    Route::get('/dosen/ubah-foto/{id}', 'DosenController@ubah_foto')->name('dosen.ubah-foto');
+    Route::post('/dosen/update-foto/{id}', 'DosenController@update_foto')->name('dosen.update-foto');
+    Route::post('/dosen/upload', 'DosenController@upload')->name('dosen.upload');
+    Route::get('/dosen/export_excel', 'DosenController@export_excel')->name('dosen.export_excel');
+    Route::post('/dosen/import_excel', 'DosenController@import_excel')->name('dosen.import_excel');
+    Route::delete('/dosen/deleteAll', 'DosenController@deleteAll')->name('dosen.deleteAll');
+    Route::resource('/dosen', 'DosenController');
     Route::get('/kelas/edit/json', 'KelasController@getEdit');
     Route::resource('/kelas', 'KelasController');
     Route::get('/siswa/kelas/{id}', 'SiswaController@kelas')->name('siswa.kelas');
