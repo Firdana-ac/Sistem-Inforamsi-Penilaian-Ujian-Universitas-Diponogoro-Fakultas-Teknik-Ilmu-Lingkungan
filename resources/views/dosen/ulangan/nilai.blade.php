@@ -1,7 +1,7 @@
 @extends('template_backend.home')
-@section('heading', 'Entry Nilai Ulangan')
+@section('heading', 'Entry Nilai Seminar')
 @section('page')
-  <li class="breadcrumb-item active">Entry Nilai Ulangan</li>
+  <li class="breadcrumb-item active">Entry Nilai Seminar</li>
 @endsection
 @section('content')
 <div class="col-md-12">
@@ -75,11 +75,11 @@
                         <tr>
                             <th class="ctr">No.</th>
                             <th>Nama Mhs</th>
-                            <th class="ctr">ULHA 1</th>
-                            <th class="ctr">ULHA 2</th>
-                            <th class="ctr">UTS</th>
-                            <th class="ctr">ULHA 3</th>
-                            <th class="ctr">UAS</th>
+                            <th class="ctr">Nilai 1</th>
+                            <th class="ctr">Nilai 2</th>
+                            <th class="ctr">Nilai 3</th>
+                            <th class="ctr">Nilai 4</th>
+                            <th class="ctr">Nilai 5</th>
                             <th class="ctr">Aksi</th>
                         </tr>
                     </thead>

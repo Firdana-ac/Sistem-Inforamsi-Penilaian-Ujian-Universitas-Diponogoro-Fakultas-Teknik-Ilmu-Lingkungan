@@ -39,7 +39,7 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <th colspan="5" class="text-center"><strong>Copyright &copy; <script>document.write(new Date().getFullYear());</script> :: <a href="">SMK Negeri 1 Jenangan Ponorogo</a>. </strong></th>
+                        <th colspan="5" class="text-center"><strong>Copyright &copy; <script>document.write(new Date().getFullYear());</script> :: <a href="">Sekolah Pascasarjana Univeristas Diponogoro Fakultas Teknik Ilmu Lingkungan</a>. </strong></th>
                     </tr>
                 </tfoot>
             </table>
