@@ -33,7 +33,7 @@
                         <td>{{ $kelas->nama_kelas }}</td>
                     </tr>
                     <tr>
-                        <td>Wali Kelas</td>
+                        <td>Ketua Sidang</td>
                         <td>:</td>
                         <td>{{ $kelas->dosen->nama_dosen }}</td>
                     </tr>
@@ -113,7 +113,7 @@
                             <thead>
                                 <tr>
                                     <th rowspan="2">No.</th>
-                                    <th rowspan="2">Mata Pelajaran</th>
+                                    <th rowspan="2">Team Penguji</th>
                                     <th rowspan="2">KKM</th>
                                     <th class="ctr" colspan="3">Pengetahuan</th>
                                     <th class="ctr" colspan="3">Keterampilan</th>

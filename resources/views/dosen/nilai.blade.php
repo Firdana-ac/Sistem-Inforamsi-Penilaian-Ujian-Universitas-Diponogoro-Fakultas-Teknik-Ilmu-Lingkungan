@@ -37,7 +37,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="team">Mata Pelajaran</label>
+                            <label for="team">Team</label>
                             <input type="text" id="team" name="team" value="{{ $dosen->team->nama_team }}" class="form-control" readonly>
                         </div>
                         <div class="form-group">

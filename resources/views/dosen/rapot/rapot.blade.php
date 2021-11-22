@@ -1,14 +1,14 @@
 @extends('template_backend.home')
-@section('heading', 'Entry Nilai Rapot')
+@section('heading', 'Entry Nilai Seminar')
 @section('page')
-  <li class="breadcrumb-item active">Entry Nilai Rapot</li>
+  <li class="breadcrumb-item active">Entry Nilai Seminar</li>
 @endsection
 @section('content')
 <div class="col-md-12">
     <!-- general form elements -->
     <div class="card card-primary">
       <div class="card-header">
-        <h3 class="card-title">Entry Nilai Rapot</h3>
+        <h3 class="card-title">Entry Nilai Seminar</h3>
       </div>
       <!-- /.card-header -->
         <div class="card-body">
@@ -21,7 +21,7 @@
                         <td>{{ $kelas->nama_kelas }}</td>
                     </tr>
                     <tr>
-                        <td>Wali Kelas</td>
+                        <td>Ketua Sidang</td>
                         <td>:</td>
                         <td>{{ $kelas->dosen->nama_dosen }}</td>
                     </tr>
@@ -31,12 +31,12 @@
                         <td>{{ $mhs->count() }}</td>
                     </tr>
                     <tr>
-                        <td>Mata Pelajaran</td>
+                        <td>Team</td>
                         <td>:</td>
                         <td>{{ $dosen->team->nama_team }}</td>
                     </tr>
                     <tr>
-                        <td>Dosen Mata Pelajaran</td>
+                        <td>Dosen</td>
                         <td>:</td>
                         <td>{{ $dosen->nama_dosen }}</td>
                     </tr>

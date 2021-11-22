@@ -17,7 +17,7 @@
                     <th>No.</th>
                     <th>Kelas</th>
                     <th>Paket Keahlian</th>
-                    <th>Wali Kelas</th>
+                    <th>Ketua Sidang</th>
                     <th>Aksi</th>
                 </tr>
             </thead>

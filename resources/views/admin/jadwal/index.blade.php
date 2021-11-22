@@ -140,9 +140,11 @@
                 <div class="form-group">
                   <label for="dosen_id">Kode Team</label>
                   <select id="dosen_id" name="dosen_id" class="form-control @error('dosen_id') is-invalid @enderror select2bs4">
-                      <option value="">-- Pilih Kode Team --</option>
-                      @foreach ($dosen as $data)
-                          <option value="{{ $data->id }}">{{ $data->kode }}</option>
+                      <option value="">-- Pilih Dosen --</option>
+                      @foreach ($dosen as $dosen)
+                      @foreach ($team as $data)
+                          <option value="{{ $dosen->id }}">{{ $dosen->nama_dosen .'|'.$data->nama_team }}</option>
+                      @endforeach
                       @endforeach
                   </select>
                 </div>

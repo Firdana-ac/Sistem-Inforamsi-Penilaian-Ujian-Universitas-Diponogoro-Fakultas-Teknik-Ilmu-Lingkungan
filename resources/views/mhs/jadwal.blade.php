@@ -13,7 +13,7 @@
             <thead>
                 <tr>
                     <th>Hari</th>
-                    <th>Mata Pelajaran</th>
+                    <th>Team</th>
                     <th>Jam Pelajaran</th>
                     <th>Ruang Kelas</th>
                 </tr>

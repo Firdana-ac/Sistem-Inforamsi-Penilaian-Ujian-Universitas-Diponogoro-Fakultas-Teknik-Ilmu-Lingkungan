@@ -31,7 +31,7 @@
                         <td>{{ $kelas->nama_kelas }}</td>
                     </tr>
                     <tr>
-                        <td>Wali Kelas</td>
+                        <td>Ketua Sidang</td>
                         <td>:</td>
                         <td>{{ $kelas->dosen->nama_dosen }}</td>
                     </tr>
@@ -69,7 +69,7 @@
                     <thead>
                         <tr>
                             <th class="ctr">No.</th>
-                            <th>Mata Pelajaran</th>
+                            <th>Team</th>
                             <th class="ctr">ULHA 1</th>
                             <th class="ctr">ULHA 2</th>
                             <th class="ctr">UTS</th>

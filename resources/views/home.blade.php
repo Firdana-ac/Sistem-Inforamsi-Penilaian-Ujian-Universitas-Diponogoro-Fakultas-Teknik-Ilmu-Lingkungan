@@ -11,7 +11,7 @@
                 <thead>
                   <tr>
                     <th>Jam Pelajaran</th>
-                    <th>Mata Pelajaran</th>
+                    <th>Team </th>
                     <th>Kelas</th>
                     <th>Ruang Kelas</th>
                     <th>Ket.</th>

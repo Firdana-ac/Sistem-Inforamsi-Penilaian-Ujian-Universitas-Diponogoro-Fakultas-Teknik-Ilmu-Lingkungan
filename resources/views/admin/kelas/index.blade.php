@@ -20,7 +20,7 @@
                 <tr>
                     <th>No.</th>
                     <th>Kelas</th>
-                    <th>Wali Kelas</th>
+                    <th>Ketua Sidang</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
@@ -76,9 +76,9 @@
               <div class="form-group" id="form_nama"></div>
               <div class="form-group" id="form_paket"></div>
               <div class="form-group">
-                <label for="dosen_id">Wali Kelas</label>
+                <label for="dosen_id">Ketua Sidang</label>
                 <select id="dosen_id" name="dosen_id" class="select2bs4 form-control @error('dosen_id') is-invalid @enderror">
-                  <option value="">-- Pilih Wali Kelas --</option>
+                  <option value="">-- Pilih Ketua Sidang --</option>
                   @foreach ($dosen as $data)
                     <option value="{{ $data->id }}">{{ $data->nama_dosen }}</option>
                   @endforeach

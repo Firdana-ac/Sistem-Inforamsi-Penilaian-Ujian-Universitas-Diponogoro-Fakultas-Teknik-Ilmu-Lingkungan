@@ -16,7 +16,7 @@
                         <td>{{ $dosen->nama_dosen }}</td>
                     </tr>
                     <tr>
-                        <td>Mata Pelajaran</td>
+                        <td>Team</td>
                         <td>:</td>
                         <td>{{ $dosen->team->nama_team }}</td>
                     </tr>

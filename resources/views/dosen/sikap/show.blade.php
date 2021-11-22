@@ -21,7 +21,7 @@
                         <td>{{ $kelas->nama_kelas }}</td>
                     </tr>
                     <tr>
-                        <td>Wali Kelas</td>
+                        <td>Ketua Sidang</td>
                         <td>:</td>
                         <td>{{ $kelas->dosen->nama_dosen }}</td>
                     </tr>
@@ -31,12 +31,12 @@
                         <td>{{ $mhs->count() }}</td>
                     </tr>
                     <tr>
-                        <td>Mata Pelajaran</td>
+                        <td>Team</td>
                         <td>:</td>
                         <td>{{ $dosen->team->nama_team }}</td>
                     </tr>
                     <tr>
-                        <td>Dosen Mata Pelajaran</td>
+                        <td>Team</td>
                         <td>:</td>
                         <td>{{ $dosen->nama_dosen }}</td>
                     </tr>

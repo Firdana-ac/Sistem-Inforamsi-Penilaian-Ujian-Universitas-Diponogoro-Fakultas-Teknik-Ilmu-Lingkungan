@@ -8,6 +8,7 @@ use App\Hari;
 use App\Kelas;
 use App\Dosen;
 use App\Mhs;
+use App\Team;
 use App\Ruang;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
@@ -30,8 +31,9 @@ class JadwalController extends Controller
         $hari = Hari::all();
         $kelas = Kelas::OrderBy('nama_kelas', 'asc')->get();
         $ruang = Ruang::all();
+        $team = Team::all();
         $dosen = Dosen::OrderBy('kode', 'asc')->get();
-        return view('admin.jadwal.index', compact('hari', 'kelas', 'dosen', 'ruang'));
+        return view('admin.jadwal.index', compact('hari', 'kelas', 'dosen', 'ruang','team'));
     }
 
     /**

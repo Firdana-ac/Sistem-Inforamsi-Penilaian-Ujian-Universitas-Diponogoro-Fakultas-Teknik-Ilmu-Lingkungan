@@ -203,7 +203,7 @@
                         <a href="#" class="nav-link" id="NilaiDosen">
                             <i class="nav-icon fas fa-file-signature"></i>
                             <p>
-                                Nilai
+                                Nilai Seminar
                                 <i class="fas fa-angle-left right"></i>
                             </p>
                         </a>
@@ -211,7 +211,7 @@
                             <li class="nav-item">
                                 <a href="{{ route('ulangan.index') }}" class="nav-link" id="UlanganDosen">
                                     <i class="fas fa-file-alt nav-icon"></i>
-                                    <p>Entry Nilai Ulangan</p>
+                                    <p>Entry Nilai Seminar</p>
                                 </a>
                             </li>
                             @if (
@@ -229,7 +229,7 @@
                             <li class="nav-item">
                                 <a href="{{ route('rapot.index') }}" class="nav-link" id="RapotDosen">
                                     <i class="fas fa-file-alt nav-icon"></i>
-                                    <p>Entry Nilai Rapot</p>
+                                    <p>Entry Predikat</p>
                                 </a>
                             </li>
                             <li class="nav-item">
@@ -253,7 +253,7 @@
                             <p>Jadwal</p>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <!--<li class="nav-item">
                         <a href="{{ route('ulangan.mhs') }}" class="nav-link" id="UlanganMhs">
                             <i class="fas fa-file-alt nav-icon"></i>
                             <p>Ulangan</p>
@@ -264,11 +264,11 @@
                             <i class="fas fa-file-alt nav-icon"></i>
                             <p>Sikap</p>
                         </a>
-                    </li>
+                    </li>-->
                     <li class="nav-item">
                         <a href="{{ route('rapot.mhs') }}" class="nav-link" id="RapotMhs">
                             <i class="fas fa-file-alt nav-icon"></i>
-                            <p>Rapot</p>
+                            <p>Komentar Hasil Seminar</p>
                         </a>
                     </li>
                 @else
