@@ -1,6 +1,6 @@
 <footer class="main-footer">
         <marquee>
-            <strong>Copyright &copy; <script>document.write(new Date().getFullYear());</script> &diams; <a href="http://smkn1jenpo.sch.id/">Sekolah Pascasarjana Univeristas Diponogoro Fakultas Teknik Ilmu Lingkungan</a>. </strong>
+            <strong>Copyright &copy; <script>document.write(new Date().getFullYear());</script> &diams; <a href="https://pasca.undip.ac.id/">Sekolah Pascasarjana Univeristas Diponogoro Fakultas Teknik Ilmu Lingkungan</a>. </strong>
         </marquee>
     </footer>
 

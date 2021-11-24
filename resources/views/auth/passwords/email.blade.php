@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('page', 'Reset Password')
+@section('page')
 @section('content')
 <div class="card-body login-card-body">
   <p class="login-box-msg">You forgot your password? Here you can easily retrieve a new password.</p>

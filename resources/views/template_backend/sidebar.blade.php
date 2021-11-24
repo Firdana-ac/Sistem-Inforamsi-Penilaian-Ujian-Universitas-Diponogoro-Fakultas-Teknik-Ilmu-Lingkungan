@@ -66,7 +66,7 @@
                             <li class="nav-item">
                                 <a href="{{ route('mhs.index') }}" class="nav-link" id="DataMhs">
                                     <i class="fas fa-users nav-icon"></i>
-                                    <p>Data MahaMhs</p>
+                                    <p>Data Mahasiswa</p>
                                 </a>
                             </li>
                             <li class="nav-item">
@@ -114,7 +114,7 @@
                                 <li class="nav-item">
                                     <a href="{{ route('mhs.trash') }}" class="nav-link" id="TrashMhs">
                                         <i class="fas fa-users nav-icon"></i>
-                                        <p>Trash MahaMhs</p>
+                                        <p>Trash Mahasiswa</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">

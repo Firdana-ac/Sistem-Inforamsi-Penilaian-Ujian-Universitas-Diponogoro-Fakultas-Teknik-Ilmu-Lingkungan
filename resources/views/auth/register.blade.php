@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('page', 'Register Authentication')
+@section('page')
 @section('content')
 <div class="card-body login-card-body">
   <p class="login-box-msg">Register a new membership</p>
