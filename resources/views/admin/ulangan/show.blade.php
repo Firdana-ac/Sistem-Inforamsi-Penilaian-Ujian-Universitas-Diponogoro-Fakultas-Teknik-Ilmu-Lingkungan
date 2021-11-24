@@ -1,14 +1,14 @@
 @extends('template_backend.home')
-@section('heading', 'Show Ulangan')
+@section('heading', 'Show Seminar ')
 @section('page')
-  <li class="breadcrumb-item active">Show Ulangan</li>
+  <li class="breadcrumb-item active">Show Seminar</li>
 @endsection
 @section('content')
 <div class="col-md-12">
     <!-- general form elements -->
     <div class="card card-primary">
       <div class="card-header">
-        <h3 class="card-title">Show Ulangan</h3>
+        <h3 class="card-title">Show Seminar </h3>
       </div>
       <!-- /.card-header -->
         <div class="card-body">
@@ -82,7 +82,7 @@
                                 <?php $data = $data[0]; ?>
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $data->team->nama_team }}</td>
+                                    <td>{{ $data->team->nama_team}}</td>
                                     @php
                                         $array = array('team' => $val, 'mhs' => $mhs->id);
                                         $jsonData = json_encode($array);

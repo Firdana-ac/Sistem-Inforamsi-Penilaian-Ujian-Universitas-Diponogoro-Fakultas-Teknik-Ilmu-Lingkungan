@@ -1,7 +1,7 @@
 @extends('template_backend.home')
-@section('heading', 'Nilai Ulangan')
+@section('heading', 'Nilai Seminar')
 @section('page')
-  <li class="breadcrumb-item active"><a href="{{ route('ulangan-kelas') }}">Nilai Ulangan</a></li>
+  <li class="breadcrumb-item active"><a href="{{ route('ulangan-kelas') }}">Nilai Seminar</a></li>
   <li class="breadcrumb-item active">{{ $kelas->nama_kelas }}</li>
 @endsection
 @section('content')
@@ -31,7 +31,7 @@
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $data->nama_mhs }}</td>
                     <td>{{ $data->no_induk }}</td>
-                    <td><a href="{{ route('ulangan-show', Crypt::encrypt($data->id)) }}" class="btn btn-info btn-sm"><i class="nav-icon fas fa-search-plus"></i> &nbsp; Show Ulangan</a></td>
+                    <td><a href="{{ route('ulangan-show', Crypt::encrypt($data->id)) }}" class="btn btn-info btn-sm"><i class="nav-icon fas fa-search-plus"></i> &nbsp; Show </a></td>
                   </tr>
                 @endforeach
               </tbody>

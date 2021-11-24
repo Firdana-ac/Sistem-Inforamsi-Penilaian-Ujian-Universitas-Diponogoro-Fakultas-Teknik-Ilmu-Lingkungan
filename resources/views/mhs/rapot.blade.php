@@ -1,14 +1,14 @@
 @extends('template_backend.home')
-@section('heading', 'Nilai Rapot')
+@section('heading', 'Komentar Hasil')
 @section('page')
-  <li class="breadcrumb-item active">Nilai Rapot</li>
+  <li class="breadcrumb-item active">Komentar Hasil</li>
 @endsection
 @section('content')
 <div class="col-md-12">
     <!-- general form elements -->
     <div class="card card-primary">
       <div class="card-header">
-        <h3 class="card-title">Nilai Rapot Mhs</h3>
+        <h3 class="card-title">Nilai Mhs</h3>
       </div>
       <!-- /.card-header -->
       <!-- form start -->
@@ -68,7 +68,7 @@
             </div>
             <div class="col-md-12">
                 <div class="row">
-                    <div class="col-12 mb-3">
+                    <!---<div class="col-12 mb-3">
                         <h4 class="mb-3">A. Sikap</h4>
                         @if ($Spai && $Sppkn)
                             @php
@@ -106,25 +106,17 @@
                                 Warning. Your Attitude Value does not exist yet
                             </div>
                         @endif
-                    </div>
+                    </div>-->
                     <div class="col-12 mb-3">
-                        <h4 class="mb-3">B. Pengetahuan dan Keterampilan</h4>
+                        <h4 class="mb-3">Komentar Hasil</h4>
                         <table class="table table-bordered table-striped table-hover">
                             <thead>
                                 <tr>
                                     <th rowspan="2">No.</th>
                                     <th rowspan="2">Team Penguji</th>
-                                    <th rowspan="2">KKM</th>
-                                    <th class="ctr" colspan="3">Pengetahuan</th>
-                                    <th class="ctr" colspan="3">Keterampilan</th>
+                                    <th class="ctr" colspan="3">Komentar Hasil</th>
                                 </tr>
                                 <tr>
-                                    <th class="ctr">Nilai</th>
-                                    <th class="ctr">Predikat</th>
-                                    <th class="ctr">Deskripsi</th>
-                                    <th class="ctr">Nilai</th>
-                                    <th class="ctr">Predikat</th>
-                                    <th class="ctr">Deskripsi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -134,13 +126,7 @@
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $data->team->nama_team }}</td>
                                         {{-- <td class="ctr">{{ $data->kkm($data->nilai($val)['dosen_id']) }}</td> --}}
-                                        <td class="ctr">{{ $data->kkm($data->dosen_id) }}</td>
-                                        <td class="ctr">{{ $data->nilai($val)['p_nilai'] }}</td>
-                                        <td class="ctr">{{ $data->nilai($val)['p_predikat'] }}</td>
                                         <td class="ctr">{{ $data->nilai($val)['p_deskripsi'] }}</td>
-                                        <td class="ctr">{{ $data->nilai($val)['k_nilai'] }}</td>
-                                        <td class="ctr">{{ $data->nilai($val)['k_predikat'] }}</td>
-                                        <td class="ctr">{{ $data->nilai($val)['k_deskripsi'] }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>

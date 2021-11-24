@@ -238,7 +238,7 @@
                         $(".knilai_"+id).append(nilai);
                         $(".kpredikat_"+id).append(predikat);
                         $(".sub_"+id).append(ok);
-                        toastr.success("Nilai rapot mhs berhasil ditambahkan!");
+                        toastr.success("Nilai  mhs berhasil ditambahkan!");
                     },
                     error: function (data) {
                         toastr.warning("Errors 404!");

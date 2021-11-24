@@ -1,14 +1,14 @@
 @extends('template_backend.home')
-@section('heading', 'Nilai Ulangan')
+@section('heading', 'Nilai Seminar')
 @section('page')
-  <li class="breadcrumb-item active">Nilai Ulangan</li>
+  <li class="breadcrumb-item active">Nilai Seminar</li>
 @endsection
 @section('content')
 <div class="col-md-12">
     <!-- general form elements -->
     <div class="card card-primary">
       <div class="card-header">
-        <h3 class="card-title">Nilai Ulangan</h3>
+        <h3 class="card-title">Nilai Seminar</h3>
       </div>
       <!-- /.card-header -->
       <div class="card-body">

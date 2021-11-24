@@ -159,19 +159,19 @@
                                     <i class="fas fa-file-alt nav-icon"></i>
                                     <p>Nilai Sikap</p>
                                 </a>
-                            </li>
+                            </li>-->
                             <li class="nav-item">
                                 <a href="{{ route('rapot-kelas') }}" class="nav-link" id="Rapot">
                                     <i class="fas fa-file-alt nav-icon"></i>
-                                    <p>Nilai Rapot</p>
+                                    <p>Komentar Hasil</p>
                                 </a>
-                            </li>-->
-                            <li class="nav-item">
+                            </li>
+                            <!--<li class="nav-item">
                                 <a href="{{ route('predikat') }}" class="nav-link" id="Deskripsi">
                                     <i class="fas fa-file-alt nav-icon"></i>
                                     <p>Deskripsi Predikat</p>
                                 </a>
-                            </li>
+                            </li>-->
                         </ul>
                     </li>
                     <li class="nav-item">
