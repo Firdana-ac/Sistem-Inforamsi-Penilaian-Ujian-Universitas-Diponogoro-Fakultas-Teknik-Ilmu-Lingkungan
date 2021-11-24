@@ -143,7 +143,7 @@
                         <a href="#" class="nav-link" id="Nilai">
                             <i class="nav-icon fas fa-file-signature"></i>
                             <p>
-                                Nilai
+                                Nilai Seminar
                                 <i class="fas fa-angle-left right"></i>
                             </p>
                         </a>
@@ -151,10 +151,10 @@
                             <li class="nav-item">
                                 <a href="{{ route('ulangan-kelas') }}" class="nav-link" id="Ulangan">
                                     <i class="fas fa-file-alt nav-icon"></i>
-                                    <p>Nilai Ulangan</p>
+                                    <p>Nilai Seminar</p>
                                 </a>
                             </li>
-                            <li class="nav-item">
+                            <!--<li class="nav-item">
                                 <a href="{{ route('sikap-kelas') }}" class="nav-link" id="Sikap">
                                     <i class="fas fa-file-alt nav-icon"></i>
                                     <p>Nilai Sikap</p>
@@ -165,7 +165,7 @@
                                     <i class="fas fa-file-alt nav-icon"></i>
                                     <p>Nilai Rapot</p>
                                 </a>
-                            </li>
+                            </li>-->
                             <li class="nav-item">
                                 <a href="{{ route('predikat') }}" class="nav-link" id="Deskripsi">
                                     <i class="fas fa-file-alt nav-icon"></i>
